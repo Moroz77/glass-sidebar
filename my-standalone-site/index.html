@@ -87,6 +87,44 @@
       @media (hover:none), (pointer:coarse){
         .kb-overlay-open #kb-open-btn{ display:none !important; }
       }
+  </style>
+    <!-- Overrides: glass-masked calculator button and weather chip -->
+    <style>
+      /* Glass button exactly in calculator shape (no circular base) */
+      #kb-open-btn{
+        width: 130px !important; height: 130px !important;
+        background: transparent !important; border: 0 !important;
+        box-shadow: none !important; overflow: visible !important;
+      }
+      #kb-open-btn::before{
+        content: ""; position: absolute; inset: 0;
+        background: rgba(255,255,255,.16);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        backdrop-filter: blur(18px) saturate(160%);
+        border: 1px solid rgba(255,255,255,.35);
+        background-clip: padding-box; box-shadow: 0 8px 22px rgba(0,0,0,.26);
+        -webkit-mask-image: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");
+        -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain;
+        mask-image: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");
+        mask-repeat: no-repeat; mask-position: center; mask-size: contain;
+      }
+      @supports not ((-webkit-mask-image: url("") ) or (mask-image: url("") )){
+        #kb-open-btn::before{ background: transparent; border: 0; box-shadow: none; }
+        #kb-open-btn::after{ content: ""; position: absolute; inset: 14px; background: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
+      }
+
+      /* Weather chip (glass) — always on desktop; hides on mobile only when overlay open */
+      .kb-weather{
+        position: fixed; top: 120px; right: 14px; z-index: 2147483400;
+        padding: 8px 20px 8px 12px; border-radius: 16px 0 0 16px;
+        color: #121212; font: 700 16px/1 system-ui;
+        background: rgba(255,255,255,.16);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        backdrop-filter: blur(18px) saturate(160%);
+        border: 1px solid rgba(255,255,255,.35);
+        background-clip: padding-box;
+      }
+      @media (hover:none), (pointer:coarse){ .kb-overlay-open .kb-weather{ display:none !important; } }
     </style>
   </head>
   <body>
@@ -153,6 +191,8 @@
         referrerpolicy="no-referrer">
       </iframe>
     </div>
+    <!-- Weather chip (desktop always on) -->
+    <div id="kb-weather-chip" class="kb-weather" aria-label="Погода сейчас"><span id="kb-temp">—°</span></div>
 
     <script>
       (function(){
@@ -189,6 +229,14 @@
           e.preventDefault();
           if (overlay.classList.contains('is-open')) closeOverlay(); else openOverlay();
         });
+        // Weather
+        try{
+          fetch('https://api.open-meteo.com/v1/forecast?latitude=43.6833&longitude=40.2000&current=temperature_2m,weather_code&timezone=auto',{cache:'no-store'})
+            .then(r=>r.json()).then(d=>{
+              var t = (d && d.current && typeof d.current.temperature_2m==='number') ? Math.round(d.current.temperature_2m) : null;
+              var n = document.getElementById('kb-temp'); if(n) n.textContent = (t==null?'—':t)+'°';
+            }).catch(()=>{});
+        }catch(_){ }
       })();
     </script>
   </body>
