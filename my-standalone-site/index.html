@@ -1,18 +1,18 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>РљР°Р»РёРЅРѕРІР°СЏ Р±Р°РЅСЏ вЂ” Р°РІС‚РѕРЅРѕРјРЅС‹Р№ СЃР°Р№С‚</title>
+    <title>Р С™Р В°Р В»Р С‘Р Р…Р С•Р Р†Р В°РЎРЏ Р В±Р В°Р Р…РЎРЏ РІР‚вЂќ Р В°Р Р†РЎвЂљР С•Р Р…Р С•Р СР Р…РЎвЂ№Р в„– РЎРѓР В°Р в„–РЎвЂљ</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <!-- РСЃРїРѕР»СЊР·СѓРµРј СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ СЃС‚РёР»СЊ СЃР°Р№РґР±Р°СЂР° РёР· РєРѕСЂРЅСЏ СЂРµРїРѕР·РёС‚РѕСЂРёСЏ -->
+    <!-- Р ВРЎРѓР С—Р С•Р В»РЎРЉР В·РЎС“Р ВµР С РЎРѓРЎС“РЎвЂ°Р ВµРЎРѓРЎвЂљР Р†РЎС“РЎР‹РЎвЂ°Р С‘Р в„– РЎРѓРЎвЂљР С‘Р В»РЎРЉ РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚Р В° Р С‘Р В· Р С”Р С•РЎР‚Р Р…РЎРЏ РЎР‚Р ВµР С—Р С•Р В·Р С‘РЎвЂљР С•РЎР‚Р С‘РЎРЏ -->
     <link rel="stylesheet" href="../style.css" />
 
-    <!-- Р’СЃС‚СЂРѕРµРЅРЅС‹Р№ СѓРјРЅС‹Р№ РІРёРґР¶РµС‚ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ (mini iframe + fullscreen overlay) -->
+    <!-- Р вЂ™РЎРѓРЎвЂљРЎР‚Р С•Р ВµР Р…Р Р…РЎвЂ№Р в„– РЎС“Р СР Р…РЎвЂ№Р в„– Р Р†Р С‘Р Т‘Р В¶Р ВµРЎвЂљ Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘РЎРЏ (mini iframe + fullscreen overlay) -->
     <style>
       :root{ --kb-sidebar-width: 260px; }
       html, body { min-height: 100%; }
-      /* Р¤РѕРЅРѕРІРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹ (РјРѕР¶РЅРѕ Р·Р°РјРµРЅРёС‚СЊ РїСѓС‚СЊ РЅР° СЃРІРѕР№) */
+      /* Р В¤Р С•Р Р…Р С•Р Р†Р С•Р Вµ Р С‘Р В·Р С•Р В±РЎР‚Р В°Р В¶Р ВµР Р…Р С‘Р Вµ Р С–Р В»Р В°Р Р†Р Р…Р С•Р в„– РЎРѓРЎвЂљРЎР‚Р В°Р Р…Р С‘РЎвЂ РЎвЂ№ (Р СР С•Р В¶Р Р…Р С• Р В·Р В°Р СР ВµР Р…Р С‘РЎвЂљРЎРЉ Р С—РЎС“РЎвЂљРЎРЉ Р Р…Р В° РЎРѓР Р†Р С•Р в„–) */
       body{
         background-image: url('../images/hero-bg.jpg') !important;
         background-position: center !important;
@@ -22,7 +22,7 @@
         background-color: #000 !important; /* fallback */
       }
 
-      /* РњРёРЅРёвЂ‘РІРёРґР¶РµС‚: РІРЅСѓС‚СЂРµРЅРЅСЏСЏ FAB РёР· booking/ */
+      /* Р СљР С‘Р Р…Р С‘РІР‚вЂР Р†Р С‘Р Т‘Р В¶Р ВµРЎвЂљ: Р Р†Р Р…РЎС“РЎвЂљРЎР‚Р ВµР Р…Р Р…РЎРЏРЎРЏ FAB Р С‘Р В· booking/ */
       #kb-mini-frame{
         position: fixed;
         right: 18px;
@@ -31,11 +31,11 @@
         height: 120px;
         border: 0;
         background: transparent;
-        z-index: 2147483500; /* РІС‹С€Рµ СЃР°Р№РґР±Р°СЂР°, РЅРёР¶Рµ С„СѓР»СЃРєСЂРёРЅР° */
+        z-index: 2147483500; /* Р Р†РЎвЂ№РЎв‚¬Р Вµ РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚Р В°, Р Р…Р С‘Р В¶Р Вµ РЎвЂћРЎС“Р В»РЎРѓР С”РЎР‚Р С‘Р Р…Р В° */
       }
       @media (max-width:600px){ #kb-mini-frame{ width:100px; height:100px; } }
 
-      /* РџРѕР»РЅРѕСЌРєСЂР°РЅРЅС‹Р№ РѕРІРµСЂР»РµР№ + iframe */
+      /* Р СџР С•Р В»Р Р…Р С•РЎРЊР С”РЎР‚Р В°Р Р…Р Р…РЎвЂ№Р в„– Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР в„– + iframe */
       #kb-full-overlay{
         position: fixed; inset: 0;
         display: none; align-items: stretch;
@@ -43,23 +43,23 @@
       }
       #kb-full-overlay.is-open{ display: flex; }
       @media (min-width:1025px){ #kb-full-overlay{ bottom: 40px; } }
-      /* РќРµ Р·Р°РєСЂС‹РІР°РµРј Р»РµРІС‹Р№ СЃР°Р№РґР±Р°СЂ РЅР° РґРµСЃРєС‚РѕРїРµ */
+      /* Р СњР Вµ Р В·Р В°Р С”РЎР‚РЎвЂ№Р Р†Р В°Р ВµР С Р В»Р ВµР Р†РЎвЂ№Р в„– РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚ Р Р…Р В° Р Т‘Р ВµРЎРѓР С”РЎвЂљР С•Р С—Р Вµ */
       @media (min-width:1025px){ #kb-full-overlay{ left: var(--kb-sidebar-width); } }
-      /* РќР° РјРѕР±РёР»СЊРЅС‹С… РїСЂСЏС‡РµРј РјРёРЅРёвЂ‘РєРЅРѕРїРєСѓ РїСЂРё РѕС‚РєСЂС‹С‚РѕРј РѕРІРµСЂР»РµРµ */
+      /* Р СњР В° Р СР С•Р В±Р С‘Р В»РЎРЉР Р…РЎвЂ№РЎвЂ¦ Р С—РЎР‚РЎРЏРЎвЂЎР ВµР С Р СР С‘Р Р…Р С‘РІР‚вЂР С”Р Р…Р С•Р С—Р С”РЎС“ Р С—РЎР‚Р С‘ Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљР С•Р С Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР Вµ */
       @media (hover:none), (pointer:coarse){ .kb-overlay-open #kb-mini-frame{ display:none !important; } }
-      /* РќР° РґРµСЃРєС‚РѕРїРµ РІРѕ РІСЂРµРјСЏ РѕРІРµСЂР»РµСЏ РѕС‚РєР»СЋС‡Р°РµРј РєР»РёРєРё РїРѕ РјРёРЅРёвЂ‘РєРЅРѕРїРєРµ Рё РїРѕРґРЅРёРјР°РµРј z-index */
+      /* Р СњР В° Р Т‘Р ВµРЎРѓР С”РЎвЂљР С•Р С—Р Вµ Р Р†Р С• Р Р†РЎР‚Р ВµР СРЎРЏ Р С•Р Р†Р ВµРЎР‚Р В»Р ВµРЎРЏ Р С•РЎвЂљР С”Р В»РЎР‹РЎвЂЎР В°Р ВµР С Р С”Р В»Р С‘Р С”Р С‘ Р С—Р С• Р СР С‘Р Р…Р С‘РІР‚вЂР С”Р Р…Р С•Р С—Р С”Р Вµ Р С‘ Р С—Р С•Р Т‘Р Р…Р С‘Р СР В°Р ВµР С z-index */
       .kb-overlay-open #kb-mini-frame{ pointer-events:none; z-index:2147483602; }
 
       #kb-full-frame{ flex:1; border:0; background:transparent; width:100%; height:100%; }
       html.kb-noscroll, body.kb-noscroll{ overflow: hidden !important; }
 
-      /* РќР°С‚РёРІРЅР°СЏ РєРЅРѕРїРєР° вЂњРљР°Р»СЊРєСѓР»СЏС‚РѕСЂвЂќ РІ СЃС‚РёР»Рµ СЃС‚РµРєР»Р° (РєР°Рє СЃР°Р№РґР±Р°СЂ Рё Р±СЂРѕРЅСЊ) */
+      /* Р СњР В°РЎвЂљР С‘Р Р†Р Р…Р В°РЎРЏ Р С”Р Р…Р С•Р С—Р С”Р В° РІР‚СљР С™Р В°Р В»РЎРЉР С”РЎС“Р В»РЎРЏРЎвЂљР С•РЎР‚РІР‚Сњ Р Р† РЎРѓРЎвЂљР С‘Р В»Р Вµ РЎРѓРЎвЂљР ВµР С”Р В»Р В° (Р С”Р В°Р С” РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚ Р С‘ Р В±РЎР‚Р С•Р Р…РЎРЉ) */
       #kb-open-btn{
         position: fixed;
         right: 18px; bottom: 18px;
-        z-index: 2147483500; /* РІС‹С€Рµ СЃР°Р№РґР±Р°СЂР°, РЅРёР¶Рµ РѕРІРµСЂР»РµСЏ */
+        z-index: 2147483500; /* Р Р†РЎвЂ№РЎв‚¬Р Вµ РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚Р В°, Р Р…Р С‘Р В¶Р Вµ Р С•Р Р†Р ВµРЎР‚Р В»Р ВµРЎРЏ */
         display: inline-block; position: fixed;
-        width: 110px; height: 110px; /* РјРѕР¶РЅРѕ РїРѕРјРµРЅСЏС‚СЊ */
+        width: 110px; height: 110px; /* Р СР С•Р В¶Р Р…Р С• Р С—Р С•Р СР ВµР Р…РЎРЏРЎвЂљРЎРЉ */
         border-radius: 50%;
         background: rgba(255,255,255,.18);
         -webkit-backdrop-filter: blur(18px) saturate(160%);
@@ -73,7 +73,7 @@
       }
       #kb-open-btn::before{
         content: "";
-        position: absolute; inset: 14px; /* РїРѕР»СЏ РІРѕРєСЂСѓРі РёРєРѕРЅРєРё */
+        position: absolute; inset: 14px; /* Р С—Р С•Р В»РЎРЏ Р Р†Р С•Р С”РЎР‚РЎС“Р С– Р С‘Р С”Р С•Р Р…Р С”Р С‘ */
         background: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat;
         opacity: .95; pointer-events: none;
         filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
@@ -82,9 +82,9 @@
       #kb-open-btn:active{ transform: translateY(1px); }
       @media (max-width:600px){ #kb-open-btn{ width: 92px; height: 92px; } }
 
-      /* РљРЅРѕРїРєР° РІСЃРµРіРґР° РІРёРґРёРјР°; РїСЂРё РѕС‚РєСЂС‹С‚РѕРј РѕРІРµСЂР»РµРµ РїРѕРґРЅРёРјР°РµРј РїРѕРІРµСЂС… Рё РѕСЃС‚Р°РІР»СЏРµРј РєР»РёРєР°Р±РµР»СЊРЅРѕР№ */
+      /* Р С™Р Р…Р С•Р С—Р С”Р В° Р Р†РЎРѓР ВµР С–Р Т‘Р В° Р Р†Р С‘Р Т‘Р С‘Р СР В°; Р С—РЎР‚Р С‘ Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљР С•Р С Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР Вµ Р С—Р С•Р Т‘Р Р…Р С‘Р СР В°Р ВµР С Р С—Р С•Р Р†Р ВµРЎР‚РЎвЂ¦ Р С‘ Р С•РЎРѓРЎвЂљР В°Р Р†Р В»РЎРЏР ВµР С Р С”Р В»Р С‘Р С”Р В°Р В±Р ВµР В»РЎРЉР Р…Р С•Р в„– */
       .kb-overlay-open #kb-open-btn{ pointer-events:auto; z-index:2147483602; }
-      /* РќР° РјРѕР±РёР»СЊРЅС‹С… СЃРєСЂС‹РІР°РµРј РєРЅРѕРїРєСѓ, РєРѕРіРґР° РѕС‚РєСЂС‹С‚ РѕРІРµСЂР»РµР№ */
+      /* Р СњР В° Р СР С•Р В±Р С‘Р В»РЎРЉР Р…РЎвЂ№РЎвЂ¦ РЎРѓР С”РЎР‚РЎвЂ№Р Р†Р В°Р ВµР С Р С”Р Р…Р С•Р С—Р С”РЎС“, Р С”Р С•Р С–Р Т‘Р В° Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљ Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР в„– */
       @media (hover:none), (pointer:coarse){
         .kb-overlay-open #kb-open-btn{ display:none !important; }
       }
@@ -122,7 +122,7 @@
         #kb-open-btn::after{ content: ""; position: absolute; inset: 14px; background: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
       }
 
-      /* Weather chip (glass) вЂ” always on desktop; hides on mobile only when overlay open */
+      /* Weather chip (glass) РІР‚вЂќ always on desktop; hides on mobile only when overlay open */
       .kb-weather{
         position: fixed; top: 120px; right: 0; z-index: 2147483400;
         padding: 8px 20px 8px 12px; border-radius: 16px 0 0 16px;
@@ -138,79 +138,79 @@
     </style>
   </head>
   <body>
-    <!-- Р›РµРІС‹Р№ СЃС‚РµРєР»СЏРЅРЅС‹Р№ СЃР°Р№РґР±Р°СЂ (РєР°Рє РЅР° РіР»Р°РІРЅРѕР№) -->
-    <aside class="sidebar">
+    <!-- Р вЂєР ВµР Р†РЎвЂ№Р в„– РЎРѓРЎвЂљР ВµР С”Р В»РЎРЏР Р…Р Р…РЎвЂ№Р в„– РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚ (Р С”Р В°Р С” Р Р…Р В° Р С–Р В»Р В°Р Р†Р Р…Р С•Р в„–) -->
+        <aside class="sidebar">
       <div class="logo">
         <img src="../images/logo.jpg" alt="logo">
-        <h2>РљР°Р»РёРЅРѕРІР°СЏ Р±Р°РЅСЏ</h2>
+        <h2>Калиновая баня</h2>
       </div>
       <ul class="links">
-        <h4>РњРµРЅСЋ</h4>
+        <h4>Меню</h4>
         <li>
           <span class="material-symbols-outlined">dashboard</span>
-          <a href="#">Р“Р»Р°РІРЅР°СЏ</a>
+          <a href="#">Главная</a>
         </li>
         <li>
           <span class="material-symbols-outlined">show_chart</span>
-          <a href="#">РџСЂР°Р№СЃ</a>
+          <a href="#">Прайс</a>
         </li>
         <li>
           <span class="material-symbols-outlined">flag</span>
-          <a href="#">РћС‚С‡С‘С‚С‹</a>
+          <a href="#">Отчёты</a>
         </li>
         <hr>
-        <h4>Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ</h4>
+        <h4>Дополнительно</h4>
         <li>
           <span class="material-symbols-outlined">person</span>
-          <a href="#">РљРѕРјР°РЅРґР°</a>
+          <a href="#">Команда</a>
         </li>
         <li>
           <span class="material-symbols-outlined">group</span>
-          <a href="#">Р“РѕСЃС‚Рё</a>
+          <a href="#">Гости</a>
         </li>
         <li>
           <span class="material-symbols-outlined">monitoring</span>
-          <a href="#">РђРЅР°Р»РёС‚РёРєР°</a>
+          <a href="#">Аналитика</a>
         </li>
         <hr>
-        <h4>РђРєРєР°СѓРЅС‚</h4>
+        <h4>Аккаунт</h4>
         <li>
           <span class="material-symbols-outlined">mail</span>
-          <a href="#">РЎРѕРѕР±С‰РµРЅРёСЏ</a>
+          <a href="#">Сообщения</a>
         </li>
         <li>
           <span class="material-symbols-outlined">settings</span>
-          <a href="#">РќР°СЃС‚СЂРѕР№РєРё</a>
+          <a href="#">Настройки</a>
         </li>
         <li class="logout-link">
           <span class="material-symbols-outlined">logout</span>
-          <a href="#">Р’С‹Р№С‚Рё</a>
+          <a href="#">Выйти</a>
         </li>
       </ul>
     </aside>
 
-    <!-- РќР°С‚РёРІРЅР°СЏ РєРЅРѕРїРєР° вЂњРљР°Р»СЊРєСѓР»СЏС‚РѕСЂвЂќ -->
-    <a id="kb-open-btn" aria-label="РћС‚РєСЂС‹С‚СЊ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ" title="Бронирование"></a>
+    <!-- Р СњР В°РЎвЂљР С‘Р Р†Р Р…Р В°РЎРЏ Р С”Р Р…Р С•Р С—Р С”Р В° РІР‚СљР С™Р В°Р В»РЎРЉР С”РЎС“Р В»РЎРЏРЎвЂљР С•РЎР‚РІР‚Сњ -->
+    <a id="kb-open-btn" aria-label="Р С›РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљРЎРЉ Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘Р Вµ" title="Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"></a>
 
-    <!-- Р¤СѓР»СЃРєСЂРёРЅ СЃ РѕС‚РєСЂС‹С‚РѕР№ РєР°СЂС‚РѕС‡РєРѕР№ (РІРЅРµС€РЅРёР№ РєСЂРµСЃС‚РёРє СѓРґР°Р»С‘РЅ) -->
+    <!-- Р В¤РЎС“Р В»РЎРѓР С”РЎР‚Р С‘Р Р… РЎРѓ Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљР С•Р в„– Р С”Р В°РЎР‚РЎвЂљР С•РЎвЂЎР С”Р С•Р в„– (Р Р†Р Р…Р ВµРЎв‚¬Р Р…Р С‘Р в„– Р С”РЎР‚Р ВµРЎРѓРЎвЂљР С‘Р С” РЎС“Р Т‘Р В°Р В»РЎвЂР Р…) -->
     <div id="kb-full-overlay" aria-hidden="true">
       <iframe
         id="kb-full-frame"
-        title="Бронирование"
+        title="Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"
         src="about:blank"
         referrerpolicy="no-referrer">
       </iframe>
     </div>
     <!-- Weather chip (desktop always on) -->
-    <div id="kb-weather-chip" class="kb-weather" aria-label="РџРѕРіРѕРґР° СЃРµР№С‡Р°СЃ"><span id="kb-temp">вЂ”В°</span></div>
+    <div id="kb-weather-chip" class="kb-weather" aria-label="Р СџР С•Р С–Р С•Р Т‘Р В° РЎРѓР ВµР в„–РЎвЂЎР В°РЎРѓ"><span id="kb-temp">РІР‚вЂќР’В°</span></div>
 
     <script>
       (function(){
-        var FULL_SRC = '../booking/?hidefab=1&hideweather=1#kb-booking';
+        var FULL_SRC = '../booking/??hidefab=1&hideweather=1&raise=80#kb-booking';
         var openBtn = document.getElementById('kb-open-btn');
         var overlay = document.getElementById('kb-full-overlay');
         var full = document.getElementById('kb-full-frame');
-        // Р±РµР· РІРЅРµС€РЅРµРіРѕ РєСЂРµСЃС‚РёРєР° вЂ” РёСЃРїРѕР»СЊР·СѓРµРј РєР»РёРє РїРѕ С„РѕРЅСѓ / ESC / РїРѕРІС‚РѕСЂРЅС‹Р№ РєР»РёРє РїРѕ РєРЅРѕРїРєРµ
+        // Р В±Р ВµР В· Р Р†Р Р…Р ВµРЎв‚¬Р Р…Р ВµР С–Р С• Р С”РЎР‚Р ВµРЎРѓРЎвЂљР С‘Р С”Р В° РІР‚вЂќ Р С‘РЎРѓР С—Р С•Р В»РЎРЉР В·РЎС“Р ВµР С Р С”Р В»Р С‘Р С” Р С—Р С• РЎвЂћР С•Р Р…РЎС“ / ESC / Р С—Р С•Р Р†РЎвЂљР С•РЎР‚Р Р…РЎвЂ№Р в„– Р С”Р В»Р С‘Р С” Р С—Р С• Р С”Р Р…Р С•Р С—Р С”Р Вµ
         function isMobile(){
           try { return window.matchMedia('(hover: none), (pointer: coarse)').matches; }
           catch(_) { return window.innerWidth <= 1024; }
@@ -219,9 +219,9 @@
         function openOverlay(){ if (full.src !== FULL_SRC) full.src = FULL_SRC; overlay.classList.add('is-open'); document.documentElement.classList.add('kb-overlay-open'); lockScroll(true); }
         function closeOverlay(){ overlay.classList.remove('is-open'); document.documentElement.classList.remove('kb-overlay-open'); lockScroll(false); }
 
-        // РЎР»СѓС€Р°РµРј СЃРѕР±С‹С‚РёСЏ РёР· booking/ (postMessage)
+        // Р РЋР В»РЎС“РЎв‚¬Р В°Р ВµР С РЎРѓР С•Р В±РЎвЂ№РЎвЂљР С‘РЎРЏ Р С‘Р В· booking/ (postMessage)
         window.addEventListener('message', function(e){
-          // Р’РЅСѓС‚СЂРµРЅРЅРёР№ iframe С‚РѕРіРѕ Р¶Рµ РґРѕРјРµРЅР° вЂ” РїСЂРёРЅРёРјР°РµРј РІСЃРµ СЃРѕР±С‹С‚РёСЏ
+          // Р вЂ™Р Р…РЎС“РЎвЂљРЎР‚Р ВµР Р…Р Р…Р С‘Р в„– iframe РЎвЂљР С•Р С–Р С• Р В¶Р Вµ Р Т‘Р С•Р СР ВµР Р…Р В° РІР‚вЂќ Р С—РЎР‚Р С‘Р Р…Р С‘Р СР В°Р ВµР С Р Р†РЎРѓР Вµ РЎРѓР С•Р В±РЎвЂ№РЎвЂљР С‘РЎРЏ
           var d = e.data || {};
           if (d.source === 'kb') {
             if (d.type === 'kb-open') openOverlay();
@@ -232,9 +232,9 @@
         overlay.addEventListener('click', function(e){ if (e.target === overlay) closeOverlay(); });
         window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeOverlay(); });
         window.addEventListener('resize', function(){ if (!overlay.classList.contains('is-open')) return; if (isMobile()) lockScroll(true); else lockScroll(false); });
-        // РќР° СЃС‚Р°СЂС‚Рµ СЃР±СЂРѕСЃРёРј РєР»Р°СЃСЃ (РєРЅРѕРїРєР° РІСЃРµРіРґР° РІРёРґРёРјР° РєР°Рє РЅР°С‚РёРІРЅР°СЏ)
+        // Р СњР В° РЎРѓРЎвЂљР В°РЎР‚РЎвЂљР Вµ РЎРѓР В±РЎР‚Р С•РЎРѓР С‘Р С Р С”Р В»Р В°РЎРѓРЎРѓ (Р С”Р Р…Р С•Р С—Р С”Р В° Р Р†РЎРѓР ВµР С–Р Т‘Р В° Р Р†Р С‘Р Т‘Р С‘Р СР В° Р С”Р В°Р С” Р Р…Р В°РЎвЂљР С‘Р Р†Р Р…Р В°РЎРЏ)
         document.documentElement.classList.remove('kb-overlay-open');
-        // РљР»РёРє РїРѕ РЅР°С‚РёРІРЅРѕР№ РєРЅРѕРїРєРµ
+        // Р С™Р В»Р С‘Р С” Р С—Р С• Р Р…Р В°РЎвЂљР С‘Р Р†Р Р…Р С•Р в„– Р С”Р Р…Р С•Р С—Р С”Р Вµ
         if (openBtn) openBtn.addEventListener('click', function(e){
           e.preventDefault();
           if (overlay.classList.contains('is-open')) closeOverlay(); else openOverlay();
@@ -251,7 +251,7 @@
           fetch('https://api.open-meteo.com/v1/forecast?latitude=43.6833&longitude=40.2000&current=temperature_2m,weather_code&timezone=auto',{cache:'no-store'})
             .then(r=>r.json()).then(d=>{
               var t = (d && d.current && typeof d.current.temperature_2m==='number') ? Math.round(d.current.temperature_2m) : null;
-              var n = document.getElementById('kb-temp'); if(n) n.textContent = (t==null?'вЂ”':t)+'В°';
+              var n = document.getElementById('kb-temp'); if(n) n.textContent = (t==null?'РІР‚вЂќ':t)+'Р’В°';
             }).catch(()=>{});
         }catch(_){ }
       })();
