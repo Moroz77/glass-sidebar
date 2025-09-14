@@ -38,7 +38,7 @@
 <iframe
   id="kb-mini-frame"
   title="Калиновая баня — кнопка бронирования"
-  src="https://moroz77.github.io/glass-sidebar/booking/?mini=1"
+  src="https://moroz77.github.io/glass-sidebar/booking/?mini=1&staticfab=1"
   referrerpolicy="no-referrer">
 </iframe>
 
@@ -61,7 +61,10 @@
     var overlay = document.getElementById('kb-full-overlay');
     var full = document.getElementById('kb-full-frame');
     var closeBtn = overlay.querySelector('.kb-overlay-close');
-    function isMobile(){ return window.innerWidth <= 1024; }
+    function isMobile(){
+      try { return window.matchMedia('(hover: none), (pointer: coarse)').matches; }
+      catch(_) { return window.innerWidth <= 1024; }
+    }
     function lockScroll(on){ if (isMobile()) { document.documentElement.classList.toggle('kb-noscroll', on); document.body.classList.toggle('kb-noscroll', on); } }
     function showMini(show){ if (!mini) return; mini.style.display = show ? 'block' : 'none'; }
     function openOverlay(){

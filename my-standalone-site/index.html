@@ -122,7 +122,10 @@
         var overlay = document.getElementById('kb-full-overlay');
         var full = document.getElementById('kb-full-frame');
         var closeBtn = overlay.querySelector('.kb-overlay-close');
-        function isMobile(){ return window.innerWidth <= 1024; }
+        function isMobile(){
+          try { return window.matchMedia('(hover: none), (pointer: coarse)').matches; }
+          catch(_) { return window.innerWidth <= 1024; }
+        }
         function lockScroll(on){ if (isMobile()) { document.documentElement.classList.toggle('kb-noscroll', on); document.body.classList.toggle('kb-noscroll', on); } }
         function showMini(show){ if (mini) mini.style.display = show ? 'block' : 'none'; }
         function openOverlay(){ if (full.src !== FULL_SRC) full.src = FULL_SRC; overlay.classList.add('is-open'); if (isMobile()) { showMini(false); } else { showMini(true); if (mini){ mini.style.pointerEvents='none'; mini.style.zIndex='2147483602'; } } lockScroll(true); }
