@@ -1,5 +1,6 @@
 <!-- Tilda embed: booking button + fullscreen overlay -->
 <style>
+  :root{ --kb-sidebar-width: 260px; }
   /* Фиксированная кнопка “Калькулятор” (справа снизу) */
   #kb-open-btn{
     position: fixed;
@@ -38,6 +39,10 @@
     align-items: stretch;
     background: transparent;
     z-index: 2147483600; /* выше кнопки */
+  }
+  /* На десктопе не перекрываем левую область (для сайдбара) */
+  @media (min-width: 1025px){
+    #kb-booking-overlay{ left: var(--kb-sidebar-width); right: 0; top: 0; bottom: 0; }
   }
   #kb-booking-overlay.is-open{ display: flex; }
   #kb-booking-frame{
@@ -90,6 +95,7 @@
     var overlay = document.getElementById('kb-booking-overlay');
     var frame = document.getElementById('kb-booking-frame');
     var closeBtn = overlay.querySelector('.kb-overlay-close');
+    function isMobile(){ return window.innerWidth <= 1024; }
 
     function lockScroll(on){
       document.documentElement.classList.toggle('kb-noscroll', on);
@@ -98,11 +104,11 @@
     function openOverlay(){
       if (frame.src !== FULL_SRC) frame.src = FULL_SRC;
       overlay.classList.add('is-open');
-      lockScroll(true);
+      if (isMobile()) lockScroll(true);
     }
     function closeOverlay(){
       overlay.classList.remove('is-open');
-      lockScroll(false);
+      if (isMobile()) lockScroll(false);
       // при желании можно сбрасывать фрейм:
       // frame.src = 'about:blank';
     }
@@ -111,6 +117,11 @@
     closeBtn.addEventListener('click', function(e){ e.preventDefault(); closeOverlay(); });
     overlay.addEventListener('click', function(e){ if (e.target === overlay) closeOverlay(); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeOverlay(); });
+    // Если меняется ширина — пересчитать блокировку скролла
+    window.addEventListener('resize', function(){
+      var open = overlay.classList.contains('is-open');
+      if (!open) return;
+      if (isMobile()) { lockScroll(true); } else { lockScroll(false); }
+    });
   })();
 </script>
-
