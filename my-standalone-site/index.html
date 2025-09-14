@@ -1,18 +1,18 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Калиновая баня — автономный сайт</title>
+    <title>РљР°Р»РёРЅРѕРІР°СЏ Р±Р°РЅСЏ вЂ” Р°РІС‚РѕРЅРѕРјРЅС‹Р№ СЃР°Р№С‚</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <!-- Используем существующий стиль сайдбара из корня репозитория -->
+    <!-- РСЃРїРѕР»СЊР·СѓРµРј СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ СЃС‚РёР»СЊ СЃР°Р№РґР±Р°СЂР° РёР· РєРѕСЂРЅСЏ СЂРµРїРѕР·РёС‚РѕСЂРёСЏ -->
     <link rel="stylesheet" href="../style.css" />
 
-    <!-- Встроенный умный виджет бронирования (mini iframe + fullscreen overlay) -->
+    <!-- Р’СЃС‚СЂРѕРµРЅРЅС‹Р№ СѓРјРЅС‹Р№ РІРёРґР¶РµС‚ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ (mini iframe + fullscreen overlay) -->
     <style>
       :root{ --kb-sidebar-width: 260px; }
       html, body { min-height: 100%; }
-      /* Фоновое изображение главной страницы (можно заменить путь на свой) */
+      /* Р¤РѕРЅРѕРІРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹ (РјРѕР¶РЅРѕ Р·Р°РјРµРЅРёС‚СЊ РїСѓС‚СЊ РЅР° СЃРІРѕР№) */
       body{
         background-image: url('../images/hero-bg.jpg') !important;
         background-position: center !important;
@@ -22,7 +22,7 @@
         background-color: #000 !important; /* fallback */
       }
 
-      /* Мини‑виджет: внутренняя FAB из booking/ */
+      /* РњРёРЅРёвЂ‘РІРёРґР¶РµС‚: РІРЅСѓС‚СЂРµРЅРЅСЏСЏ FAB РёР· booking/ */
       #kb-mini-frame{
         position: fixed;
         right: 18px;
@@ -31,34 +31,34 @@
         height: 120px;
         border: 0;
         background: transparent;
-        z-index: 2147483500; /* выше сайдбара, ниже фулскрина */
+        z-index: 2147483500; /* РІС‹С€Рµ СЃР°Р№РґР±Р°СЂР°, РЅРёР¶Рµ С„СѓР»СЃРєСЂРёРЅР° */
       }
       @media (max-width:600px){ #kb-mini-frame{ width:100px; height:100px; } }
 
-      /* Полноэкранный оверлей + iframe */
+      /* РџРѕР»РЅРѕСЌРєСЂР°РЅРЅС‹Р№ РѕРІРµСЂР»РµР№ + iframe */
       #kb-full-overlay{
         position: fixed; inset: 0;
         display: none; align-items: stretch;
         background: transparent; z-index: 2147483600;
       }
       #kb-full-overlay.is-open{ display: flex; }
-      /* Не закрываем левый сайдбар на десктопе */
+      /* РќРµ Р·Р°РєСЂС‹РІР°РµРј Р»РµРІС‹Р№ СЃР°Р№РґР±Р°СЂ РЅР° РґРµСЃРєС‚РѕРїРµ */
       @media (min-width:1025px){ #kb-full-overlay{ left: var(--kb-sidebar-width); } }
-      /* На мобильных прячем мини‑кнопку при открытом оверлее */
+      /* РќР° РјРѕР±РёР»СЊРЅС‹С… РїСЂСЏС‡РµРј РјРёРЅРёвЂ‘РєРЅРѕРїРєСѓ РїСЂРё РѕС‚РєСЂС‹С‚РѕРј РѕРІРµСЂР»РµРµ */
       @media (hover:none), (pointer:coarse){ .kb-overlay-open #kb-mini-frame{ display:none !important; } }
-      /* На десктопе во время оверлея отключаем клики по мини‑кнопке и поднимаем z-index */
+      /* РќР° РґРµСЃРєС‚РѕРїРµ РІРѕ РІСЂРµРјСЏ РѕРІРµСЂР»РµСЏ РѕС‚РєР»СЋС‡Р°РµРј РєР»РёРєРё РїРѕ РјРёРЅРёвЂ‘РєРЅРѕРїРєРµ Рё РїРѕРґРЅРёРјР°РµРј z-index */
       .kb-overlay-open #kb-mini-frame{ pointer-events:none; z-index:2147483602; }
 
       #kb-full-frame{ flex:1; border:0; background:transparent; width:100%; height:100%; }
       html.kb-noscroll, body.kb-noscroll{ overflow: hidden !important; }
 
-      /* Нативная кнопка “Калькулятор” в стиле стекла (как сайдбар и бронь) */
+      /* РќР°С‚РёРІРЅР°СЏ РєРЅРѕРїРєР° вЂњРљР°Р»СЊРєСѓР»СЏС‚РѕСЂвЂќ РІ СЃС‚РёР»Рµ СЃС‚РµРєР»Р° (РєР°Рє СЃР°Р№РґР±Р°СЂ Рё Р±СЂРѕРЅСЊ) */
       #kb-open-btn{
         position: fixed;
         right: 18px; bottom: 18px;
-        z-index: 2147483500; /* выше сайдбара, ниже оверлея */
+        z-index: 2147483500; /* РІС‹С€Рµ СЃР°Р№РґР±Р°СЂР°, РЅРёР¶Рµ РѕРІРµСЂР»РµСЏ */
         display: inline-block; position: fixed;
-        width: 110px; height: 110px; /* можно поменять */
+        width: 110px; height: 110px; /* РјРѕР¶РЅРѕ РїРѕРјРµРЅСЏС‚СЊ */
         border-radius: 50%;
         background: rgba(255,255,255,.16);
         -webkit-backdrop-filter: blur(18px) saturate(160%);
@@ -72,7 +72,7 @@
       }
       #kb-open-btn::before{
         content: "";
-        position: absolute; inset: 14px; /* поля вокруг иконки */
+        position: absolute; inset: 14px; /* РїРѕР»СЏ РІРѕРєСЂСѓРі РёРєРѕРЅРєРё */
         background: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat;
         opacity: .95; pointer-events: none;
         filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
@@ -81,13 +81,14 @@
       #kb-open-btn:active{ transform: translateY(1px); }
       @media (max-width:600px){ #kb-open-btn{ width: 92px; height: 92px; } }
 
-      /* Кнопка всегда видима; при открытом оверлее поднимаем поверх и оставляем кликабельной */
+      /* РљРЅРѕРїРєР° РІСЃРµРіРґР° РІРёРґРёРјР°; РїСЂРё РѕС‚РєСЂС‹С‚РѕРј РѕРІРµСЂР»РµРµ РїРѕРґРЅРёРјР°РµРј РїРѕРІРµСЂС… Рё РѕСЃС‚Р°РІР»СЏРµРј РєР»РёРєР°Р±РµР»СЊРЅРѕР№ */
       .kb-overlay-open #kb-open-btn{ pointer-events:auto; z-index:2147483602; }
-      /* На мобильных скрываем кнопку, когда открыт оверлей */
+      /* РќР° РјРѕР±РёР»СЊРЅС‹С… СЃРєСЂС‹РІР°РµРј РєРЅРѕРїРєСѓ, РєРѕРіРґР° РѕС‚РєСЂС‹С‚ РѕРІРµСЂР»РµР№ */
       @media (hover:none), (pointer:coarse){
         .kb-overlay-open #kb-open-btn{ display:none !important; }
       }
-  </style>
+        #kb-open-btn::after{content:"";position:absolute;inset:-6px;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));-webkit-mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");mask-repeat:no-repeat;mask-position:center;mask-size:contain;filter:blur(14px);opacity:.35;pointer-events:none;z-index:1;}@keyframes kb-float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}#kb-open-btn{animation:kb-float-soft 6s ease-in-out infinite}#kb-open-btn:hover{transform:translateY(-2px)!important}
+    </style>
     <!-- Overrides: glass-masked calculator button and weather chip -->
     <style>
       /* Glass button exactly in calculator shape (no circular base) */
@@ -120,7 +121,7 @@
         #kb-open-btn::after{ content: ""; position: absolute; inset: 14px; background: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
       }
 
-      /* Weather chip (glass) — always on desktop; hides on mobile only when overlay open */
+      /* Weather chip (glass) вЂ” always on desktop; hides on mobile only when overlay open */
       .kb-weather{
         position: fixed; top: 120px; right: 0; z-index: 2147483400;
         padding: 8px 20px 8px 12px; border-radius: 16px 0 0 16px;
@@ -132,74 +133,75 @@
         background-clip: padding-box;
       }
       @media (hover:none), (pointer:coarse){ .kb-overlay-open .kb-weather{ display:none !important; } }
+          #kb-open-btn::after{content:"";position:absolute;inset:-6px;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));-webkit-mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");mask-repeat:no-repeat;mask-position:center;mask-size:contain;filter:blur(14px);opacity:.35;pointer-events:none;z-index:1;}@keyframes kb-float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}#kb-open-btn{animation:kb-float-soft 6s ease-in-out infinite}#kb-open-btn:hover{transform:translateY(-2px)!important}
     </style>
   </head>
   <body>
-    <!-- Левый стеклянный сайдбар (как на главной) -->
+    <!-- Р›РµРІС‹Р№ СЃС‚РµРєР»СЏРЅРЅС‹Р№ СЃР°Р№РґР±Р°СЂ (РєР°Рє РЅР° РіР»Р°РІРЅРѕР№) -->
     <aside class="sidebar">
       <div class="logo">
         <img src="../images/logo.jpg" alt="logo">
-        <h2>Калиновая баня</h2>
+        <h2>РљР°Р»РёРЅРѕРІР°СЏ Р±Р°РЅСЏ</h2>
       </div>
       <ul class="links">
-        <h4>Меню</h4>
+        <h4>РњРµРЅСЋ</h4>
         <li>
           <span class="material-symbols-outlined">dashboard</span>
-          <a href="#">Главная</a>
+          <a href="#">Р“Р»Р°РІРЅР°СЏ</a>
         </li>
         <li>
           <span class="material-symbols-outlined">show_chart</span>
-          <a href="#">Прайс</a>
+          <a href="#">РџСЂР°Р№СЃ</a>
         </li>
         <li>
           <span class="material-symbols-outlined">flag</span>
-          <a href="#">Отчёты</a>
+          <a href="#">РћС‚С‡С‘С‚С‹</a>
         </li>
         <hr>
-        <h4>Дополнительно</h4>
+        <h4>Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ</h4>
         <li>
           <span class="material-symbols-outlined">person</span>
-          <a href="#">Команда</a>
+          <a href="#">РљРѕРјР°РЅРґР°</a>
         </li>
         <li>
           <span class="material-symbols-outlined">group</span>
-          <a href="#">Гости</a>
+          <a href="#">Р“РѕСЃС‚Рё</a>
         </li>
         <li>
           <span class="material-symbols-outlined">monitoring</span>
-          <a href="#">Аналитика</a>
+          <a href="#">РђРЅР°Р»РёС‚РёРєР°</a>
         </li>
         <hr>
-        <h4>Аккаунт</h4>
+        <h4>РђРєРєР°СѓРЅС‚</h4>
         <li>
           <span class="material-symbols-outlined">mail</span>
-          <a href="#">Сообщения</a>
+          <a href="#">РЎРѕРѕР±С‰РµРЅРёСЏ</a>
         </li>
         <li>
           <span class="material-symbols-outlined">settings</span>
-          <a href="#">Настройки</a>
+          <a href="#">РќР°СЃС‚СЂРѕР№РєРё</a>
         </li>
         <li class="logout-link">
           <span class="material-symbols-outlined">logout</span>
-          <a href="#">Выйти</a>
+          <a href="#">Р’С‹Р№С‚Рё</a>
         </li>
       </ul>
     </aside>
 
-    <!-- Нативная кнопка “Калькулятор” -->
-    <a id="kb-open-btn" aria-label="Открыть бронирование" title="Бронирование"></a>
+    <!-- РќР°С‚РёРІРЅР°СЏ РєРЅРѕРїРєР° вЂњРљР°Р»СЊРєСѓР»СЏС‚РѕСЂвЂќ -->
+    <a id="kb-open-btn" aria-label="РћС‚РєСЂС‹С‚СЊ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ" title="Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"></a>
 
-    <!-- Фулскрин с открытой карточкой (внешний крестик удалён) -->
+    <!-- Р¤СѓР»СЃРєСЂРёРЅ СЃ РѕС‚РєСЂС‹С‚РѕР№ РєР°СЂС‚РѕС‡РєРѕР№ (РІРЅРµС€РЅРёР№ РєСЂРµСЃС‚РёРє СѓРґР°Р»С‘РЅ) -->
     <div id="kb-full-overlay" aria-hidden="true">
       <iframe
         id="kb-full-frame"
-        title="Калиновая баня — бронирование"
+        title="РљР°Р»РёРЅРѕРІР°СЏ Р±Р°РЅСЏ вЂ” Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"
         src="about:blank"
         referrerpolicy="no-referrer">
       </iframe>
     </div>
     <!-- Weather chip (desktop always on) -->
-    <div id="kb-weather-chip" class="kb-weather" aria-label="Погода сейчас"><span id="kb-temp">—°</span></div>
+    <div id="kb-weather-chip" class="kb-weather" aria-label="РџРѕРіРѕРґР° СЃРµР№С‡Р°СЃ"><span id="kb-temp">вЂ”В°</span></div>
 
     <script>
       (function(){
@@ -207,7 +209,7 @@
         var openBtn = document.getElementById('kb-open-btn');
         var overlay = document.getElementById('kb-full-overlay');
         var full = document.getElementById('kb-full-frame');
-        // без внешнего крестика — используем клик по фону / ESC / повторный клик по кнопке
+        // Р±РµР· РІРЅРµС€РЅРµРіРѕ РєСЂРµСЃС‚РёРєР° вЂ” РёСЃРїРѕР»СЊР·СѓРµРј РєР»РёРє РїРѕ С„РѕРЅСѓ / ESC / РїРѕРІС‚РѕСЂРЅС‹Р№ РєР»РёРє РїРѕ РєРЅРѕРїРєРµ
         function isMobile(){
           try { return window.matchMedia('(hover: none), (pointer: coarse)').matches; }
           catch(_) { return window.innerWidth <= 1024; }
@@ -216,9 +218,9 @@
         function openOverlay(){ if (full.src !== FULL_SRC) full.src = FULL_SRC; overlay.classList.add('is-open'); document.documentElement.classList.add('kb-overlay-open'); lockScroll(true); }
         function closeOverlay(){ overlay.classList.remove('is-open'); document.documentElement.classList.remove('kb-overlay-open'); lockScroll(false); }
 
-        // Слушаем события из booking/ (postMessage)
+        // РЎР»СѓС€Р°РµРј СЃРѕР±С‹С‚РёСЏ РёР· booking/ (postMessage)
         window.addEventListener('message', function(e){
-          // Внутренний iframe того же домена — принимаем все события
+          // Р’РЅСѓС‚СЂРµРЅРЅРёР№ iframe С‚РѕРіРѕ Р¶Рµ РґРѕРјРµРЅР° вЂ” РїСЂРёРЅРёРјР°РµРј РІСЃРµ СЃРѕР±С‹С‚РёСЏ
           var d = e.data || {};
           if (d.source === 'kb') {
             if (d.type === 'kb-open') openOverlay();
@@ -229,9 +231,9 @@
         overlay.addEventListener('click', function(e){ if (e.target === overlay) closeOverlay(); });
         window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeOverlay(); });
         window.addEventListener('resize', function(){ if (!overlay.classList.contains('is-open')) return; if (isMobile()) lockScroll(true); else lockScroll(false); });
-        // На старте сбросим класс (кнопка всегда видима как нативная)
+        // РќР° СЃС‚Р°СЂС‚Рµ СЃР±СЂРѕСЃРёРј РєР»Р°СЃСЃ (РєРЅРѕРїРєР° РІСЃРµРіРґР° РІРёРґРёРјР° РєР°Рє РЅР°С‚РёРІРЅР°СЏ)
         document.documentElement.classList.remove('kb-overlay-open');
-        // Клик по нативной кнопке
+        // РљР»РёРє РїРѕ РЅР°С‚РёРІРЅРѕР№ РєРЅРѕРїРєРµ
         if (openBtn) openBtn.addEventListener('click', function(e){
           e.preventDefault();
           if (overlay.classList.contains('is-open')) closeOverlay(); else openOverlay();
@@ -248,7 +250,7 @@
           fetch('https://api.open-meteo.com/v1/forecast?latitude=43.6833&longitude=40.2000&current=temperature_2m,weather_code&timezone=auto',{cache:'no-store'})
             .then(r=>r.json()).then(d=>{
               var t = (d && d.current && typeof d.current.temperature_2m==='number') ? Math.round(d.current.temperature_2m) : null;
-              var n = document.getElementById('kb-temp'); if(n) n.textContent = (t==null?'—':t)+'°';
+              var n = document.getElementById('kb-temp'); if(n) n.textContent = (t==null?'вЂ”':t)+'В°';
             }).catch(()=>{});
         }catch(_){ }
       })();
