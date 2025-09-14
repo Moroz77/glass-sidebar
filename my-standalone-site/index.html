@@ -34,6 +34,10 @@
       #kb-full-overlay.is-open{ display: flex; }
       /* Не закрываем левый сайдбар на десктопе */
       @media (min-width:1025px){ #kb-full-overlay{ left: var(--kb-sidebar-width); } }
+      /* На мобильных прячем мини‑кнопку при открытом оверлее */
+      @media (hover:none), (pointer:coarse){ .kb-overlay-open #kb-mini-frame{ display:none !important; } }
+      /* На десктопе во время оверлея отключаем клики по мини‑кнопке и поднимаем z-index */
+      .kb-overlay-open #kb-mini-frame{ pointer-events:none; z-index:2147483602; }
 
       #kb-full-frame{ flex:1; border:0; background:transparent; width:100%; height:100%; }
       .kb-overlay-close{
@@ -127,9 +131,8 @@
           catch(_) { return window.innerWidth <= 1024; }
         }
         function lockScroll(on){ if (isMobile()) { document.documentElement.classList.toggle('kb-noscroll', on); document.body.classList.toggle('kb-noscroll', on); } }
-        function showMini(show){ if (mini) mini.style.display = show ? 'block' : 'none'; }
-        function openOverlay(){ if (full.src !== FULL_SRC) full.src = FULL_SRC; overlay.classList.add('is-open'); if (isMobile()) { showMini(false); } else { showMini(true); if (mini){ mini.style.pointerEvents='none'; mini.style.zIndex='2147483602'; } } lockScroll(true); }
-        function closeOverlay(){ overlay.classList.remove('is-open'); lockScroll(false); showMini(true); if (mini){ mini.style.pointerEvents='auto'; mini.style.zIndex='2147483500'; } }
+        function openOverlay(){ if (full.src !== FULL_SRC) full.src = FULL_SRC; overlay.classList.add('is-open'); document.documentElement.classList.add('kb-overlay-open'); lockScroll(true); }
+        function closeOverlay(){ overlay.classList.remove('is-open'); document.documentElement.classList.remove('kb-overlay-open'); lockScroll(false); }
 
         // Слушаем события из booking/ (postMessage)
         window.addEventListener('message', function(e){
@@ -145,8 +148,8 @@
         overlay.addEventListener('click', function(e){ if (e.target === overlay) closeOverlay(); });
         window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeOverlay(); });
         window.addEventListener('resize', function(){ if (!overlay.classList.contains('is-open')) return; if (isMobile()) lockScroll(true); else lockScroll(false); });
-        // Стартовое состояние — показать мини‑кнопку
-        showMini(true);
+        // На старте сбросим класс, чтобы мини‑кнопка точно была видна
+        document.documentElement.classList.remove('kb-overlay-open');
       })();
     </script>
   </body>
