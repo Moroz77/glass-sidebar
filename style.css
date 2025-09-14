@@ -49,7 +49,7 @@ body {
 }
 
 .logo img {
-    width: 43px;
+    width: 56px; /* was 43px */
     border-radius: 50%;
 }
 
