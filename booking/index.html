@@ -28,22 +28,8 @@
     .kb-glass{background:linear-gradient(135deg,var(--glass-from),var(--glass-to));border-radius:var(--radius-card);
       box-shadow:var(--glass-shadow);backdrop-filter:var(--glass-backdrop)}
 
-    /* FAB - Статичный с элевантной анимацией появления */
-    .kb-fab{
-      position:fixed;right:18px;bottom:18px;z-index:var(--z-max);width:var(--fab-size);height:var(--fab-size);
-      background:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat;
-      cursor:pointer;transition:transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
-      opacity:0.7;
-      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.4));
-      animation: kb-subtle-pulse 8s ease-in-out infinite;
-    }
-    .kb-fab:hover{
-      transform:scale(1.05);
-      opacity:0.9;
-      filter: drop-shadow(0 10px 25px rgba(0,0,0,0.5));
-      animation: none; /* Отключаем анимацию при наведении */
-    }
-    .kb-fab:active{transform:scale(.97)}
+    /* FAB внутри виджета отключаем (внешняя кнопка на Тильде единственная) */
+    .kb-fab{ display:none !important; }
     
     /* Сдержанная анимация пульсации */
     @keyframes kb-subtle-pulse{
