@@ -93,7 +93,7 @@
       /* Glass button exactly in calculator shape (no circular base) */
       #kb-open-btn{
         width: 130px !important; height: 130px !important;
-        background: transparent !important; border: 0 !important;
+        background: transparent !important; border: 0 !important; border-radius: 0 !important;
         box-shadow: none !important; overflow: visible !important;
       }
       #kb-open-btn::before{
@@ -196,7 +196,7 @@
 
     <script>
       (function(){
-        var FULL_SRC = '../booking/?hidefab=1#kb-booking';
+        var FULL_SRC = '../booking/?hidefab=1&hideweather=1#kb-booking';
         var openBtn = document.getElementById('kb-open-btn');
         var overlay = document.getElementById('kb-full-overlay');
         var full = document.getElementById('kb-full-frame');

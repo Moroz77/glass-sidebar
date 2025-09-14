@@ -16,6 +16,9 @@
         if (p.has('hidefab') || p.get('hidefab') === '1') {
           document.documentElement.classList.add('kb-hidefab');
         }
+        if (p.has('hideweather') || p.get('hideweather') === '1') {
+          document.documentElement.classList.add('kb-hideweather');
+        }
       }catch(_){ }
     })();
   </script>
@@ -246,6 +249,7 @@
        чтобы не было второй кнопки рядом с нативной */
     body.kb-open .kb-fab { display: none !important; }
     html.kb-hidefab .kb-fab { display: none !important; }
+    html.kb-hideweather .kb-weather { display: none !important; }
   </style>
   <!-- Выравнивание стеклянного эффекта карточки бронирования под сайдбар -->
   <style>
