@@ -1,29 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script>
-    (function(){
-      try{
-        var p = new URLSearchParams(location.search);
-        if (p.has('mini') || p.get('mode') === 'fab') {
-          document.documentElement.classList.add('kb-mini');
-        }
-        if (p.has('staticfab') || p.get('staticfab') === '1') {
-          document.documentElement.classList.add('kb-staticfab');
-        }
-        if (p.has('hidefab') || p.get('hidefab') === '1') {
-          document.documentElement.classList.add('kb-hidefab');
-        }
-        if (p.has('hideweather') || p.get('hideweather') === '1') {
-          document.documentElement.classList.add('kb-hideweather');
-        }
-      }catch(_){ }
-    })();
-  </script>
   <base href="./">
-  <title>РљР°Р»РёРЅРѕРІР°СЏ Р±Р°РЅСЏ вЂ” РЈР»СѓС‡С€РµРЅРЅС‹Р№ РІРёРґР¶РµС‚ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ</title>
+  <title>Калиновая баня — Улучшенный виджет бронирования</title>
   <style>
     :root{
       --z-max:2147483647; --z-card:2147483600; --z-weather:2147483000; --z-home:2147483500;
@@ -47,7 +28,7 @@
     .kb-glass{background:linear-gradient(135deg,var(--glass-from),var(--glass-to));border-radius:var(--radius-card);
       box-shadow:var(--glass-shadow);backdrop-filter:var(--glass-backdrop)}
 
-    /* FAB - РЎС‚Р°С‚РёС‡РЅС‹Р№ СЃ СЌР»РµРІР°РЅС‚РЅРѕР№ Р°РЅРёРјР°С†РёРµР№ РїРѕСЏРІР»РµРЅРёСЏ */
+    /* FAB - Статичный с элевантной анимацией появления */
     .kb-fab{
       position:fixed;right:18px;bottom:18px;z-index:var(--z-max);width:var(--fab-size);height:var(--fab-size);
       background:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat;
@@ -60,11 +41,11 @@
       transform:scale(1.05);
       opacity:0.9;
       filter: drop-shadow(0 10px 25px rgba(0,0,0,0.5));
-      animation: none; /* РћС‚РєР»СЋС‡Р°РµРј Р°РЅРёРјР°С†РёСЋ РїСЂРё РЅР°РІРµРґРµРЅРёРё */
+      animation: none; /* Отключаем анимацию при наведении */
     }
     .kb-fab:active{transform:scale(.97)}
     
-    /* РЎРґРµСЂР¶Р°РЅРЅР°СЏ Р°РЅРёРјР°С†РёСЏ РїСѓР»СЊСЃР°С†РёРё */
+    /* Сдержанная анимация пульсации */
     @keyframes kb-subtle-pulse{
       0%, 90%, 100% {
         transform: scale(1);
@@ -76,9 +57,9 @@
       }
     }
 
-    /* Home button - РІРѕР·РІСЂР°С‰Р°РµРј РїРµСЂРІСѓСЋ Р°РЅРёРјР°С†РёСЋ СЃ СѓР»СѓС‡С€РµРЅРЅРѕР№ С‚РµРЅСЊСЋ */
+    /* Home button - возвращаем первую анимацию с улучшенной тенью */
     .kb-home{
-      display:none; /* РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ СЃРєСЂС‹С‚Рѕ РЅР°РІСЃРµРіРґР° */
+      display:none;
       position:fixed;
       left:18px;
       top:calc(18px + env(safe-area-inset-top));
@@ -87,7 +68,7 @@
       height:var(--home-size);
       cursor:pointer;
       opacity:0.7;
-      /* РџР РђР’РР›Р¬РќР«Р™ Р›РћР“РћРўРРџ РЎР›Р•Р’Рђ */
+      /* ПРАВИЛЬНЫЙ ЛОГОТИП СЛЕВА */
       background:url("https://static.tildacdn.com/tild6434-3966-4334-b664-396466336537/ChatGPT_Image_13__20.png") center/contain no-repeat;
       filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
       animation: kb-float 4s ease-in-out infinite;
@@ -98,16 +79,16 @@
       filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6));
     }
     
-    /* РќРѕРІРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ СЃ РЅР°Р·РІР°РЅРёРµРј - РїСЂРѕР·СЂР°С‡РЅРѕРµ */
+    /* Новое изображение с названием - прозрачное */
     .kb-home-name {
-      display:none; /* РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ СЃРєСЂС‹С‚Рѕ РЅР°РІСЃРµРіРґР° */
+      display:none;
       position:fixed;
       left:calc(18px + var(--home-size) + 10px);
       top:calc(18px + env(safe-area-inset-top) + 25px);
       z-index:var(--z-home);
       height:60px;
       width:auto;
-      /* РџР РћР—Р РђР§РќРћР• РР—РћР‘Р РђР–Р•РќРР• РЎ РќРђР—Р’РђРќРР•Рњ */
+      /* ПРОЗРАЧНОЕ ИЗОБРАЖЕНИЕ С НАЗВАНИЕМ */
       background:url("https://static.tildacdn.com/tild3664-3430-4234-a264-306136616264/ChatGPT_Image_13__20.png") center/contain no-repeat;
     }
     
@@ -120,7 +101,7 @@
       50%{transform:scale(1.06); opacity:0.8;}
     }
 
-    /* РћСЃС‚Р°Р»СЊРЅС‹Рµ СЃС‚РёР»Рё Р±РµР· РёР·РјРµРЅРµРЅРёР№ */
+    /* Остальные стили без изменений */
     .kb-card{position:fixed;left:8px;right:8px;top:calc(8px + env(safe-area-inset-top));margin:0 auto;max-width:520px;
       z-index:var(--z-card);visibility:hidden;opacity:0;transform:translateY(8px) scale(.98);
       transition:visibility .25s,opacity .25s,transform .25s;display:flex;flex-direction:column;padding:var(--pad-card);color:var(--text)}
@@ -210,7 +191,7 @@
     }
 
     @media (min-width:601px){
-      .kb-card{top:auto;bottom:calc(18px + var(--fab-size) + 16px + var(--raise,0px));right:18px;left:auto;transform:none;max-width:420px;width:420px}
+      .kb-card{top:auto;bottom:calc(18px + var(--fab-size) + 16px);right:18px;left:auto;transform:none;max-width:420px;width:420px}
       .kb-card:target{transform:none}
     }
     @media (max-width:600px){
@@ -219,12 +200,11 @@
       .kb-field{margin:10px 0 var(--gap-field-m)}
       body.kb-open .kb-fab,body.kb-open .kb-weather,body.kb-open .kb-home,body.kb-open .kb-home-name{display:none!important}
       .kb-row + .kb-field{margin-top:4px!important;}
-      /* РЅР° РјРѕР±РёР»РєРµ Р»РѕРіРѕС‚РёРїС‹ С‚РѕР¶Рµ СЃРєСЂС‹С‚С‹ */
-      .kb-home{display:none!important;}
-      .kb-home-name{display:none!important;}
+      .kb-home{display:block;}
+      .kb-home-name{display:block;}
       .kb-weather{top:120px;right:-10px;}
       
-      /* Р‘Р»РѕРєРёСЂРѕРІРєР° СЃРєСЂРѕР»Р»Р° РїСЂРё РѕС‚РєСЂС‹С‚РѕРј РІРёРґР¶РµС‚Рµ */
+      /* Блокировка скролла при открытом виджете */
       body.kb-open {
         overflow: hidden;
         position: fixed;
@@ -234,123 +214,93 @@
     }
     #kb-contacts + #kb-deposit-field{ margin-top:8px; }
   </style>
-  <!-- Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЃС‚РёР»Рё РґР»СЏ СЂРµР¶РёРјР° РјРёРЅРё (РїРѕРєР°Р·С‹РІР°С‚СЊ С‚РѕР»СЊРєРѕ FAB) -->
-  <style>
-    html.kb-mini .kb-card,
-    html.kb-mini .kb-home,
-    html.kb-mini .kb-home-name,
-    html.kb-mini .kb-weather,
-    html.kb-mini .kb-toast { display: none !important; }
-    /* РЎС‚Р°С‚РёС‡РЅР°СЏ FAB РІ РјРёРЅРёвЂ‘СЂРµР¶РёРјРµ (Р±РµР· РґРµСЂРіР°РЅРёР№) */
-    html.kb-mini.kb-staticfab .kb-fab { transition: none !important; }
-    html.kb-mini.kb-staticfab .kb-fab:hover { transform: none !important; }
-    html.kb-mini.kb-staticfab .kb-fab:active { transform: none !important; }
-    /* РљРѕРіРґР° РєР°СЂС‚РѕС‡РєР° РѕС‚РєСЂС‹С‚Р° (РїРѕР»РЅРѕСЌРєСЂР°РЅРЅС‹Р№ СЂРµР¶РёРј), РІРЅСѓС‚СЂРµРЅРЅСЋСЋ FAB СЃРєСЂС‹РІР°РµРј РІСЃРµРіРґР°
-       С‡С‚РѕР±С‹ РЅРµ Р±С‹Р»Рѕ РІС‚РѕСЂРѕР№ РєРЅРѕРїРєРё СЂСЏРґРѕРј СЃ РЅР°С‚РёРІРЅРѕР№ */
-    body.kb-open .kb-fab { display: none !important; }
-    html.kb-hidefab .kb-fab { display: none !important; }
-    html.kb-hideweather .kb-weather { display: none !important; }
-  </style>
-  <!-- Р’С‹СЂР°РІРЅРёРІР°РЅРёРµ СЃС‚РµРєР»СЏРЅРЅРѕРіРѕ СЌС„С„РµРєС‚Р° РєР°СЂС‚РѕС‡РєРё Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ РїРѕРґ СЃР°Р№РґР±Р°СЂ -->
-  <style>
-    /* Р”РµР»Р°РµРј С‚Р°РєСѓСЋ Р¶Рµ В«СЃС‚РµРєР»СЏРЅРЅРѕСЃС‚СЊВ», РєР°Рє Сѓ СЃР°Р№РґР±Р°СЂР° */
-    .kb-card.kb-glass{
-      background: rgba(255, 255, 255, 0.16) !important;
-      -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
-      backdrop-filter: blur(18px) saturate(160%) !important;
-      border: 1px solid rgba(255, 255, 255, 0.35) !important;
-      background-clip: padding-box !important;
-      isolation: isolate;
-      overflow: hidden;
-    }
-  </style>
 </head>
 <body>
   <div id="kb-widget">
-    <a href="#kb-booking" class="kb-fab" aria-label="РћС‚РєСЂС‹С‚СЊ/Р·Р°РєСЂС‹С‚СЊ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"></a>
-    <a href="/" class="kb-home" aria-label="Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР° РіР»Р°РІРЅСѓСЋ"></a>
-    <div class="kb-home-name" aria-label="РљР°Р»РёРЅРѕРІР°СЏ Р‘Р°РЅСЏ"></div>
+    <a href="#kb-booking" class="kb-fab" aria-label="Открыть/закрыть бронирование"></a>
+    <a href="/" class="kb-home" aria-label="Вернуться на главную"></a>
+    <div class="kb-home-name" aria-label="Калиновая Баня"></div>
 
-    <aside id="kb-booking" class="kb-card kb-glass" aria-label="Р¤РѕСЂРјР° Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ">
+    <aside id="kb-booking" class="kb-card kb-glass" aria-label="Форма бронирования">
       <div class="kb-card-header">
-        <div class="kb-title">Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ</div>
-        <button type="button" class="kb-close" aria-label="Р—Р°РєСЂС‹С‚СЊ">вњ•</button>
+        <div class="kb-title">Бронирование</div>
+        <button type="button" class="kb-close" aria-label="Закрыть">✕</button>
       </div>
 
       <div class="kb-card-body">
         <div class="kb-row">
           <div class="kb-field">
-            <label class="kb-label" for="kb-date">Р”Р°С‚Р°</label>
+            <label class="kb-label" for="kb-date">Дата</label>
             <input class="kb-input" type="date" id="kb-date" />
           </div>
           <div class="kb-field">
-            <label class="kb-label">РќР°С‡Р°Р»Рѕ</label>
-            <div class="kb-input kb-static" id="kb-start-label">вЂ”</div>
+            <label class="kb-label">Начало</label>
+            <div class="kb-input kb-static" id="kb-start-label">—</div>
           </div>
         </div>
 
         <div class="kb-field">
-          <label class="kb-label">РЎР»РѕС‚С‹</label>
+          <label class="kb-label">Слоты</label>
           <div class="kb-seg" id="kb-window" role="tablist">
-            <button type="button" data-index="0" aria-selected="false"><div class="kb-slot-start">09:00</div><div class="kb-slot-end">РґРѕ 12:00</div></button>
-            <button type="button" data-index="1" aria-selected="false"><div class="kb-slot-start">13:00</div><div class="kb-slot-end">РґРѕ 16:00</div></button>
-            <button type="button" data-index="2" aria-selected="false"><div class="kb-slot-start">17:00</div><div class="kb-slot-end">РґРѕ 20:00</div></button>
-            <button type="button" data-index="3" aria-selected="false"><div class="kb-slot-start">21:00</div><div class="kb-slot-end">РґРѕ 00:00</div></button>
+            <button type="button" data-index="0" aria-selected="false"><div class="kb-slot-start">09:00</div><div class="kb-slot-end">до 12:00</div></button>
+            <button type="button" data-index="1" aria-selected="false"><div class="kb-slot-start">13:00</div><div class="kb-slot-end">до 16:00</div></button>
+            <button type="button" data-index="2" aria-selected="false"><div class="kb-slot-start">17:00</div><div class="kb-slot-end">до 20:00</div></button>
+            <button type="button" data-index="3" aria-selected="false"><div class="kb-slot-start">21:00</div><div class="kb-slot-end">до 00:00</div></button>
           </div>
         </div>
 
         <div class="kb-field">
-          <label class="kb-label" for="kb-hours">Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ</label>
+          <label class="kb-label" for="kb-hours">Длительность</label>
           <div class="kb-range-row">
             <input class="kb-range" id="kb-hours" type="range" min="3" max="12" step="3" value="3" />
             <div class="kb-badge" id="kb-hours-badge">3</div>
           </div>
-          <div class="kb-note" id="kb-note-line">Р’С‹Р±РµСЂРёС‚Рµ СЃР»РѕС‚С‹</div>
+          <div class="kb-note" id="kb-note-line">Выберите слоты</div>
         </div>
 
         <div class="kb-field">
-          <label class="kb-label" for="kb-guests">Р“РѕСЃС‚Рё</label>
+          <label class="kb-label" for="kb-guests">Гости</label>
           <div class="kb-range-row">
             <input class="kb-range" id="kb-guests" type="range" min="1" max="15" step="1" value="1" />
             <div class="kb-badge" id="kb-guests-badge">1</div>
           </div>
-          <div class="kb-note">Р”РµС‚СЏРј РґРѕ 12 Р»РµС‚ вЂ”50%</div>
+          <div class="kb-note">Детям до 12 лет —50%</div>
         </div>
 
         <div class="kb-row" id="kb-contacts">
           <div class="kb-field">
-            <label class="kb-label" for="kb-name">РРјСЏ</label>
-            <input class="kb-input" type="text" id="kb-name" placeholder="Р’Р°С€Рµ РёРјСЏ" />
+            <label class="kb-label" for="kb-name">Имя</label>
+            <input class="kb-input" type="text" id="kb-name" placeholder="Ваше имя" />
           </div>
           <div class="kb-field">
-            <label class="kb-label" for="kb-phone">РўРµР»РµС„РѕРЅ</label>
+            <label class="kb-label" for="kb-phone">Телефон</label>
             <input class="kb-input" type="tel" id="kb-phone" placeholder="+7 ..." />
           </div>
         </div>
 
         <div class="kb-field" id="kb-deposit-field">
-          <label class="kb-label" for="kb-deposit">Р”РµРїРѕР·РёС‚</label>
+          <label class="kb-label" for="kb-deposit">Депозит</label>
           <div class="kb-range-row">
             <input class="kb-range" id="kb-deposit" type="range" min="0" max="25000" step="100" value="11000" disabled />
-            <div class="kb-badge" id="kb-deposit-badge">11 000 в‚Ѕ</div>
+            <div class="kb-badge" id="kb-deposit-badge">11 000 ₽</div>
           </div>
-          <div class="kb-note" id="kb-deposit-note">РћСЃС‚Р°Р»РѕСЃСЊ РЅР° РїСЂРѕС†РµРґСѓСЂС‹: 11 000 в‚Ѕ</div>
+          <div class="kb-note" id="kb-deposit-note">Осталось на процедуры: 11 000 ₽</div>
         </div>
 
         <div class="kb-bottom">
           <div class="kb-total-wrap">
-            <div class="kb-label">РС‚РѕРіРѕ</div>
-            <div class="kb-total" id="kb-total">25 000 в‚Ѕ</div>
+            <div class="kb-label">Итого</div>
+            <div class="kb-total" id="kb-total">25 000 ₽</div>
           </div>
-          <a id="kb-book-btn" class="kb-like-input" href="#" role="button" aria-label="Р—Р°Р±СЂРѕРЅРёСЂРѕРІР°С‚СЊ">Р—Р°Р±СЂРѕРЅРёСЂРѕРІР°С‚СЊ</a>
+          <a id="kb-book-btn" class="kb-like-input" href="#" role="button" aria-label="Забронировать">Забронировать</a>
         </div>
 
-        <div class="kb-min-bottom" id="kb-minline">РњРёРЅ. РґРµРїРѕР·РёС‚: 25 000 в‚Ѕ (Р±СѓРґРЅРё) / 30 000 в‚Ѕ (РІС‹С…РѕРґРЅС‹Рµ) Р·Р° 1 СЃР»РѕС‚ (3 С‡)</div>
+        <div class="kb-min-bottom" id="kb-minline">Мин. депозит: 25 000 ₽ (будни) / 30 000 ₽ (выходные) за 1 слот (3 ч)</div>
       </div>
     </aside>
 
-    <div class="kb-weather kb-glass" aria-label="РџРѕРіРѕРґР° СЃРµР№С‡Р°СЃ">
-      <span id="kb-temp">вЂ”В°</span>
+    <div class="kb-weather kb-glass" aria-label="Погода сейчас">
+      <span id="kb-temp">—°</span>
     </div>
 
     <div class="kb-toast" id="kb-toast"></div>
@@ -361,9 +311,9 @@
     function addHoursToHM(hm, add){var p=(hm||'00:00').split(':'),h=parseInt(p[0],10)||0,m=parseInt(p[1],10)||0;
       var d=new Date(2000,0,1,h,m,0,0);d.setHours(d.getHours()+add);
       return pad2(d.getHours())+':'+pad2(d.getMinutes())}
-    function rub(n){ return (Math.max(0,Math.round(n))||0).toLocaleString('ru-RU') + ' в‚Ѕ'; }
+    function rub(n){ return (Math.max(0,Math.round(n))||0).toLocaleString('ru-RU') + ' ₽'; }
     
-    // Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїРѕРєР°Р·Р° СѓРІРµРґРѕРјР»РµРЅРёР№
+    // Функция для показа уведомлений
     function showToast(message, duration = 3000) {
       const toast = document.getElementById('kb-toast');
       toast.textContent = message;
@@ -374,9 +324,9 @@
       }, duration);
     }
     
-    // РЈР±СЂР°РЅР° С„СѓРЅРєС†РёСЏ РІР°Р»РёРґР°С†РёРё С‚РµР»РµС„РѕРЅР°
+    // Убрана функция валидации телефона
     
-    // Р¤РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёРµ С‚РµР»РµС„РѕРЅР° (РѕСЃС‚Р°РІР»СЏРµРј РґР»СЏ СѓРґРѕР±СЃС‚РІР° РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№)
+    // Форматирование телефона (оставляем для удобства пользователей)
     function formatPhone(input) {
       const value = input.value.replace(/\D/g, '');
       let formattedValue = '+7 ';
@@ -399,27 +349,6 @@
       
       input.value = formattedValue;
     }
-  </script>
-
-  <!-- РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёРµ РїРѕРІРµРґРµРЅРёСЏ РІ СЂРµР¶РёРјРµ РјРёРЅРё: С‚РѕР»СЊРєРѕ FAB, Р±РµР· РѕС‚РєСЂС‹С‚РёСЏ РІРЅСѓС‚СЂРё iframe -->
-  <script>
-    (function(){
-      try{
-        var params = new URLSearchParams(location.search);
-        var onlyFab = params.has('mini') || params.get('mode') === 'fab';
-        if (!onlyFab) return;
-        document.addEventListener('DOMContentLoaded', function(){
-          try { document.body.classList.add('kb-only-fab'); } catch(_){}
-          var fab = document.querySelector('#kb-widget .kb-fab');
-          if (!fab) return;
-          fab.addEventListener('click', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            try { window.parent && window.parent.postMessage({ source:'kb', type:'kb-open' }, '*'); } catch(_) {}
-          }, true);
-        });
-      }catch(_){ }
-    })();
   </script>
 
   <script>
@@ -454,14 +383,14 @@
           phoneEl=document.getElementById('kb-phone'),
           toastEl = document.getElementById('kb-toast');
 
-      // РЈСЃС‚Р°РЅРѕРІРєР° РјРёРЅРёРјР°Р»СЊРЅРѕР№ РґР°С‚Р° (СЃРµРіРѕРґРЅСЏ)
+      // Установка минимальной дата (сегодня)
       const today = new Date();
       const yyyy = today.getFullYear();
       const mm = String(today.getMonth() + 1).padStart(2, '0');
       const dd = String(today.getDate()).padStart(2, '0');
       dateEl.min = `${yyyy}-${mm}-${dd}`;
       
-      // РћР±СЂР°Р±РѕС‚С‡РёРє РґР»СЏ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёСЏ С‚РµР»РµС„РѕРЅР°
+      // Обработчик для форматирования телефона
       if(phoneEl){
         phoneEl.value = '+7 ';
         phoneEl.addEventListener('input', function() {
@@ -516,15 +445,15 @@
 
         if(selectedStart===null){
           applySlotHighlight(0);
-          startLabel.textContent='вЂ”';
+          startLabel.textContent='—';
           hoursBadge.textContent=String(durPaid);
-          noteLine.textContent='Р’С‹Р±РµСЂРёС‚Рµ СЃР»РѕС‚С‹';
+          noteLine.textContent='Выберите слоты';
           var guests0  = +guestsEl.value || CFG.BASE_GUESTS;
           var effGuests0 = Math.max(guests0, 2);
           var baselineRemaining = Math.max(baseDep0 - (effGuests0*price0*1), 0);
           depRange.max=String(baseDep0); depRange.value=String(baselineRemaining); fill(depRange);
           depBadge.textContent=rub(baselineRemaining);
-          depNote.textContent='РћСЃС‚Р°Р»РѕСЃСЊ РЅР° РїСЂРѕС†РµРґСѓСЂС‹: ' + rub(baselineRemaining);
+          depNote.textContent='Осталось на процедуры: ' + rub(baselineRemaining);
           totalEl.textContent=rub(baseDep0);
           return;
         }
@@ -535,7 +464,7 @@
         var gift=Math.max(slots-1,0);
         var endFact=addHoursToHM(startHM,durPaid+gift); if(endFact==='24:00') endFact='00:00';
         hoursBadge.textContent=String(durPaid+gift);
-        noteLine.textContent='Р’С‹ РІС‹Р±СЂР°Р»Рё: '+startHM+' вЂ” '+endFact+(gift?('; +'+gift+' С‡ РІ РїРѕРґР°СЂРѕРє'):'');
+        noteLine.textContent='Вы выбрали: '+startHM+' — '+endFact+(gift?('; +'+gift+' ч в подарок'):'');
       }
 
       function recalcMoney(){
@@ -548,7 +477,7 @@
           var baselineRemaining = Math.max(baseDeposit - (effGuestsInit*priceInit*1), 0);
           depRange.max=String(baseDeposit); depRange.value=String(baselineRemaining); fill(depRange);
           depBadge.textContent=rub(baselineRemaining);
-          depNote.textContent='РћСЃС‚Р°Р»РѕСЃСЊ РЅР° РїСЂРѕС†РµРґСѓСЂС‹: ' + rub(baselineRemaining);
+          depNote.textContent='Осталось на процедуры: ' + rub(baselineRemaining);
           totalEl.textContent=rub(baseDeposit);
           return;
         }
@@ -563,11 +492,11 @@
         var total=Math.max(ticketsReal, deposit);
         depRange.max=String(deposit); depRange.value=String(Math.round(topup)); fill(depRange);
         depBadge.innerHTML=rub(topup);
-        depNote.innerHTML=topup>0?('РћСЃС‚Р°Р»РѕСЃСЊ РЅР° РїСЂРѕС†РµРґСѓСЂС‹: '+rub(topup)):'Р‘РёР»РµС‚С‹ РїРµСЂРµРєСЂС‹РІР°СЋС‚ РґРµРїРѕР·РёС‚';
+        depNote.innerHTML=topup>0?('Осталось на процедуры: '+rub(topup)):'Билеты перекрывают депозит';
         totalEl.innerHTML=rub(total);
       }
 
-      // РЈР»СѓС‡С€РµРЅРЅС‹Р№ РѕР±СЂР°Р±РѕС‚С‡РёРє РєР»РёРєРѕРІ РґР»СЏ СЃР»РѕС‚РѕРІ
+      // Улучшенный обработчик кликов для слотов
       function handleSlotClick(e){
         var btn = e.target.closest('button');
         if(!btn) return;
@@ -578,10 +507,10 @@
         selectedStart = parseInt(index);
         recompute(); 
         recalcMoney();
-        showToast('Р’С‹Р±СЂР°РЅ СЃР»РѕС‚ ' + CFG.WINDOWS[selectedStart].start);
+        showToast('Выбран слот ' + CFG.WINDOWS[selectedStart].start);
       }
 
-      // РСЃРїСЂР°РІР»РµРЅРЅС‹Р№ РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕР±С‹С‚РёР№ РґР»СЏ СЃР»РѕС‚РѕРІ
+      // Исправленный обработчик событий для слотов
       winSeg.addEventListener('click', handleSlotClick);
 
       hoursEl.addEventListener('input',function(){
@@ -596,7 +525,7 @@
 
       dateEl.addEventListener('change',function(){
         if (!dateEl.value) {
-          showToast('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РґР°С‚Сѓ', 3000);
+          showToast('Пожалуйста, выберите дату', 3000);
           dateEl.classList.add('kb-input-error');
           return;
         }
@@ -609,37 +538,37 @@
       bookBtn.addEventListener('click', function(e){
         e.preventDefault();
         
-        // Р’Р°Р»РёРґР°С†РёСЏ С„РѕСЂРјС‹
+        // Валидация формы
         if(!dateEl.value) {
-          showToast('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РґР°С‚Сѓ', 3000);
+          showToast('Пожалуйста, выберите дату', 3000);
           dateEl.classList.add('kb-input-error');
           return;
         }
         
         if(selectedStart===null){ 
-          showToast('Р’С‹Р±РµСЂРёС‚Рµ С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ СЃР»РѕС‚', 3000);
+          showToast('Выберите хотя бы один слот', 3000);
           winSeg.classList.add('kb-input-error');
           setTimeout(() => winSeg.classList.remove('kb-input-error'), 1000);
           return; 
         }
         
         if(!nameEl.value.trim()) {
-          showToast('Р’РІРµРґРёС‚Рµ РІР°С€Рµ РёРјСЏ', 3000);
+          showToast('Введите ваше имя', 3000);
           nameEl.classList.add('kb-input-error');
           nameEl.focus();
           return;
         }
         
-        // РЈР±СЂР°РЅР° РїСЂРѕРІРµСЂРєР° С„РѕСЂРјР°С‚Р° С‚РµР»РµС„РѕРЅР°, РѕСЃС‚Р°РІР»РµРЅР° С‚РѕР»СЊРєРѕ РїСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ Р·РЅР°С‡РµРЅРёСЏ
+        // Убрана проверка формата телефона, оставлена только проверка на наличие значения
         if(!phoneEl.value.trim()) {
-          showToast('Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°', 3000);
+          showToast('Введите номер телефона', 3000);
           phoneEl.classList.add('kb-input-error');
           phoneEl.focus();
           return;
         }
         
-        // Р’СЃРµ РїСЂРѕРІРµСЂРєРё РїСЂРѕР№РґРµРЅС‹
-        var date = dateEl.value ? dateEl.value.split('-').reverse().join('.') : 'РЅРµ РІС‹Р±СЂР°РЅР°';
+        // Все проверки пройдены
+        var date = dateEl.value ? dateEl.value.split('-').reverse().join('.') : 'не выбрана';
         var durPaid = +hoursEl.value || CFG.SLOT_HOURS;
         var slots = Math.max(1, Math.round(durPaid/CFG.SLOT_HOURS));
         var gift = Math.max(slots-1, 0);
@@ -647,13 +576,13 @@
         var endHM = addHoursToHM(startHM, durPaid + gift);
         if(endHM==='24:00') endHM='00:00';
         var lines = [
-          'Р—Р°СЏРІРєР° РЅР° Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ вЂ” РљР°Р»РёРЅРѕРІР°СЏ Р‘Р°РЅСЏ',
-          'Р”Р°С‚Р°: ' + date,
-          'РРЅС‚РµСЂРІР°Р»: ' + startHM + 'вЂ“' + endHM,
-          'Р“РѕСЃС‚РµР№: ' + (guestsEl.value || 'вЂ”'),
-          'РўРµР»РµС„РѕРЅ: ' + (phoneEl && phoneEl.value ? phoneEl.value.trim() : 'вЂ”'),
-          'РРјСЏ: ' + (nameEl && nameEl.value ? nameEl.value.trim() : 'вЂ”'),
-          'РС‚РѕРіРѕ Рє РѕРїР»Р°С‚Рµ: ' + totalEl.textContent
+          'Заявка на бронирование — Калиновая Баня',
+          'Дата: ' + date,
+          'Интервал: ' + startHM + '–' + endHM,
+          'Гостей: ' + (guestsEl.value || '—'),
+          'Телефон: ' + (phoneEl && phoneEl.value ? phoneEl.value.trim() : '—'),
+          'Имя: ' + (nameEl && nameEl.value ? nameEl.value.trim() : '—'),
+          'Итого к оплате: ' + totalEl.textContent
         ];
         var text = encodeURIComponent(lines.join('\n'));
         window.open('https://wa.me/79347771777?text=' + text, '_blank');
@@ -663,7 +592,7 @@
       document.querySelectorAll('#kb-window button').forEach(function(btn){
         var top=btn.querySelector('.kb-slot-start'); var bot=btn.querySelector('.kb-slot-end');
         var st=top.textContent.trim(); var end=addHoursToHM(st,CFG.SLOT_HOURS);
-        if(bot){ bot.textContent='РґРѕ '+(end==='24:00'?'00:00':end); }
+        if(bot){ bot.textContent='до '+(end==='24:00'?'00:00':end); }
       });
 
       // Weather (best effort)
@@ -671,7 +600,7 @@
         fetch('https://api.open-meteo.com/v1/forecast?latitude=43.6833&longitude=40.2000&current=temperature_2m,weather_code&timezone=auto',{cache:'no-store'})
           .then(r=>r.json()).then(d=>{
             var t = (d && d.current && typeof d.current.temperature_2m==='number') ? Math.round(d.current.temperature_2m) : null;
-            var tNode=document.getElementById('kb-temp'); if(tNode) tNode.textContent = (t==null?'вЂ”':t)+'В°';
+            var tNode=document.getElementById('kb-temp'); if(tNode) tNode.textContent = (t==null?'—':t)+'°';
           }).catch(()=>{});
       }catch(_){}}
     );
@@ -682,20 +611,17 @@
     (function(){
       var CARD_ID = 'kb-booking';
       var card = document.getElementById(CARD_ID);
-      function notify(type){
-        try { if (window.parent) { window.parent.postMessage({ source:'kb', type:type }, '*'); } } catch(_) { }
-      }
       function isOpen(){ return !!card && card.matches(':target'); }
       function setBody(){ 
         document.body.classList.toggle('kb-open', isOpen());
         
-        // Р‘Р»РѕРєРёСЂРѕРІРєР° СЃРєСЂРѕР»Р»Р° РЅР° РјРѕР±РёР»СЊРЅС‹С… СѓСЃС‚СЂРѕР№СЃС‚РІР°С…
+        // Блокировка скролла на мобильных устройствах
         if (window.innerWidth <= 600) {
           if (isOpen()) {
-            // РЎРѕС…СЂР°РЅСЏРµРј С‚РµРєСѓС‰СѓСЋ РїРѕР·РёС†РёСЋ СЃРєСЂРѕР»Р»Р°
+            // Сохраняем текущую позицию скролла
             document.body.style.top = `-${window.scrollY}px`;
           } else {
-            // Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР·РёС†РёСЋ СЃРєСЂРѕР»Р»Р°
+            // Восстанавливаем позицию скролла
             const scrollY = document.body.style.top;
             document.body.style.top = '';
             window.scrollTo(0, parseInt(scrollY || '0') * -1);
@@ -706,7 +632,6 @@
       function openCard(){
         try{ location.hash = '#' + CARD_ID; }catch(_){ window.location.href = '#' + CARD_ID; }
         setTimeout(setBody, 0);
-        notify('kb-open');
       }
       function closeCard(){
         try{ location.hash = ''; }catch(_){}
@@ -717,7 +642,6 @@
           try{ window.location.href = window.location.pathname + window.location.search; }catch(_){}
         }
         setTimeout(setBody, 0);
-        notify('kb-close');
       }
 
       window.addEventListener('hashchange', setBody);
@@ -739,15 +663,13 @@
         }, true);
       }
       
-      // РћР±СЂР°Р±РѕС‚С‡РёРє РёР·РјРµРЅРµРЅРёСЏ СЂР°Р·РјРµСЂР° РѕРєРЅР°
+      // Обработчик изменения размера окна
       window.addEventListener('resize', function() {
         if (window.innerWidth > 600 && document.body.classList.contains('kb-open')) {
           document.body.classList.remove('kb-open');
           document.body.style.top = '';
         }
       });
-      // РЎРѕРѕР±С‰РёРј СЂРѕРґРёС‚РµР»СЋ, С‡С‚Рѕ РІРёРґР¶РµС‚ РіРѕС‚РѕРІ
-      notify('kb-ready');
     })();
   </script>
 </body>
