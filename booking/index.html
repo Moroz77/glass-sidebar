@@ -236,6 +236,9 @@
     html.kb-mini.kb-staticfab .kb-fab { transition: none !important; }
     html.kb-mini.kb-staticfab .kb-fab:hover { transform: none !important; }
     html.kb-mini.kb-staticfab .kb-fab:active { transform: none !important; }
+    /* Когда карточка открыта (полноэкранный режим), внутреннюю FAB скрываем всегда
+       чтобы не было второй кнопки рядом с нативной */
+    body.kb-open .kb-fab { display: none !important; }
   </style>
   <!-- Выравнивание стеклянного эффекта карточки бронирования под сайдбар -->
   <style>
