@@ -42,6 +42,7 @@
         background: transparent; z-index: 2147483600;
       }
       #kb-full-overlay.is-open{ display: flex; }
+      @media (min-width:1025px){ #kb-full-overlay{ bottom: 40px; } }
       /* РќРµ Р·Р°РєСЂС‹РІР°РµРј Р»РµРІС‹Р№ СЃР°Р№РґР±Р°СЂ РЅР° РґРµСЃРєС‚РѕРїРµ */
       @media (min-width:1025px){ #kb-full-overlay{ left: var(--kb-sidebar-width); } }
       /* РќР° РјРѕР±РёР»СЊРЅС‹С… РїСЂСЏС‡РµРј РјРёРЅРёвЂ‘РєРЅРѕРїРєСѓ РїСЂРё РѕС‚РєСЂС‹С‚РѕРј РѕРІРµСЂР»РµРµ */
@@ -60,10 +61,10 @@
         display: inline-block; position: fixed;
         width: 110px; height: 110px; /* РјРѕР¶РЅРѕ РїРѕРјРµРЅСЏС‚СЊ */
         border-radius: 50%;
-        background: rgba(255,255,255,.16);
+        background: rgba(255,255,255,.18);
         -webkit-backdrop-filter: blur(18px) saturate(160%);
         backdrop-filter: blur(18px) saturate(160%);
-        border: 1px solid rgba(255,255,255,.35);
+        border: 1px solid rgba(255,255,255,.5);
         background-clip: padding-box;
         box-shadow: 0 8px 22px rgba(0,0,0,.26);
         transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
@@ -87,7 +88,7 @@
       @media (hover:none), (pointer:coarse){
         .kb-overlay-open #kb-open-btn{ display:none !important; }
       }
-        #kb-open-btn::after{content:"";position:absolute;inset:-6px;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));-webkit-mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");mask-repeat:no-repeat;mask-position:center;mask-size:contain;filter:blur(14px);opacity:.35;pointer-events:none;z-index:1;}@keyframes kb-float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}#kb-open-btn{animation:kb-float-soft 6s ease-in-out infinite}#kb-open-btn:hover{transform:translateY(-2px)!important}
+        #kb-open-btn::after{content:"";position:absolute;inset:-6px;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));-webkit-mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");mask-repeat:no-repeat;mask-position:center;mask-size:contain;filter:blur(14px);opacity:.45;pointer-events:none;z-index:1;}@keyframes kb-float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}#kb-open-btn{animation:kb-float-soft 6s ease-in-out infinite}#kb-open-btn:hover{transform:translateY(-2px)!important}
     </style>
     <!-- Overrides: glass-masked calculator button and weather chip -->
     <style>
@@ -100,10 +101,10 @@
       }
       #kb-open-btn::before{
         content: ""; position: absolute; inset: 0;
-        background: rgba(255,255,255,.16);
+        background: rgba(255,255,255,.18);
         -webkit-backdrop-filter: blur(18px) saturate(160%);
         backdrop-filter: blur(18px) saturate(160%);
-        border: 1px solid rgba(255,255,255,.35);
+        border: 1px solid rgba(255,255,255,.5);
         background-clip: padding-box; box-shadow: 0 8px 22px rgba(0,0,0,.26);
         -webkit-mask-image: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");
         -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain;
@@ -126,14 +127,14 @@
         position: fixed; top: 120px; right: 0; z-index: 2147483400;
         padding: 8px 20px 8px 12px; border-radius: 16px 0 0 16px;
         color: #121212; font: 700 16px/1 system-ui;
-        background: rgba(255,255,255,.16);
+        background: rgba(255,255,255,.18);
         -webkit-backdrop-filter: blur(18px) saturate(160%);
         backdrop-filter: blur(18px) saturate(160%);
-        border: 1px solid rgba(255,255,255,.35);
+        border: 1px solid rgba(255,255,255,.5);
         background-clip: padding-box;
       }
       @media (hover:none), (pointer:coarse){ .kb-overlay-open .kb-weather{ display:none !important; } }
-          #kb-open-btn::after{content:"";position:absolute;inset:-6px;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));-webkit-mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");mask-repeat:no-repeat;mask-position:center;mask-size:contain;filter:blur(14px);opacity:.35;pointer-events:none;z-index:1;}@keyframes kb-float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}#kb-open-btn{animation:kb-float-soft 6s ease-in-out infinite}#kb-open-btn:hover{transform:translateY(-2px)!important}
+          #kb-open-btn::after{content:"";position:absolute;inset:-6px;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));-webkit-mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");mask-repeat:no-repeat;mask-position:center;mask-size:contain;filter:blur(14px);opacity:.45;pointer-events:none;z-index:1;}@keyframes kb-float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}#kb-open-btn{animation:kb-float-soft 6s ease-in-out infinite}#kb-open-btn:hover{transform:translateY(-2px)!important}
     </style>
   </head>
   <body>
@@ -257,3 +258,4 @@
     </script>
   </body>
 </html>
+
