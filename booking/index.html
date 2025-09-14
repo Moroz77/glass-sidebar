@@ -215,6 +215,14 @@
     }
     #kb-contacts + #kb-deposit-field{ margin-top:8px; }
   </style>
+  <!-- Дополнительные стили для режима мини (показывать только FAB) -->
+  <style>
+    body.kb-only-fab .kb-card,
+    body.kb-only-fab .kb-home,
+    body.kb-only-fab .kb-home-name,
+    body.kb-only-fab .kb-weather,
+    body.kb-only-fab .kb-toast { display: none !important; }
+  </style>
 </head>
 <body>
   <div id="kb-widget">
@@ -350,6 +358,27 @@
       
       input.value = formattedValue;
     }
+  </script>
+
+  <!-- Переопределение поведения в режиме мини: только FAB, без открытия внутри iframe -->
+  <script>
+    (function(){
+      try{
+        var params = new URLSearchParams(location.search);
+        var onlyFab = params.has('mini') || params.get('mode') === 'fab';
+        if (!onlyFab) return;
+        document.addEventListener('DOMContentLoaded', function(){
+          try { document.body.classList.add('kb-only-fab'); } catch(_){}
+          var fab = document.querySelector('#kb-widget .kb-fab');
+          if (!fab) return;
+          fab.addEventListener('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            try { window.parent && window.parent.postMessage({ source:'kb', type:'kb-open' }, '*'); } catch(_) {}
+          }, true);
+        });
+      }catch(_){ }
+    })();
   </script>
 
   <script>
