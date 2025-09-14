@@ -237,6 +237,19 @@
     html.kb-mini.kb-staticfab .kb-fab:hover { transform: none !important; }
     html.kb-mini.kb-staticfab .kb-fab:active { transform: none !important; }
   </style>
+  <!-- Выравнивание стеклянного эффекта карточки бронирования под сайдбар -->
+  <style>
+    /* Делаем такую же «стеклянность», как у сайдбара */
+    .kb-card.kb-glass{
+      background: rgba(255, 255, 255, 0.16) !important;
+      -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
+      backdrop-filter: blur(18px) saturate(160%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.35) !important;
+      background-clip: padding-box !important;
+      isolation: isolate;
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
   <div id="kb-widget">
