@@ -611,6 +611,9 @@
     (function(){
       var CARD_ID = 'kb-booking';
       var card = document.getElementById(CARD_ID);
+      function notify(type){
+        try { if (window.parent) { window.parent.postMessage({ source:'kb', type:type }, '*'); } } catch(_) { }
+      }
       function isOpen(){ return !!card && card.matches(':target'); }
       function setBody(){ 
         document.body.classList.toggle('kb-open', isOpen());
@@ -632,6 +635,7 @@
       function openCard(){
         try{ location.hash = '#' + CARD_ID; }catch(_){ window.location.href = '#' + CARD_ID; }
         setTimeout(setBody, 0);
+        notify('kb-open');
       }
       function closeCard(){
         try{ location.hash = ''; }catch(_){}
@@ -642,6 +646,7 @@
           try{ window.location.href = window.location.pathname + window.location.search; }catch(_){}
         }
         setTimeout(setBody, 0);
+        notify('kb-close');
       }
 
       window.addEventListener('hashchange', setBody);
@@ -670,8 +675,9 @@
           document.body.style.top = '';
         }
       });
+      // Сообщим родителю, что виджет готов
+      notify('kb-ready');
     })();
   </script>
 </body>
 </html>
-
