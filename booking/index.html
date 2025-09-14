@@ -10,6 +10,12 @@
         if (p.has('mini') || p.get('mode') === 'fab') {
           document.documentElement.classList.add('kb-mini');
         }
+        if (p.has('staticfab') || p.get('staticfab') === '1') {
+          document.documentElement.classList.add('kb-staticfab');
+        }
+        if (p.has('hidefab') || p.get('hidefab') === '1') {
+          document.documentElement.classList.add('kb-hidefab');
+        }
       }catch(_){ }
     })();
   </script>
@@ -239,6 +245,7 @@
     /* Когда карточка открыта (полноэкранный режим), внутреннюю FAB скрываем всегда
        чтобы не было второй кнопки рядом с нативной */
     body.kb-open .kb-fab { display: none !important; }
+    html.kb-hidefab .kb-fab { display: none !important; }
   </style>
   <!-- Выравнивание стеклянного эффекта карточки бронирования под сайдбар -->
   <style>
