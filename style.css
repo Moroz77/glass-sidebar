@@ -11,7 +11,7 @@
 body {
     height: 100vh;
     width: 100%;
-    background-image: url("images/hero-bg.jpg");
+    /* background-image: url("images/hero-bg.jpg"); */
     background-position: center;
     background-size: cover;
 }
@@ -25,11 +25,11 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(17px);
-    -webkit-backdrop-filter: blur(17px);
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
     background-clip: padding-box; /* avoid border + blur bleed */
-    border-right: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     isolation: isolate;          /* reduce rendering artifacts */
     will-change: width;          /* smoother hover expand */
     transform: translateZ(0);    /* promote to its own layer */
@@ -108,6 +108,21 @@ body {
 
 .sidebar:hover .links hr {
     background: rgba(255, 255, 255, 0.25);
+}
+
+/* ---- Transparent iframe overrides (for Tilda embedding) ---- */
+html, body { background: transparent !important; }
+
+body::before, body::after,
+.bg, .background, .hero,
+.wrapper::before, .wrapper::after,
+[class*="bg-"], [class*="background"] {
+  background: none !important;
+  background-image: none !important;
+}
+
+img.bg, img.background, img[class*="bg"] {
+  display: none !important;
 }
 
 .links li span {
