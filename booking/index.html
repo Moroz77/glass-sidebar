@@ -227,11 +227,15 @@
   </style>
   <!-- Дополнительные стили для режима мини (показывать только FAB) -->
   <style>
-    body.kb-only-fab .kb-card,
-    body.kb-only-fab .kb-home,
-    body.kb-only-fab .kb-home-name,
-    body.kb-only-fab .kb-weather,
-    body.kb-only-fab .kb-toast { display: none !important; }
+    html.kb-mini .kb-card,
+    html.kb-mini .kb-home,
+    html.kb-mini .kb-home-name,
+    html.kb-mini .kb-weather,
+    html.kb-mini .kb-toast { display: none !important; }
+    /* Статичная FAB в мини‑режиме (без дерганий) */
+    html.kb-mini.kb-staticfab .kb-fab { transition: none !important; }
+    html.kb-mini.kb-staticfab .kb-fab:hover { transform: none !important; }
+    html.kb-mini.kb-staticfab .kb-fab:active { transform: none !important; }
   </style>
 </head>
 <body>
