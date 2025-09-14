@@ -1,0 +1,116 @@
+<!-- Tilda embed: booking button + fullscreen overlay -->
+<style>
+  /* Фиксированная кнопка “Калькулятор” (справа снизу) */
+  #kb-open-btn{
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 2147483500; /* выше сайдбара */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.14);
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
+    border: 1px solid rgba(255,255,255,.35);
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,.35);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  #kb-open-btn:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0,0,0,.45);
+    background: rgba(255,255,255,.18);
+  }
+  #kb-open-btn:active{ transform: translateY(1px); }
+  #kb-open-btn svg{ width: 28px; height: 28px; }
+
+  /* Полноэкранный оверлей + iframe */
+  #kb-booking-overlay{
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: stretch;
+    background: transparent;
+    z-index: 2147483600; /* выше кнопки */
+  }
+  #kb-booking-overlay.is-open{ display: flex; }
+  #kb-booking-frame{
+    flex: 1; border: 0; background: transparent; width: 100%; height: 100%;
+  }
+  .kb-overlay-close{
+    position: fixed; top: 12px; right: 12px; z-index: 2147483601;
+    width: 44px; height: 44px; border: 0; border-radius: 50%;
+    background: rgba(0,0,0,.6); color: #fff; font-size: 28px; line-height: 44px;
+    cursor: pointer;
+  }
+
+  /* Блокировка скролла фона при открытом оверлее */
+  html.kb-noscroll, body.kb-noscroll{ overflow: hidden !important; }
+</style>
+
+<!-- Кнопка “Калькулятор” -->
+<a id="kb-open-btn" href="#" aria-label="Открыть бронирование" title="Бронирование">
+  <!-- SVG иконка калькулятора -->
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3" y="2" width="18" height="20" rx="3" ry="3"></rect>
+    <path d="M7 6h10"></path>
+    <path d="M7 11h2"></path>
+    <path d="M11 11h2"></path>
+    <path d="M15 11h2"></path>
+    <path d="M7 15h2"></path>
+    <path d="M11 15h2"></path>
+    <path d="M15 15h2"></path>
+    <path d="M7 19h2"></path>
+    <path d="M11 19h2"></path>
+    <path d="M15 19h2"></path>
+  </svg>
+</a>
+
+<!-- Полноэкранный слой с уже открытой карточкой бронирования -->
+<div id="kb-booking-overlay" aria-hidden="true">
+  <iframe
+    id="kb-booking-frame"
+    title="Калиновая баня — бронирование"
+    src="about:blank"
+    referrerpolicy="no-referrer">
+  </iframe>
+  <button class="kb-overlay-close" aria-label="Закрыть">×</button>
+</div>
+
+<script>
+  (function(){
+    var FULL_SRC = 'https://moroz77.github.io/glass-sidebar/booking/#kb-booking';
+    var openBtn = document.getElementById('kb-open-btn');
+    var overlay = document.getElementById('kb-booking-overlay');
+    var frame = document.getElementById('kb-booking-frame');
+    var closeBtn = overlay.querySelector('.kb-overlay-close');
+
+    function lockScroll(on){
+      document.documentElement.classList.toggle('kb-noscroll', on);
+      document.body.classList.toggle('kb-noscroll', on);
+    }
+    function openOverlay(){
+      if (frame.src !== FULL_SRC) frame.src = FULL_SRC;
+      overlay.classList.add('is-open');
+      lockScroll(true);
+    }
+    function closeOverlay(){
+      overlay.classList.remove('is-open');
+      lockScroll(false);
+      // при желании можно сбрасывать фрейм:
+      // frame.src = 'about:blank';
+    }
+
+    openBtn.addEventListener('click', function(e){ e.preventDefault(); openOverlay(); });
+    closeBtn.addEventListener('click', function(e){ e.preventDefault(); closeOverlay(); });
+    overlay.addEventListener('click', function(e){ if (e.target === overlay) closeOverlay(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeOverlay(); });
+  })();
+</script>
+
