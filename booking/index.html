@@ -59,7 +59,7 @@
 
     /* Home button - возвращаем первую анимацию с улучшенной тенью */
     .kb-home{
-      display:none;
+      display:none; /* принудительно скрыто навсегда */
       position:fixed;
       left:18px;
       top:calc(18px + env(safe-area-inset-top));
@@ -81,7 +81,7 @@
     
     /* Новое изображение с названием - прозрачное */
     .kb-home-name {
-      display:none;
+      display:none; /* принудительно скрыто навсегда */
       position:fixed;
       left:calc(18px + var(--home-size) + 10px);
       top:calc(18px + env(safe-area-inset-top) + 25px);
@@ -200,8 +200,9 @@
       .kb-field{margin:10px 0 var(--gap-field-m)}
       body.kb-open .kb-fab,body.kb-open .kb-weather,body.kb-open .kb-home,body.kb-open .kb-home-name{display:none!important}
       .kb-row + .kb-field{margin-top:4px!important;}
-      .kb-home{display:block;}
-      .kb-home-name{display:block;}
+      /* на мобилке логотипы тоже скрыты */
+      .kb-home{display:none!important;}
+      .kb-home-name{display:none!important;}
       .kb-weather{top:120px;right:-10px;}
       
       /* Блокировка скролла при открытом виджете */
