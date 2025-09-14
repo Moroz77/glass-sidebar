@@ -1,7 +1,145 @@
-<!DOCTYPE html>\n<html lang="ru">\n  <head>
-    <meta charset='UTF-8'>
-\n    \n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <title>Р С™Р В°Р В»Р С‘Р Р…Р С•Р Р†Р В°РЎРЏ Р В±Р В°Р Р…РЎРЏ РІР‚вЂќ Р В°Р Р†РЎвЂљР С•Р Р…Р С•Р СР Р…РЎвЂ№Р в„– РЎРѓР В°Р в„–РЎвЂљ</title>\n    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">\n    <!-- Р ВРЎРѓР С—Р С•Р В»РЎРЉР В·РЎС“Р ВµР С РЎРѓРЎС“РЎвЂ°Р ВµРЎРѓРЎвЂљР Р†РЎС“РЎР‹РЎвЂ°Р С‘Р в„– РЎРѓРЎвЂљР С‘Р В»РЎРЉ РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚Р В° Р С‘Р В· Р С”Р С•РЎР‚Р Р…РЎРЏ РЎР‚Р ВµР С—Р С•Р В·Р С‘РЎвЂљР С•РЎР‚Р С‘РЎРЏ -->\n    <link rel="stylesheet" href="../style.css" />\n\n    <!-- Р вЂ™РЎРѓРЎвЂљРЎР‚Р С•Р ВµР Р…Р Р…РЎвЂ№Р в„– РЎС“Р СР Р…РЎвЂ№Р в„– Р Р†Р С‘Р Т‘Р В¶Р ВµРЎвЂљ Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘РЎРЏ (mini iframe + fullscreen overlay) -->\n    <style>\n      :root{ --kb-sidebar-width: 260px; }\n      html, body { min-height: 100%; }\n      /* Р В¤Р С•Р Р…Р С•Р Р†Р С•Р Вµ Р С‘Р В·Р С•Р В±РЎР‚Р В°Р В¶Р ВµР Р…Р С‘Р Вµ Р С–Р В»Р В°Р Р†Р Р…Р С•Р в„– РЎРѓРЎвЂљРЎР‚Р В°Р Р…Р С‘РЎвЂ РЎвЂ№ (Р СР С•Р В¶Р Р…Р С• Р В·Р В°Р СР ВµР Р…Р С‘РЎвЂљРЎРЉ Р С—РЎС“РЎвЂљРЎРЉ Р Р…Р В° РЎРѓР Р†Р С•Р в„–) */\n      body{\n        background-image: url('../images/hero-bg.jpg') !important;\n        background-position: center !important;\n        background-size: cover !important;\n        background-repeat: no-repeat !important;\n        background-attachment: fixed !important;\n        background-color: #000 !important; /* fallback */\n      }\n\n      /* Р СљР С‘Р Р…Р С‘РІР‚вЂР Р†Р С‘Р Т‘Р В¶Р ВµРЎвЂљ: Р Р†Р Р…РЎС“РЎвЂљРЎР‚Р ВµР Р…Р Р…РЎРЏРЎРЏ FAB Р С‘Р В· booking/ */\n      #kb-mini-frame{\n        position: fixed;\n        right: 18px;\n        bottom: 18px;\n        width: 120px;\n        height: 120px;\n        border: 0;\n        background: transparent;\n        z-index: 2147483500; /* Р Р†РЎвЂ№РЎв‚¬Р Вµ РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚Р В°, Р Р…Р С‘Р В¶Р Вµ РЎвЂћРЎС“Р В»РЎРѓР С”РЎР‚Р С‘Р Р…Р В° */\n      }\n      @media (max-width:600px){ #kb-mini-frame{ width:100px; height:100px; } }\n\n      /* Р СџР С•Р В»Р Р…Р С•РЎРЊР С”РЎР‚Р В°Р Р…Р Р…РЎвЂ№Р в„– Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР в„– + iframe */\n      #kb-full-overlay{\n        position: fixed; inset: 0;\n        display: none; align-items: stretch;\n        background: transparent; z-index: 2147483600;\n      }\n      #kb-full-overlay.is-open{ display: flex; }
-      @media (min-width:1025px){ #kb-full-overlay{ bottom: 40px; } }\n      /* Р СњР Вµ Р В·Р В°Р С”РЎР‚РЎвЂ№Р Р†Р В°Р ВµР С Р В»Р ВµР Р†РЎвЂ№Р в„– РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚ Р Р…Р В° Р Т‘Р ВµРЎРѓР С”РЎвЂљР С•Р С—Р Вµ */\n      @media (min-width:1025px){ #kb-full-overlay{ left: var(--kb-sidebar-width); } }\n      /* Р СњР В° Р СР С•Р В±Р С‘Р В»РЎРЉР Р…РЎвЂ№РЎвЂ¦ Р С—РЎР‚РЎРЏРЎвЂЎР ВµР С Р СР С‘Р Р…Р С‘РІР‚вЂР С”Р Р…Р С•Р С—Р С”РЎС“ Р С—РЎР‚Р С‘ Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљР С•Р С Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР Вµ */\n      @media (hover:none), (pointer:coarse){ .kb-overlay-open #kb-mini-frame{ display:none !important; } }\n      /* Р СњР В° Р Т‘Р ВµРЎРѓР С”РЎвЂљР С•Р С—Р Вµ Р Р†Р С• Р Р†РЎР‚Р ВµР СРЎРЏ Р С•Р Р†Р ВµРЎР‚Р В»Р ВµРЎРЏ Р С•РЎвЂљР С”Р В»РЎР‹РЎвЂЎР В°Р ВµР С Р С”Р В»Р С‘Р С”Р С‘ Р С—Р С• Р СР С‘Р Р…Р С‘РІР‚вЂР С”Р Р…Р С•Р С—Р С”Р Вµ Р С‘ Р С—Р С•Р Т‘Р Р…Р С‘Р СР В°Р ВµР С z-index */\n      .kb-overlay-open #kb-mini-frame{ pointer-events:none; z-index:2147483602; }\n\n      #kb-full-frame{ flex:1; border:0; background:transparent; width:100%; height:100%; }\n      html.kb-noscroll, body.kb-noscroll{ overflow: hidden !important; }\n\n      /* Р СњР В°РЎвЂљР С‘Р Р†Р Р…Р В°РЎРЏ Р С”Р Р…Р С•Р С—Р С”Р В° РІР‚СљР С™Р В°Р В»РЎРЉР С”РЎС“Р В»РЎРЏРЎвЂљР С•РЎР‚РІР‚Сњ Р Р† РЎРѓРЎвЂљР С‘Р В»Р Вµ РЎРѓРЎвЂљР ВµР С”Р В»Р В° (Р С”Р В°Р С” РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚ Р С‘ Р В±РЎР‚Р С•Р Р…РЎРЉ) */\n      #kb-open-btn{\n        position: fixed;\n        right: 18px; bottom: 18px;\n        z-index: 2147483500; /* Р Р†РЎвЂ№РЎв‚¬Р Вµ РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚Р В°, Р Р…Р С‘Р В¶Р Вµ Р С•Р Р†Р ВµРЎР‚Р В»Р ВµРЎРЏ */\n        display: inline-block; position: fixed;\n        width: 110px; height: 110px; /* Р СР С•Р В¶Р Р…Р С• Р С—Р С•Р СР ВµР Р…РЎРЏРЎвЂљРЎРЉ */\n        border-radius: 50%;\n        background: rgba(255,255,255,.18);\n        -webkit-backdrop-filter: blur(18px) saturate(160%);\n        backdrop-filter: blur(18px) saturate(160%);\n        border: 1px solid rgba(255,255,255,.5);\n        background-clip: padding-box;\n        box-shadow: 0 8px 22px rgba(0,0,0,.26);\n        transition: transform .18s ease, box-shadow .18s ease, background .18s ease;\n        cursor: pointer;\n        overflow: hidden;\n      }\n      #kb-open-btn::before{\n        content: "";\n        position: absolute; inset: 14px; /* Р С—Р С•Р В»РЎРЏ Р Р†Р С•Р С”РЎР‚РЎС“Р С– Р С‘Р С”Р С•Р Р…Р С”Р С‘ */\n        background: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat;\n        opacity: .95; pointer-events: none;\n        filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));\n      }\n      #kb-open-btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.20); box-shadow: 0 12px 28px rgba(0,0,0,.32); }\n      #kb-open-btn:active{ transform: translateY(1px); }\n      @media (max-width:600px){ #kb-open-btn{ width: 92px; height: 92px; } }\n\n      /* Р С™Р Р…Р С•Р С—Р С”Р В° Р Р†РЎРѓР ВµР С–Р Т‘Р В° Р Р†Р С‘Р Т‘Р С‘Р СР В°; Р С—РЎР‚Р С‘ Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљР С•Р С Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР Вµ Р С—Р С•Р Т‘Р Р…Р С‘Р СР В°Р ВµР С Р С—Р С•Р Р†Р ВµРЎР‚РЎвЂ¦ Р С‘ Р С•РЎРѓРЎвЂљР В°Р Р†Р В»РЎРЏР ВµР С Р С”Р В»Р С‘Р С”Р В°Р В±Р ВµР В»РЎРЉР Р…Р С•Р в„– */\n      .kb-overlay-open #kb-open-btn{ pointer-events:auto; z-index:2147483602; }\n      /* Р СњР В° Р СР С•Р В±Р С‘Р В»РЎРЉР Р…РЎвЂ№РЎвЂ¦ РЎРѓР С”РЎР‚РЎвЂ№Р Р†Р В°Р ВµР С Р С”Р Р…Р С•Р С—Р С”РЎС“, Р С”Р С•Р С–Р Т‘Р В° Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљ Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР в„– */\n      @media (hover:none), (pointer:coarse){\n        .kb-overlay-open #kb-open-btn{ display:none !important; }\n      }\n        #kb-open-btn::after{content:"";position:absolute;inset:-6px;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));-webkit-mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");mask-repeat:no-repeat;mask-position:center;mask-size:contain;filter:blur(14px);opacity:.45;pointer-events:none;z-index:1;}@keyframes kb-float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}#kb-open-btn{animation:kb-float-soft 6s ease-in-out infinite}#kb-open-btn:hover{transform:translateY(-2px)!important}\n    </style>\n    <!-- Overrides: glass-masked calculator button and weather chip -->\n    <style>\n      /* Glass button exactly in calculator shape (no circular base) */\n      #kb-open-btn{\n        width: 130px !important; height: 130px !important;\n        background: transparent !important; border: 0 !important; border-radius: 0 !important;\n        -webkit-backdrop-filter: none !important; backdrop-filter: none !important;\n        background-clip: initial !important; box-shadow: none !important; overflow: visible !important;\n      }\n      #kb-open-btn::before{\n        content: ""; position: absolute; inset: 0;\n        background: rgba(255,255,255,.18);\n        -webkit-backdrop-filter: blur(18px) saturate(160%);\n        backdrop-filter: blur(18px) saturate(160%);\n        border: 1px solid rgba(255,255,255,.5);\n        background-clip: padding-box; box-shadow: 0 8px 22px rgba(0,0,0,.26);\n        -webkit-mask-image: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");\n        -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain;\n        mask-image: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");\n        mask-repeat: no-repeat; mask-position: center; mask-size: contain;\n        pointer-events: none;\n      }\n      /* Remove platform tap/selection highlight around the button */\n      #kb-open-btn{ -webkit-tap-highlight-color: transparent; outline: none !important; }\n      #kb-open-btn:focus{ outline: none !important; }\n      .kb-overlay-open{ -webkit-user-select: none; user-select: none; }\n      .no-select{ -webkit-user-select: none !important; user-select: none !important; }\n      @supports not ((-webkit-mask-image: url("") ) or (mask-image: url("") )){\n        #kb-open-btn::before{ background: transparent; border: 0; box-shadow: none; }\n        #kb-open-btn::after{ content: ""; position: absolute; inset: 14px; background: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }\n      }\n\n      /* Weather chip (glass) РІР‚вЂќ always on desktop; hides on mobile only when overlay open */\n      .kb-weather{\n        position: fixed; top: 120px; right: 0; z-index: 2147483400;\n        padding: 8px 20px 8px 12px; border-radius: 16px 0 0 16px;\n        color: #121212; font: 700 16px/1 system-ui;\n        background: rgba(255,255,255,.18);\n        -webkit-backdrop-filter: blur(18px) saturate(160%);\n        backdrop-filter: blur(18px) saturate(160%);\n        border: 1px solid rgba(255,255,255,.5);\n        background-clip: padding-box;\n      }\n      @media (hover:none), (pointer:coarse){ .kb-overlay-open .kb-weather{ display:none !important; } }\n          #kb-open-btn::after{content:"";position:absolute;inset:-6px;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));-webkit-mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");mask-repeat:no-repeat;mask-position:center;mask-size:contain;filter:blur(14px);opacity:.45;pointer-events:none;z-index:1;}@keyframes kb-float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}#kb-open-btn{animation:kb-float-soft 6s ease-in-out infinite}#kb-open-btn:hover{transform:translateY(-2px)!important}\n    </style>\n  </head>\n  <body>\n    <!-- Р вЂєР ВµР Р†РЎвЂ№Р в„– РЎРѓРЎвЂљР ВµР С”Р В»РЎРЏР Р…Р Р…РЎвЂ№Р в„– РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚ (Р С”Р В°Р С” Р Р…Р В° Р С–Р В»Р В°Р Р†Р Р…Р С•Р в„–) -->\n        <aside class="sidebar">
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Р С™Р В°Р В»Р С‘Р Р…Р С•Р Р†Р В°РЎРЏ Р В±Р В°Р Р…РЎРЏ РІР‚вЂќ Р В°Р Р†РЎвЂљР С•Р Р…Р С•Р СР Р…РЎвЂ№Р в„– РЎРѓР В°Р в„–РЎвЂљ</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <!-- Р ВРЎРѓР С—Р С•Р В»РЎРЉР В·РЎС“Р ВµР С РЎРѓРЎС“РЎвЂ°Р ВµРЎРѓРЎвЂљР Р†РЎС“РЎР‹РЎвЂ°Р С‘Р в„– РЎРѓРЎвЂљР С‘Р В»РЎРЉ РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚Р В° Р С‘Р В· Р С”Р С•РЎР‚Р Р…РЎРЏ РЎР‚Р ВµР С—Р С•Р В·Р С‘РЎвЂљР С•РЎР‚Р С‘РЎРЏ -->
+    <link rel="stylesheet" href="../style.css" />
+
+    <!-- Р вЂ™РЎРѓРЎвЂљРЎР‚Р С•Р ВµР Р…Р Р…РЎвЂ№Р в„– РЎС“Р СР Р…РЎвЂ№Р в„– Р Р†Р С‘Р Т‘Р В¶Р ВµРЎвЂљ Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘РЎРЏ (mini iframe + fullscreen overlay) -->
+    <style>
+      :root{ --kb-sidebar-width: 260px; }
+      html, body { min-height: 100%; }
+      /* Р В¤Р С•Р Р…Р С•Р Р†Р С•Р Вµ Р С‘Р В·Р С•Р В±РЎР‚Р В°Р В¶Р ВµР Р…Р С‘Р Вµ Р С–Р В»Р В°Р Р†Р Р…Р С•Р в„– РЎРѓРЎвЂљРЎР‚Р В°Р Р…Р С‘РЎвЂ РЎвЂ№ (Р СР С•Р В¶Р Р…Р С• Р В·Р В°Р СР ВµР Р…Р С‘РЎвЂљРЎРЉ Р С—РЎС“РЎвЂљРЎРЉ Р Р…Р В° РЎРѓР Р†Р С•Р в„–) */
+      body{
+        background-image: url('../images/hero-bg.jpg') !important;
+        background-position: center !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+        background-color: #000 !important; /* fallback */
+      }
+
+      /* Р СљР С‘Р Р…Р С‘РІР‚вЂР Р†Р С‘Р Т‘Р В¶Р ВµРЎвЂљ: Р Р†Р Р…РЎС“РЎвЂљРЎР‚Р ВµР Р…Р Р…РЎРЏРЎРЏ FAB Р С‘Р В· booking/ */
+      #kb-mini-frame{
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        width: 120px;
+        height: 120px;
+        border: 0;
+        background: transparent;
+        z-index: 2147483500; /* Р Р†РЎвЂ№РЎв‚¬Р Вµ РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚Р В°, Р Р…Р С‘Р В¶Р Вµ РЎвЂћРЎС“Р В»РЎРѓР С”РЎР‚Р С‘Р Р…Р В° */
+      }
+      @media (max-width:600px){ #kb-mini-frame{ width:100px; height:100px; } }
+
+      /* Р СџР С•Р В»Р Р…Р С•РЎРЊР С”РЎР‚Р В°Р Р…Р Р…РЎвЂ№Р в„– Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР в„– + iframe */
+      #kb-full-overlay{
+        position: fixed; inset: 0;
+        display: none; align-items: stretch;
+        background: transparent; z-index: 2147483600;
+      }
+      #kb-full-overlay.is-open{ display: flex; }
+      @media (min-width:1025px){ #kb-full-overlay{ bottom: 40px; } }
+      /* Р СњР Вµ Р В·Р В°Р С”РЎР‚РЎвЂ№Р Р†Р В°Р ВµР С Р В»Р ВµР Р†РЎвЂ№Р в„– РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚ Р Р…Р В° Р Т‘Р ВµРЎРѓР С”РЎвЂљР С•Р С—Р Вµ */
+      @media (min-width:1025px){ #kb-full-overlay{ left: var(--kb-sidebar-width); } }
+      /* Р СњР В° Р СР С•Р В±Р С‘Р В»РЎРЉР Р…РЎвЂ№РЎвЂ¦ Р С—РЎР‚РЎРЏРЎвЂЎР ВµР С Р СР С‘Р Р…Р С‘РІР‚вЂР С”Р Р…Р С•Р С—Р С”РЎС“ Р С—РЎР‚Р С‘ Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљР С•Р С Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР Вµ */
+      @media (hover:none), (pointer:coarse){ .kb-overlay-open #kb-mini-frame{ display:none !important; } }
+      /* Р СњР В° Р Т‘Р ВµРЎРѓР С”РЎвЂљР С•Р С—Р Вµ Р Р†Р С• Р Р†РЎР‚Р ВµР СРЎРЏ Р С•Р Р†Р ВµРЎР‚Р В»Р ВµРЎРЏ Р С•РЎвЂљР С”Р В»РЎР‹РЎвЂЎР В°Р ВµР С Р С”Р В»Р С‘Р С”Р С‘ Р С—Р С• Р СР С‘Р Р…Р С‘РІР‚вЂР С”Р Р…Р С•Р С—Р С”Р Вµ Р С‘ Р С—Р С•Р Т‘Р Р…Р С‘Р СР В°Р ВµР С z-index */
+      .kb-overlay-open #kb-mini-frame{ pointer-events:none; z-index:2147483602; }
+
+      #kb-full-frame{ flex:1; border:0; background:transparent; width:100%; height:100%; }
+      html.kb-noscroll, body.kb-noscroll{ overflow: hidden !important; }
+
+      /* Р СњР В°РЎвЂљР С‘Р Р†Р Р…Р В°РЎРЏ Р С”Р Р…Р С•Р С—Р С”Р В° РІР‚СљР С™Р В°Р В»РЎРЉР С”РЎС“Р В»РЎРЏРЎвЂљР С•РЎР‚РІР‚Сњ Р Р† РЎРѓРЎвЂљР С‘Р В»Р Вµ РЎРѓРЎвЂљР ВµР С”Р В»Р В° (Р С”Р В°Р С” РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚ Р С‘ Р В±РЎР‚Р С•Р Р…РЎРЉ) */
+      #kb-open-btn{
+        position: fixed;
+        right: 18px; bottom: 18px;
+        z-index: 2147483500; /* Р Р†РЎвЂ№РЎв‚¬Р Вµ РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚Р В°, Р Р…Р С‘Р В¶Р Вµ Р С•Р Р†Р ВµРЎР‚Р В»Р ВµРЎРЏ */
+        display: inline-block; position: fixed;
+        width: 110px; height: 110px; /* Р СР С•Р В¶Р Р…Р С• Р С—Р С•Р СР ВµР Р…РЎРЏРЎвЂљРЎРЉ */
+        border-radius: 50%;
+        background: rgba(255,255,255,.18);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        backdrop-filter: blur(18px) saturate(160%);
+        border: 1px solid rgba(255,255,255,.5);
+        background-clip: padding-box;
+        box-shadow: 0 8px 22px rgba(0,0,0,.26);
+        transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+        cursor: pointer;
+        overflow: hidden;
+      }
+      #kb-open-btn::before{
+        content: "";
+        position: absolute; inset: 14px; /* Р С—Р С•Р В»РЎРЏ Р Р†Р С•Р С”РЎР‚РЎС“Р С– Р С‘Р С”Р С•Р Р…Р С”Р С‘ */
+        background: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat;
+        opacity: .95; pointer-events: none;
+        filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+      }
+      #kb-open-btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.20); box-shadow: 0 12px 28px rgba(0,0,0,.32); }
+      #kb-open-btn:active{ transform: translateY(1px); }
+      @media (max-width:600px){ #kb-open-btn{ width: 92px; height: 92px; } }
+
+      /* Р С™Р Р…Р С•Р С—Р С”Р В° Р Р†РЎРѓР ВµР С–Р Т‘Р В° Р Р†Р С‘Р Т‘Р С‘Р СР В°; Р С—РЎР‚Р С‘ Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљР С•Р С Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР Вµ Р С—Р С•Р Т‘Р Р…Р С‘Р СР В°Р ВµР С Р С—Р С•Р Р†Р ВµРЎР‚РЎвЂ¦ Р С‘ Р С•РЎРѓРЎвЂљР В°Р Р†Р В»РЎРЏР ВµР С Р С”Р В»Р С‘Р С”Р В°Р В±Р ВµР В»РЎРЉР Р…Р С•Р в„– */
+      .kb-overlay-open #kb-open-btn{ pointer-events:auto; z-index:2147483602; }
+      /* Р СњР В° Р СР С•Р В±Р С‘Р В»РЎРЉР Р…РЎвЂ№РЎвЂ¦ РЎРѓР С”РЎР‚РЎвЂ№Р Р†Р В°Р ВµР С Р С”Р Р…Р С•Р С—Р С”РЎС“, Р С”Р С•Р С–Р Т‘Р В° Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљ Р С•Р Р†Р ВµРЎР‚Р В»Р ВµР в„– */
+      @media (hover:none), (pointer:coarse){
+        .kb-overlay-open #kb-open-btn{ display:none !important; }
+      }
+        #kb-open-btn::after{content:"";position:absolute;inset:-6px;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));-webkit-mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");mask-repeat:no-repeat;mask-position:center;mask-size:contain;filter:blur(14px);opacity:.45;pointer-events:none;z-index:1;}@keyframes kb-float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}#kb-open-btn{animation:kb-float-soft 6s ease-in-out infinite}#kb-open-btn:hover{transform:translateY(-2px)!important}
+    </style>
+    <!-- Overrides: glass-masked calculator button and weather chip -->
+    <style>
+      /* Glass button exactly in calculator shape (no circular base) */
+      #kb-open-btn{
+        width: 130px !important; height: 130px !important;
+        background: transparent !important; border: 0 !important; border-radius: 0 !important;
+        -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+        background-clip: initial !important; box-shadow: none !important; overflow: visible !important;
+      }
+      #kb-open-btn::before{
+        content: ""; position: absolute; inset: 0;
+        background: rgba(255,255,255,.18);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        backdrop-filter: blur(18px) saturate(160%);
+        border: 1px solid rgba(255,255,255,.5);
+        background-clip: padding-box; box-shadow: 0 8px 22px rgba(0,0,0,.26);
+        -webkit-mask-image: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");
+        -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain;
+        mask-image: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");
+        mask-repeat: no-repeat; mask-position: center; mask-size: contain;
+        pointer-events: none;
+      }
+      /* Remove platform tap/selection highlight around the button */
+      #kb-open-btn{ -webkit-tap-highlight-color: transparent; outline: none !important; }
+      #kb-open-btn:focus{ outline: none !important; }
+      .kb-overlay-open{ -webkit-user-select: none; user-select: none; }
+      .no-select{ -webkit-user-select: none !important; user-select: none !important; }
+      @supports not ((-webkit-mask-image: url("") ) or (mask-image: url("") )){
+        #kb-open-btn::before{ background: transparent; border: 0; box-shadow: none; }
+        #kb-open-btn::after{ content: ""; position: absolute; inset: 14px; background: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
+      }
+
+      /* Weather chip (glass) РІР‚вЂќ always on desktop; hides on mobile only when overlay open */
+      .kb-weather{
+        position: fixed; top: 120px; right: 0; z-index: 2147483400;
+        padding: 8px 20px 8px 12px; border-radius: 16px 0 0 16px;
+        color: #121212; font: 700 16px/1 system-ui;
+        background: rgba(255,255,255,.18);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        backdrop-filter: blur(18px) saturate(160%);
+        border: 1px solid rgba(255,255,255,.5);
+        background-clip: padding-box;
+      }
+      @media (hover:none), (pointer:coarse){ .kb-overlay-open .kb-weather{ display:none !important; } }
+          #kb-open-btn::after{content:"";position:absolute;inset:-6px;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));-webkit-mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain;mask-image:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");mask-repeat:no-repeat;mask-position:center;mask-size:contain;filter:blur(14px);opacity:.45;pointer-events:none;z-index:1;}@keyframes kb-float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}#kb-open-btn{animation:kb-float-soft 6s ease-in-out infinite}#kb-open-btn:hover{transform:translateY(-2px)!important}
+    </style>
+  </head>
+  <body>
+    <!-- Р вЂєР ВµР Р†РЎвЂ№Р в„– РЎРѓРЎвЂљР ВµР С”Р В»РЎРЏР Р…Р Р…РЎвЂ№Р в„– РЎРѓР В°Р в„–Р Т‘Р В±Р В°РЎР‚ (Р С”Р В°Р С” Р Р…Р В° Р С–Р В»Р В°Р Р†Р Р…Р С•Р в„–) -->
+        <aside class="sidebar">
       <div class="logo">
         <img src="../images/logo.jpg" alt="logo">
         <h2>Калиновая баня</h2>
@@ -49,4 +187,77 @@
           <a href="#">Выйти</a>
         </li>
       </ul>
-    </aside>\n\n    <!-- Р СњР В°РЎвЂљР С‘Р Р†Р Р…Р В°РЎРЏ Р С”Р Р…Р С•Р С—Р С”Р В° РІР‚СљР С™Р В°Р В»РЎРЉР С”РЎС“Р В»РЎРЏРЎвЂљР С•РЎР‚РІР‚Сњ -->\n    <a id="kb-open-btn" aria-label="Р С›РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљРЎРЉ Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘Р Вµ" title="Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"></a>\n\n    <!-- Р В¤РЎС“Р В»РЎРѓР С”РЎР‚Р С‘Р Р… РЎРѓ Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљР С•Р в„– Р С”Р В°РЎР‚РЎвЂљР С•РЎвЂЎР С”Р С•Р в„– (Р Р†Р Р…Р ВµРЎв‚¬Р Р…Р С‘Р в„– Р С”РЎР‚Р ВµРЎРѓРЎвЂљР С‘Р С” РЎС“Р Т‘Р В°Р В»РЎвЂР Р…) -->\n    <div id="kb-full-overlay" aria-hidden="true">\n      <iframe\n        id="kb-full-frame"\n        title="Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"\n        src="about:blank"\n        referrerpolicy="no-referrer">\n      </iframe>\n    </div>\n    <!-- Weather chip (desktop always on) -->\n    <div id="kb-weather-chip" class="kb-weather" aria-label="Р СџР С•Р С–Р С•Р Т‘Р В° РЎРѓР ВµР в„–РЎвЂЎР В°РЎРѓ"><span id="kb-temp">РІР‚вЂќР’В°</span></div>\n\n    <script>\n      (function(){\n        var FULL_SRC = '../booking/??hidefab=1&hideweather=1&raise=80#kb-booking';\n        var openBtn = document.getElementById('kb-open-btn');\n        var overlay = document.getElementById('kb-full-overlay');\n        var full = document.getElementById('kb-full-frame');\n        // Р В±Р ВµР В· Р Р†Р Р…Р ВµРЎв‚¬Р Р…Р ВµР С–Р С• Р С”РЎР‚Р ВµРЎРѓРЎвЂљР С‘Р С”Р В° РІР‚вЂќ Р С‘РЎРѓР С—Р С•Р В»РЎРЉР В·РЎС“Р ВµР С Р С”Р В»Р С‘Р С” Р С—Р С• РЎвЂћР С•Р Р…РЎС“ / ESC / Р С—Р С•Р Р†РЎвЂљР С•РЎР‚Р Р…РЎвЂ№Р в„– Р С”Р В»Р С‘Р С” Р С—Р С• Р С”Р Р…Р С•Р С—Р С”Р Вµ\n        function isMobile(){\n          try { return window.matchMedia('(hover: none), (pointer: coarse)').matches; }\n          catch(_) { return window.innerWidth <= 1024; }\n        }\n        function lockScroll(on){ if (isMobile()) { document.documentElement.classList.toggle('kb-noscroll', on); document.body.classList.toggle('kb-noscroll', on); } }\n        function openOverlay(){ if (full.src !== FULL_SRC) full.src = FULL_SRC; overlay.classList.add('is-open'); document.documentElement.classList.add('kb-overlay-open'); lockScroll(true); }\n        function closeOverlay(){ overlay.classList.remove('is-open'); document.documentElement.classList.remove('kb-overlay-open'); lockScroll(false); }\n\n        // Р РЋР В»РЎС“РЎв‚¬Р В°Р ВµР С РЎРѓР С•Р В±РЎвЂ№РЎвЂљР С‘РЎРЏ Р С‘Р В· booking/ (postMessage)\n        window.addEventListener('message', function(e){\n          // Р вЂ™Р Р…РЎС“РЎвЂљРЎР‚Р ВµР Р…Р Р…Р С‘Р в„– iframe РЎвЂљР С•Р С–Р С• Р В¶Р Вµ Р Т‘Р С•Р СР ВµР Р…Р В° РІР‚вЂќ Р С—РЎР‚Р С‘Р Р…Р С‘Р СР В°Р ВµР С Р Р†РЎРѓР Вµ РЎРѓР С•Р В±РЎвЂ№РЎвЂљР С‘РЎРЏ\n          var d = e.data || {};\n          if (d.source === 'kb') {\n            if (d.type === 'kb-open') openOverlay();\n            else if (d.type === 'kb-close') closeOverlay();\n          }\n        });\n\n        overlay.addEventListener('click', function(e){ if (e.target === overlay) closeOverlay(); });\n        window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeOverlay(); });\n        window.addEventListener('resize', function(){ if (!overlay.classList.contains('is-open')) return; if (isMobile()) lockScroll(true); else lockScroll(false); });\n        // Р СњР В° РЎРѓРЎвЂљР В°РЎР‚РЎвЂљР Вµ РЎРѓР В±РЎР‚Р С•РЎРѓР С‘Р С Р С”Р В»Р В°РЎРѓРЎРѓ (Р С”Р Р…Р С•Р С—Р С”Р В° Р Р†РЎРѓР ВµР С–Р Т‘Р В° Р Р†Р С‘Р Т‘Р С‘Р СР В° Р С”Р В°Р С” Р Р…Р В°РЎвЂљР С‘Р Р†Р Р…Р В°РЎРЏ)\n        document.documentElement.classList.remove('kb-overlay-open');\n        // Р С™Р В»Р С‘Р С” Р С—Р С• Р Р…Р В°РЎвЂљР С‘Р Р†Р Р…Р С•Р в„– Р С”Р Р…Р С•Р С—Р С”Р Вµ\n        if (openBtn) openBtn.addEventListener('click', function(e){\n          e.preventDefault();\n          if (overlay.classList.contains('is-open')) closeOverlay(); else openOverlay();\n        });\n        // Prevent accidental text selection highlight while pressing button\n        if (openBtn){\n          openBtn.addEventListener('mousedown', function(){ document.body.classList.add('no-select'); });\n          document.addEventListener('mouseup', function(){ document.body.classList.remove('no-select'); });\n          openBtn.addEventListener('touchstart', function(){ document.body.classList.add('no-select'); }, {passive:true});\n          document.addEventListener('touchend', function(){ document.body.classList.remove('no-select'); }, {passive:true});\n        }\n        // Weather\n        try{\n          fetch('https://api.open-meteo.com/v1/forecast?latitude=43.6833&longitude=40.2000&current=temperature_2m,weather_code&timezone=auto',{cache:'no-store'})\n            .then(r=>r.json()).then(d=>{\n              var t = (d && d.current && typeof d.current.temperature_2m==='number') ? Math.round(d.current.temperature_2m) : null;\n              var n = document.getElementById('kb-temp'); if(n) n.textContent = (t==null?'РІР‚вЂќ':t)+'Р’В°';\n            }).catch(()=>{});\n        }catch(_){ }\n      })();\n    </script>\n  </body>\n</html>\n\n\n\n
+    </aside>
+
+    <!-- Р СњР В°РЎвЂљР С‘Р Р†Р Р…Р В°РЎРЏ Р С”Р Р…Р С•Р С—Р С”Р В° РІР‚СљР С™Р В°Р В»РЎРЉР С”РЎС“Р В»РЎРЏРЎвЂљР С•РЎР‚РІР‚Сњ -->
+    <a id="kb-open-btn" aria-label="Р С›РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљРЎРЉ Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘Р Вµ" title="Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"></a>
+
+    <!-- Р В¤РЎС“Р В»РЎРѓР С”РЎР‚Р С‘Р Р… РЎРѓ Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљР С•Р в„– Р С”Р В°РЎР‚РЎвЂљР С•РЎвЂЎР С”Р С•Р в„– (Р Р†Р Р…Р ВµРЎв‚¬Р Р…Р С‘Р в„– Р С”РЎР‚Р ВµРЎРѓРЎвЂљР С‘Р С” РЎС“Р Т‘Р В°Р В»РЎвЂР Р…) -->
+    <div id="kb-full-overlay" aria-hidden="true">
+      <iframe
+        id="kb-full-frame"
+        title="Р‘СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"
+        src="about:blank"
+        referrerpolicy="no-referrer">
+      </iframe>
+    </div>
+    <!-- Weather chip (desktop always on) -->
+    <div id="kb-weather-chip" class="kb-weather" aria-label="Р СџР С•Р С–Р С•Р Т‘Р В° РЎРѓР ВµР в„–РЎвЂЎР В°РЎРѓ"><span id="kb-temp">РІР‚вЂќР’В°</span></div>
+
+    <script>
+      (function(){
+        var FULL_SRC = '../booking/??hidefab=1&hideweather=1&raise=80#kb-booking';
+        var openBtn = document.getElementById('kb-open-btn');
+        var overlay = document.getElementById('kb-full-overlay');
+        var full = document.getElementById('kb-full-frame');
+        // Р В±Р ВµР В· Р Р†Р Р…Р ВµРЎв‚¬Р Р…Р ВµР С–Р С• Р С”РЎР‚Р ВµРЎРѓРЎвЂљР С‘Р С”Р В° РІР‚вЂќ Р С‘РЎРѓР С—Р С•Р В»РЎРЉР В·РЎС“Р ВµР С Р С”Р В»Р С‘Р С” Р С—Р С• РЎвЂћР С•Р Р…РЎС“ / ESC / Р С—Р С•Р Р†РЎвЂљР С•РЎР‚Р Р…РЎвЂ№Р в„– Р С”Р В»Р С‘Р С” Р С—Р С• Р С”Р Р…Р С•Р С—Р С”Р Вµ
+        function isMobile(){
+          try { return window.matchMedia('(hover: none), (pointer: coarse)').matches; }
+          catch(_) { return window.innerWidth <= 1024; }
+        }
+        function lockScroll(on){ if (isMobile()) { document.documentElement.classList.toggle('kb-noscroll', on); document.body.classList.toggle('kb-noscroll', on); } }
+        function openOverlay(){ if (full.src !== FULL_SRC) full.src = FULL_SRC; overlay.classList.add('is-open'); document.documentElement.classList.add('kb-overlay-open'); lockScroll(true); }
+        function closeOverlay(){ overlay.classList.remove('is-open'); document.documentElement.classList.remove('kb-overlay-open'); lockScroll(false); }
+
+        // Р РЋР В»РЎС“РЎв‚¬Р В°Р ВµР С РЎРѓР С•Р В±РЎвЂ№РЎвЂљР С‘РЎРЏ Р С‘Р В· booking/ (postMessage)
+        window.addEventListener('message', function(e){
+          // Р вЂ™Р Р…РЎС“РЎвЂљРЎР‚Р ВµР Р…Р Р…Р С‘Р в„– iframe РЎвЂљР С•Р С–Р С• Р В¶Р Вµ Р Т‘Р С•Р СР ВµР Р…Р В° РІР‚вЂќ Р С—РЎР‚Р С‘Р Р…Р С‘Р СР В°Р ВµР С Р Р†РЎРѓР Вµ РЎРѓР С•Р В±РЎвЂ№РЎвЂљР С‘РЎРЏ
+          var d = e.data || {};
+          if (d.source === 'kb') {
+            if (d.type === 'kb-open') openOverlay();
+            else if (d.type === 'kb-close') closeOverlay();
+          }
+        });
+
+        overlay.addEventListener('click', function(e){ if (e.target === overlay) closeOverlay(); });
+        window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeOverlay(); });
+        window.addEventListener('resize', function(){ if (!overlay.classList.contains('is-open')) return; if (isMobile()) lockScroll(true); else lockScroll(false); });
+        // Р СњР В° РЎРѓРЎвЂљР В°РЎР‚РЎвЂљР Вµ РЎРѓР В±РЎР‚Р С•РЎРѓР С‘Р С Р С”Р В»Р В°РЎРѓРЎРѓ (Р С”Р Р…Р С•Р С—Р С”Р В° Р Р†РЎРѓР ВµР С–Р Т‘Р В° Р Р†Р С‘Р Т‘Р С‘Р СР В° Р С”Р В°Р С” Р Р…Р В°РЎвЂљР С‘Р Р†Р Р…Р В°РЎРЏ)
+        document.documentElement.classList.remove('kb-overlay-open');
+        // Р С™Р В»Р С‘Р С” Р С—Р С• Р Р…Р В°РЎвЂљР С‘Р Р†Р Р…Р С•Р в„– Р С”Р Р…Р С•Р С—Р С”Р Вµ
+        if (openBtn) openBtn.addEventListener('click', function(e){
+          e.preventDefault();
+          if (overlay.classList.contains('is-open')) closeOverlay(); else openOverlay();
+        });
+        // Prevent accidental text selection highlight while pressing button
+        if (openBtn){
+          openBtn.addEventListener('mousedown', function(){ document.body.classList.add('no-select'); });
+          document.addEventListener('mouseup', function(){ document.body.classList.remove('no-select'); });
+          openBtn.addEventListener('touchstart', function(){ document.body.classList.add('no-select'); }, {passive:true});
+          document.addEventListener('touchend', function(){ document.body.classList.remove('no-select'); }, {passive:true});
+        }
+        // Weather
+        try{
+          fetch('https://api.open-meteo.com/v1/forecast?latitude=43.6833&longitude=40.2000&current=temperature_2m,weather_code&timezone=auto',{cache:'no-store'})
+            .then(r=>r.json()).then(d=>{
+              var t = (d && d.current && typeof d.current.temperature_2m==='number') ? Math.round(d.current.temperature_2m) : null;
+              var n = document.getElementById('kb-temp'); if(n) n.textContent = (t==null?'РІР‚вЂќ':t)+'Р’В°';
+            }).catch(()=>{});
+        }catch(_){ }
+      })();
+    </script>
+  </body>
+</html>
+
+
+
