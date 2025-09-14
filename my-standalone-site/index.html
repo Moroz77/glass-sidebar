@@ -110,6 +110,11 @@
         mask-repeat: no-repeat; mask-position: center; mask-size: contain;
         pointer-events: none;
       }
+      /* Remove platform tap/selection highlight around the button */
+      #kb-open-btn{ -webkit-tap-highlight-color: transparent; outline: none !important; }
+      #kb-open-btn:focus{ outline: none !important; }
+      .kb-overlay-open{ -webkit-user-select: none; user-select: none; }
+      .no-select{ -webkit-user-select: none !important; user-select: none !important; }
       @supports not ((-webkit-mask-image: url("") ) or (mask-image: url("") )){
         #kb-open-btn::before{ background: transparent; border: 0; box-shadow: none; }
         #kb-open-btn::after{ content: ""; position: absolute; inset: 14px; background: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
@@ -231,6 +236,13 @@
           e.preventDefault();
           if (overlay.classList.contains('is-open')) closeOverlay(); else openOverlay();
         });
+        // Prevent accidental text selection highlight while pressing button
+        if (openBtn){
+          openBtn.addEventListener('mousedown', function(){ document.body.classList.add('no-select'); });
+          document.addEventListener('mouseup', function(){ document.body.classList.remove('no-select'); });
+          openBtn.addEventListener('touchstart', function(){ document.body.classList.add('no-select'); }, {passive:true});
+          document.addEventListener('touchend', function(){ document.body.classList.remove('no-select'); }, {passive:true});
+        }
         // Weather
         try{
           fetch('https://api.open-meteo.com/v1/forecast?latitude=43.6833&longitude=40.2000&current=temperature_2m,weather_code&timezone=auto',{cache:'no-store'})
