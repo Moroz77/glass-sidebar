@@ -27,8 +27,13 @@ body {
     flex-direction: column;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(17px);
-    --webkit-backdrop-filter: blur(17px);
-    border-right: 1px solid rgba(255, 255, 255, 0.7);
+    -webkit-backdrop-filter: blur(17px);
+    background-clip: padding-box; /* avoid border + blur bleed */
+    border-right: 1px solid rgba(255, 255, 255, 0.35);
+    isolation: isolate;          /* reduce rendering artifacts */
+    will-change: width;          /* smoother hover expand */
+    transform: translateZ(0);    /* promote to its own layer */
+    overflow: hidden;            /* prevent inner bleed during blur */
     transition: width 0.3s ease;
 }
 
@@ -79,7 +84,7 @@ body {
 
 .links li:hover {
     cursor: pointer;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.85);
 }
 
 .links h4 {
@@ -95,11 +100,14 @@ body {
 
 .links hr {
     margin: 10px 8px;
-    border: 1px solid #4c4c4c;
+    height: 1px;
+    border: 0;
+    background: rgba(76, 76, 76, 0.4);
+    transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
 .sidebar:hover .links hr {
-    border-color: transparent;
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .links li span {
