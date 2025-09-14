@@ -11,6 +11,15 @@
     <!-- Встроенный умный виджет бронирования (mini iframe + fullscreen overlay) -->
     <style>
       :root{ --kb-sidebar-width: 260px; }
+      html, body { min-height: 100%; }
+      /* Фоновое изображение главной страницы (можно заменить путь на свой) */
+      body{
+        background-image: url('../images/hero-bg.jpg');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
 
       /* Мини‑виджет: внутренняя FAB из booking/ */
       #kb-mini-frame{
