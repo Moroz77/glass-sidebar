@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script>\n    (function(){\n      try{\n        var p = new URLSearchParams(location.search);\n        if (p.has("mini") || p.get("mode") === "fab") document.documentElement.classList.add("kb-mini");\n        if (p.has("staticfab") || p.get("staticfab") === "1") document.documentElement.classList.add("kb-staticfab");\n        if (p.has("hidefab") || p.get("hidefab") === "1") document.documentElement.classList.add("kb-hidefab");\n        if (p.has("hideweather") || p.get("hideweather") === "1") document.documentElement.classList.add("kb-hideweather");\n        var r = p.get("raise"); if (r && /^\\d+$/.test(r)) document.documentElement.style.setProperty("--raise", r+"px");\n      }catch(_){ }\n    })();\n  </script>\n  <base href="./">
-  <title>Р С™Р В°Р В»Р С‘Р Р…Р С•Р Р†Р В°РЎРЏ Р В±Р В°Р Р…РЎРЏ РІР‚вЂќ Р Р€Р В»РЎС“РЎвЂЎРЎв‚¬Р ВµР Р…Р Р…РЎвЂ№Р в„– Р Р†Р С‘Р Т‘Р В¶Р ВµРЎвЂљ Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘РЎРЏ</title>
+  <base href="./">
+  <title>╨Ъ╨░╨╗╨╕╨╜╨╛╨▓╨░╤П ╨▒╨░╨╜╤П тАФ ╨г╨╗╤Г╤З╤И╨╡╨╜╨╜╤Л╨╣ ╨▓╨╕╨┤╨╢╨╡╤В ╨▒╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╨╜╨╕╤П</title>
   <style>
     :root{
       --z-max:2147483647; --z-card:2147483600; --z-weather:2147483000; --z-home:2147483500;
@@ -28,7 +28,7 @@
     .kb-glass{background:linear-gradient(135deg,var(--glass-from),var(--glass-to));border-radius:var(--radius-card);
       box-shadow:var(--glass-shadow);backdrop-filter:var(--glass-backdrop)}
 
-    /* FAB - Р РЋРЎвЂљР В°РЎвЂљР С‘РЎвЂЎР Р…РЎвЂ№Р в„– РЎРѓ РЎРЊР В»Р ВµР Р†Р В°Р Р…РЎвЂљР Р…Р С•Р в„– Р В°Р Р…Р С‘Р СР В°РЎвЂ Р С‘Р ВµР в„– Р С—Р С•РЎРЏР Р†Р В»Р ВµР Р…Р С‘РЎРЏ */
+    /* FAB - ╨б╤В╨░╤В╨╕╤З╨╜╤Л╨╣ ╤Б ╤Н╨╗╨╡╨▓╨░╨╜╤В╨╜╨╛╨╣ ╨░╨╜╨╕╨╝╨░╤Ж╨╕╨╡╨╣ ╨┐╨╛╤П╨▓╨╗╨╡╨╜╨╕╤П */
     .kb-fab{
       position:fixed;right:18px;bottom:18px;z-index:var(--z-max);width:var(--fab-size);height:var(--fab-size);
       background:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat;
@@ -41,11 +41,11 @@
       transform:scale(1.05);
       opacity:0.9;
       filter: drop-shadow(0 10px 25px rgba(0,0,0,0.5));
-      animation: none; /* Р С›РЎвЂљР С”Р В»РЎР‹РЎвЂЎР В°Р ВµР С Р В°Р Р…Р С‘Р СР В°РЎвЂ Р С‘РЎР‹ Р С—РЎР‚Р С‘ Р Р…Р В°Р Р†Р ВµР Т‘Р ВµР Р…Р С‘Р С‘ */
+      animation: none; /* ╨Ю╤В╨║╨╗╤О╤З╨░╨╡╨╝ ╨░╨╜╨╕╨╝╨░╤Ж╨╕╤О ╨┐╤А╨╕ ╨╜╨░╨▓╨╡╨┤╨╡╨╜╨╕╨╕ */
     }
     .kb-fab:active{transform:scale(.97)}
     
-    /* Р РЋР Т‘Р ВµРЎР‚Р В¶Р В°Р Р…Р Р…Р В°РЎРЏ Р В°Р Р…Р С‘Р СР В°РЎвЂ Р С‘РЎРЏ Р С—РЎС“Р В»РЎРЉРЎРѓР В°РЎвЂ Р С‘Р С‘ */
+    /* ╨б╨┤╨╡╤А╨╢╨░╨╜╨╜╨░╤П ╨░╨╜╨╕╨╝╨░╤Ж╨╕╤П ╨┐╤Г╨╗╤М╤Б╨░╤Ж╨╕╨╕ */
     @keyframes kb-subtle-pulse{
       0%, 90%, 100% {
         transform: scale(1);
@@ -57,7 +57,7 @@
       }
     }
 
-    /* Home button - Р Р†Р С•Р В·Р Р†РЎР‚Р В°РЎвЂ°Р В°Р ВµР С Р С—Р ВµРЎР‚Р Р†РЎС“РЎР‹ Р В°Р Р…Р С‘Р СР В°РЎвЂ Р С‘РЎР‹ РЎРѓ РЎС“Р В»РЎС“РЎвЂЎРЎв‚¬Р ВµР Р…Р Р…Р С•Р в„– РЎвЂљР ВµР Р…РЎРЉРЎР‹ */
+    /* Home button - ╨▓╨╛╨╖╨▓╤А╨░╤Й╨░╨╡╨╝ ╨┐╨╡╤А╨▓╤Г╤О ╨░╨╜╨╕╨╝╨░╤Ж╨╕╤О ╤Б ╤Г╨╗╤Г╤З╤И╨╡╨╜╨╜╨╛╨╣ ╤В╨╡╨╜╤М╤О */
     .kb-home{
       display:none;
       position:fixed;
@@ -68,7 +68,7 @@
       height:var(--home-size);
       cursor:pointer;
       opacity:0.7;
-      /* Р СџР В Р С’Р вЂ™Р ВР вЂєР В¬Р СњР В«Р в„ў Р вЂєР С›Р вЂњР С›Р СћР ВР Сџ Р РЋР вЂєР вЂўР вЂ™Р С’ */
+      /* ╨Я╨а╨Р╨Т╨Ш╨Ы╨м╨Э╨л╨Щ ╨Ы╨Ю╨У╨Ю╨в╨Ш╨Я ╨б╨Ы╨Х╨Т╨Р */
       background:url("https://static.tildacdn.com/tild6434-3966-4334-b664-396466336537/ChatGPT_Image_13__20.png") center/contain no-repeat;
       filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
       animation: kb-float 4s ease-in-out infinite;
@@ -79,7 +79,7 @@
       filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6));
     }
     
-    /* Р СњР С•Р Р†Р С•Р Вµ Р С‘Р В·Р С•Р В±РЎР‚Р В°Р В¶Р ВµР Р…Р С‘Р Вµ РЎРѓ Р Р…Р В°Р В·Р Р†Р В°Р Р…Р С‘Р ВµР С - Р С—РЎР‚Р С•Р В·РЎР‚Р В°РЎвЂЎР Р…Р С•Р Вµ */
+    /* ╨Э╨╛╨▓╨╛╨╡ ╨╕╨╖╨╛╨▒╤А╨░╨╢╨╡╨╜╨╕╨╡ ╤Б ╨╜╨░╨╖╨▓╨░╨╜╨╕╨╡╨╝ - ╨┐╤А╨╛╨╖╤А╨░╤З╨╜╨╛╨╡ */
     .kb-home-name {
       display:none;
       position:fixed;
@@ -88,7 +88,7 @@
       z-index:var(--z-home);
       height:60px;
       width:auto;
-      /* Р СџР В Р С›Р вЂ”Р В Р С’Р В§Р СњР С›Р вЂў Р ВР вЂ”Р С›Р вЂР В Р С’Р вЂ“Р вЂўР СњР ВР вЂў Р РЋ Р СњР С’Р вЂ”Р вЂ™Р С’Р СњР ВР вЂўР Сљ */
+      /* ╨Я╨а╨Ю╨Ч╨а╨Р╨з╨Э╨Ю╨Х ╨Ш╨Ч╨Ю╨С╨а╨Р╨Ц╨Х╨Э╨Ш╨Х ╨б ╨Э╨Р╨Ч╨Т╨Р╨Э╨Ш╨Х╨Ь */
       background:url("https://static.tildacdn.com/tild3664-3430-4234-a264-306136616264/ChatGPT_Image_13__20.png") center/contain no-repeat;
     }
     
@@ -101,7 +101,7 @@
       50%{transform:scale(1.06); opacity:0.8;}
     }
 
-    /* Р С›РЎРѓРЎвЂљР В°Р В»РЎРЉР Р…РЎвЂ№Р Вµ РЎРѓРЎвЂљР С‘Р В»Р С‘ Р В±Р ВµР В· Р С‘Р В·Р СР ВµР Р…Р ВµР Р…Р С‘Р в„– */
+    /* ╨Ю╤Б╤В╨░╨╗╤М╨╜╤Л╨╡ ╤Б╤В╨╕╨╗╨╕ ╨▒╨╡╨╖ ╨╕╨╖╨╝╨╡╨╜╨╡╨╜╨╕╨╣ */
     .kb-card{position:fixed;left:8px;right:8px;top:calc(8px + env(safe-area-inset-top));margin:0 auto;max-width:520px;
       z-index:var(--z-card);visibility:hidden;opacity:0;transform:translateY(8px) scale(.98);
       transition:visibility .25s,opacity .25s,transform .25s;display:flex;flex-direction:column;padding:var(--pad-card);color:var(--text)}
@@ -191,7 +191,7 @@
     }
 
     @media (min-width:601px){
-      .kb-card{top:auto;bottom:calc(18px + var(--fab-size) + 16px + var(--raise,0px));right:18px;left:auto;transform:none;max-width:420px;width:420px}
+      .kb-card{top:auto;bottom:calc(18px + var(--fab-size) + 16px);right:18px;left:auto;transform:none;max-width:420px;width:420px}
       .kb-card:target{transform:none}
     }
     @media (max-width:600px){
@@ -204,7 +204,7 @@
       .kb-home-name{display:block;}
       .kb-weather{top:120px;right:-10px;}
       
-      /* Р вЂР В»Р С•Р С”Р С‘РЎР‚Р С•Р Р†Р С”Р В° РЎРѓР С”РЎР‚Р С•Р В»Р В»Р В° Р С—РЎР‚Р С‘ Р С•РЎвЂљР С”РЎР‚РЎвЂ№РЎвЂљР С•Р С Р Р†Р С‘Р Т‘Р В¶Р ВµРЎвЂљР Вµ */
+      /* ╨С╨╗╨╛╨║╨╕╤А╨╛╨▓╨║╨░ ╤Б╨║╤А╨╛╨╗╨╗╨░ ╨┐╤А╨╕ ╨╛╤В╨║╤А╤Л╤В╨╛╨╝ ╨▓╨╕╨┤╨╢╨╡╤В╨╡ */
       body.kb-open {
         overflow: hidden;
         position: fixed;
@@ -213,93 +213,94 @@
       }
     }
     #kb-contacts + #kb-deposit-field{ margin-top:8px; }
-  </style>\n  <style>\n    html.kb-mini .kb-card, html.kb-mini .kb-home, html.kb-mini .kb-home-name, html.kb-mini .kb-weather, html.kb-mini .kb-toast{ display:none !important; }\n    body.kb-open .kb-fab{ display:none !important; }\n    html.kb-hidefab .kb-fab{ display:none !important; }\n    html.kb-hideweather .kb-weather{ display:none !important; }\n  </style>
+  </style>
 </head>
 <body>
   <div id="kb-widget">
-    <a href="/" class="kb-home" aria-label="Р вЂ™Р ВµРЎР‚Р Р…РЎС“РЎвЂљРЎРЉРЎРѓРЎРЏ Р Р…Р В° Р С–Р В»Р В°Р Р†Р Р…РЎС“РЎР‹"></a>
-    <div class="kb-home-name" aria-label="Р С™Р В°Р В»Р С‘Р Р…Р С•Р Р†Р В°РЎРЏ Р вЂР В°Р Р…РЎРЏ"></div>
+    <a href="#kb-booking" class="kb-fab" aria-label="╨Ю╤В╨║╤А╤Л╤В╤М/╨╖╨░╨║╤А╤Л╤В╤М ╨▒╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡"></a>
+    <a href="/" class="kb-home" aria-label="╨Т╨╡╤А╨╜╤Г╤В╤М╤Б╤П ╨╜╨░ ╨│╨╗╨░╨▓╨╜╤Г╤О"></a>
+    <div class="kb-home-name" aria-label="╨Ъ╨░╨╗╨╕╨╜╨╛╨▓╨░╤П ╨С╨░╨╜╤П"></div>
 
-    <aside id="kb-booking" class="kb-card kb-glass" aria-label="Р В¤Р С•РЎР‚Р СР В° Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘РЎРЏ">
+    <aside id="kb-booking" class="kb-card kb-glass" aria-label="╨д╨╛╤А╨╝╨░ ╨▒╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╨╜╨╕╤П">
       <div class="kb-card-header">
-        <div class="kb-title">Р вЂРЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘Р Вµ</div>
-        <button type="button" class="kb-close" aria-label="Р вЂ”Р В°Р С”РЎР‚РЎвЂ№РЎвЂљРЎРЉ">РІСљвЂў</button>
+        <div class="kb-title">╨С╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡</div>
+        <button type="button" class="kb-close" aria-label="╨Ч╨░╨║╤А╤Л╤В╤М">тЬХ</button>
       </div>
 
       <div class="kb-card-body">
         <div class="kb-row">
           <div class="kb-field">
-            <label class="kb-label" for="kb-date">Р вЂќР В°РЎвЂљР В°</label>
+            <label class="kb-label" for="kb-date">╨Ф╨░╤В╨░</label>
             <input class="kb-input" type="date" id="kb-date" />
           </div>
           <div class="kb-field">
-            <label class="kb-label">Р СњР В°РЎвЂЎР В°Р В»Р С•</label>
-            <div class="kb-input kb-static" id="kb-start-label">РІР‚вЂќ</div>
+            <label class="kb-label">╨Э╨░╤З╨░╨╗╨╛</label>
+            <div class="kb-input kb-static" id="kb-start-label">тАФ</div>
           </div>
         </div>
 
         <div class="kb-field">
-          <label class="kb-label">Р РЋР В»Р С•РЎвЂљРЎвЂ№</label>
+          <label class="kb-label">╨б╨╗╨╛╤В╤Л</label>
           <div class="kb-seg" id="kb-window" role="tablist">
-            <button type="button" data-index="0" aria-selected="false"><div class="kb-slot-start">09:00</div><div class="kb-slot-end">Р Т‘Р С• 12:00</div></button>
-            <button type="button" data-index="1" aria-selected="false"><div class="kb-slot-start">13:00</div><div class="kb-slot-end">Р Т‘Р С• 16:00</div></button>
-            <button type="button" data-index="2" aria-selected="false"><div class="kb-slot-start">17:00</div><div class="kb-slot-end">Р Т‘Р С• 20:00</div></button>
-            <button type="button" data-index="3" aria-selected="false"><div class="kb-slot-start">21:00</div><div class="kb-slot-end">Р Т‘Р С• 00:00</div></button>
+            <button type="button" data-index="0" aria-selected="false"><div class="kb-slot-start">09:00</div><div class="kb-slot-end">╨┤╨╛ 12:00</div></button>
+            <button type="button" data-index="1" aria-selected="false"><div class="kb-slot-start">13:00</div><div class="kb-slot-end">╨┤╨╛ 16:00</div></button>
+            <button type="button" data-index="2" aria-selected="false"><div class="kb-slot-start">17:00</div><div class="kb-slot-end">╨┤╨╛ 20:00</div></button>
+            <button type="button" data-index="3" aria-selected="false"><div class="kb-slot-start">21:00</div><div class="kb-slot-end">╨┤╨╛ 00:00</div></button>
           </div>
         </div>
 
         <div class="kb-field">
-          <label class="kb-label" for="kb-hours">Р вЂќР В»Р С‘РЎвЂљР ВµР В»РЎРЉР Р…Р С•РЎРѓРЎвЂљРЎРЉ</label>
+          <label class="kb-label" for="kb-hours">╨Ф╨╗╨╕╤В╨╡╨╗╤М╨╜╨╛╤Б╤В╤М</label>
           <div class="kb-range-row">
             <input class="kb-range" id="kb-hours" type="range" min="3" max="12" step="3" value="3" />
             <div class="kb-badge" id="kb-hours-badge">3</div>
           </div>
-          <div class="kb-note" id="kb-note-line">Р вЂ™РЎвЂ№Р В±Р ВµРЎР‚Р С‘РЎвЂљР Вµ РЎРѓР В»Р С•РЎвЂљРЎвЂ№</div>
+          <div class="kb-note" id="kb-note-line">╨Т╤Л╨▒╨╡╤А╨╕╤В╨╡ ╤Б╨╗╨╛╤В╤Л</div>
         </div>
 
         <div class="kb-field">
-          <label class="kb-label" for="kb-guests">Р вЂњР С•РЎРѓРЎвЂљР С‘</label>
+          <label class="kb-label" for="kb-guests">╨У╨╛╤Б╤В╨╕</label>
           <div class="kb-range-row">
             <input class="kb-range" id="kb-guests" type="range" min="1" max="15" step="1" value="1" />
             <div class="kb-badge" id="kb-guests-badge">1</div>
           </div>
-          <div class="kb-note">Р вЂќР ВµРЎвЂљРЎРЏР С Р Т‘Р С• 12 Р В»Р ВµРЎвЂљ РІР‚вЂќ50%</div>
+          <div class="kb-note">╨Ф╨╡╤В╤П╨╝ ╨┤╨╛ 12 ╨╗╨╡╤В тАФ50%</div>
         </div>
 
         <div class="kb-row" id="kb-contacts">
           <div class="kb-field">
-            <label class="kb-label" for="kb-name">Р ВР СРЎРЏ</label>
-            <input class="kb-input" type="text" id="kb-name" placeholder="Р вЂ™Р В°РЎв‚¬Р Вµ Р С‘Р СРЎРЏ" />
+            <label class="kb-label" for="kb-name">╨Ш╨╝╤П</label>
+            <input class="kb-input" type="text" id="kb-name" placeholder="╨Т╨░╤И╨╡ ╨╕╨╝╤П" />
           </div>
           <div class="kb-field">
-            <label class="kb-label" for="kb-phone">Р СћР ВµР В»Р ВµРЎвЂћР С•Р Р…</label>
+            <label class="kb-label" for="kb-phone">╨в╨╡╨╗╨╡╤Д╨╛╨╜</label>
             <input class="kb-input" type="tel" id="kb-phone" placeholder="+7 ..." />
           </div>
         </div>
 
         <div class="kb-field" id="kb-deposit-field">
-          <label class="kb-label" for="kb-deposit">Р вЂќР ВµР С—Р С•Р В·Р С‘РЎвЂљ</label>
+          <label class="kb-label" for="kb-deposit">╨Ф╨╡╨┐╨╛╨╖╨╕╤В</label>
           <div class="kb-range-row">
             <input class="kb-range" id="kb-deposit" type="range" min="0" max="25000" step="100" value="11000" disabled />
-            <div class="kb-badge" id="kb-deposit-badge">11 000 РІвЂљР…</div>
+            <div class="kb-badge" id="kb-deposit-badge">11 000 тВ╜</div>
           </div>
-          <div class="kb-note" id="kb-deposit-note">Р С›РЎРѓРЎвЂљР В°Р В»Р С•РЎРѓРЎРЉ Р Р…Р В° Р С—РЎР‚Р С•РЎвЂ Р ВµР Т‘РЎС“РЎР‚РЎвЂ№: 11 000 РІвЂљР…</div>
+          <div class="kb-note" id="kb-deposit-note">╨Ю╤Б╤В╨░╨╗╨╛╤Б╤М ╨╜╨░ ╨┐╤А╨╛╤Ж╨╡╨┤╤Г╤А╤Л: 11 000 тВ╜</div>
         </div>
 
         <div class="kb-bottom">
           <div class="kb-total-wrap">
-            <div class="kb-label">Р ВРЎвЂљР С•Р С–Р С•</div>
-            <div class="kb-total" id="kb-total">25 000 РІвЂљР…</div>
+            <div class="kb-label">╨Ш╤В╨╛╨│╨╛</div>
+            <div class="kb-total" id="kb-total">25 000 тВ╜</div>
           </div>
-          <a id="kb-book-btn" class="kb-like-input" href="#" role="button" aria-label="Р вЂ”Р В°Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°РЎвЂљРЎРЉ">Р вЂ”Р В°Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°РЎвЂљРЎРЉ</a>
+          <a id="kb-book-btn" class="kb-like-input" href="#" role="button" aria-label="╨Ч╨░╨▒╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╤В╤М">╨Ч╨░╨▒╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╤В╤М</a>
         </div>
 
-        <div class="kb-min-bottom" id="kb-minline">Р СљР С‘Р Р…. Р Т‘Р ВµР С—Р С•Р В·Р С‘РЎвЂљ: 25 000 РІвЂљР… (Р В±РЎС“Р Т‘Р Р…Р С‘) / 30 000 РІвЂљР… (Р Р†РЎвЂ№РЎвЂ¦Р С•Р Т‘Р Р…РЎвЂ№Р Вµ) Р В·Р В° 1 РЎРѓР В»Р С•РЎвЂљ (3 РЎвЂЎ)</div>
+        <div class="kb-min-bottom" id="kb-minline">╨Ь╨╕╨╜. ╨┤╨╡╨┐╨╛╨╖╨╕╤В: 25 000 тВ╜ (╨▒╤Г╨┤╨╜╨╕) / 30 000 тВ╜ (╨▓╤Л╤Е╨╛╨┤╨╜╤Л╨╡) ╨╖╨░ 1 ╤Б╨╗╨╛╤В (3 ╤З)</div>
       </div>
     </aside>
 
-    <div class="kb-weather kb-glass" aria-label="Р СџР С•Р С–Р С•Р Т‘Р В° РЎРѓР ВµР в„–РЎвЂЎР В°РЎРѓ">
-      <span id="kb-temp">РІР‚вЂќР’В°</span>
+    <div class="kb-weather kb-glass" aria-label="╨Я╨╛╨│╨╛╨┤╨░ ╤Б╨╡╨╣╤З╨░╤Б">
+      <span id="kb-temp">тАФ┬░</span>
     </div>
 
     <div class="kb-toast" id="kb-toast"></div>
@@ -310,9 +311,9 @@
     function addHoursToHM(hm, add){var p=(hm||'00:00').split(':'),h=parseInt(p[0],10)||0,m=parseInt(p[1],10)||0;
       var d=new Date(2000,0,1,h,m,0,0);d.setHours(d.getHours()+add);
       return pad2(d.getHours())+':'+pad2(d.getMinutes())}
-    function rub(n){ return (Math.max(0,Math.round(n))||0).toLocaleString('ru-RU') + ' РІвЂљР…'; }
+    function rub(n){ return (Math.max(0,Math.round(n))||0).toLocaleString('ru-RU') + ' тВ╜'; }
     
-    // Р В¤РЎС“Р Р…Р С”РЎвЂ Р С‘РЎРЏ Р Т‘Р В»РЎРЏ Р С—Р С•Р С”Р В°Р В·Р В° РЎС“Р Р†Р ВµР Т‘Р С•Р СР В»Р ВµР Р…Р С‘Р в„–
+    // ╨д╤Г╨╜╨║╤Ж╨╕╤П ╨┤╨╗╤П ╨┐╨╛╨║╨░╨╖╨░ ╤Г╨▓╨╡╨┤╨╛╨╝╨╗╨╡╨╜╨╕╨╣
     function showToast(message, duration = 3000) {
       const toast = document.getElementById('kb-toast');
       toast.textContent = message;
@@ -323,9 +324,9 @@
       }, duration);
     }
     
-    // Р Р€Р В±РЎР‚Р В°Р Р…Р В° РЎвЂћРЎС“Р Р…Р С”РЎвЂ Р С‘РЎРЏ Р Р†Р В°Р В»Р С‘Р Т‘Р В°РЎвЂ Р С‘Р С‘ РЎвЂљР ВµР В»Р ВµРЎвЂћР С•Р Р…Р В°
+    // ╨г╨▒╤А╨░╨╜╨░ ╤Д╤Г╨╜╨║╤Ж╨╕╤П ╨▓╨░╨╗╨╕╨┤╨░╤Ж╨╕╨╕ ╤В╨╡╨╗╨╡╤Д╨╛╨╜╨░
     
-    // Р В¤Р С•РЎР‚Р СР В°РЎвЂљР С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘Р Вµ РЎвЂљР ВµР В»Р ВµРЎвЂћР С•Р Р…Р В° (Р С•РЎРѓРЎвЂљР В°Р Р†Р В»РЎРЏР ВµР С Р Т‘Р В»РЎРЏ РЎС“Р Т‘Р С•Р В±РЎРѓРЎвЂљР Р†Р В° Р С—Р С•Р В»РЎРЉР В·Р С•Р Р†Р В°РЎвЂљР ВµР В»Р ВµР в„–)
+    // ╨д╨╛╤А╨╝╨░╤В╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╤В╨╡╨╗╨╡╤Д╨╛╨╜╨░ (╨╛╤Б╤В╨░╨▓╨╗╤П╨╡╨╝ ╨┤╨╗╤П ╤Г╨┤╨╛╨▒╤Б╤В╨▓╨░ ╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╤В╨╡╨╗╨╡╨╣)
     function formatPhone(input) {
       const value = input.value.replace(/\D/g, '');
       let formattedValue = '+7 ';
@@ -382,14 +383,14 @@
           phoneEl=document.getElementById('kb-phone'),
           toastEl = document.getElementById('kb-toast');
 
-      // Р Р€РЎРѓРЎвЂљР В°Р Р…Р С•Р Р†Р С”Р В° Р СР С‘Р Р…Р С‘Р СР В°Р В»РЎРЉР Р…Р С•Р в„– Р Т‘Р В°РЎвЂљР В° (РЎРѓР ВµР С–Р С•Р Т‘Р Р…РЎРЏ)
+      // ╨г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨╝╨╕╨╜╨╕╨╝╨░╨╗╤М╨╜╨╛╨╣ ╨┤╨░╤В╨░ (╤Б╨╡╨│╨╛╨┤╨╜╤П)
       const today = new Date();
       const yyyy = today.getFullYear();
       const mm = String(today.getMonth() + 1).padStart(2, '0');
       const dd = String(today.getDate()).padStart(2, '0');
       dateEl.min = `${yyyy}-${mm}-${dd}`;
       
-      // Р С›Р В±РЎР‚Р В°Р В±Р С•РЎвЂљРЎвЂЎР С‘Р С” Р Т‘Р В»РЎРЏ РЎвЂћР С•РЎР‚Р СР В°РЎвЂљР С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘РЎРЏ РЎвЂљР ВµР В»Р ВµРЎвЂћР С•Р Р…Р В°
+      // ╨Ю╨▒╤А╨░╨▒╨╛╤В╤З╨╕╨║ ╨┤╨╗╤П ╤Д╨╛╤А╨╝╨░╤В╨╕╤А╨╛╨▓╨░╨╜╨╕╤П ╤В╨╡╨╗╨╡╤Д╨╛╨╜╨░
       if(phoneEl){
         phoneEl.value = '+7 ';
         phoneEl.addEventListener('input', function() {
@@ -444,15 +445,15 @@
 
         if(selectedStart===null){
           applySlotHighlight(0);
-          startLabel.textContent='РІР‚вЂќ';
+          startLabel.textContent='тАФ';
           hoursBadge.textContent=String(durPaid);
-          noteLine.textContent='Р вЂ™РЎвЂ№Р В±Р ВµРЎР‚Р С‘РЎвЂљР Вµ РЎРѓР В»Р С•РЎвЂљРЎвЂ№';
+          noteLine.textContent='╨Т╤Л╨▒╨╡╤А╨╕╤В╨╡ ╤Б╨╗╨╛╤В╤Л';
           var guests0  = +guestsEl.value || CFG.BASE_GUESTS;
           var effGuests0 = Math.max(guests0, 2);
           var baselineRemaining = Math.max(baseDep0 - (effGuests0*price0*1), 0);
           depRange.max=String(baseDep0); depRange.value=String(baselineRemaining); fill(depRange);
           depBadge.textContent=rub(baselineRemaining);
-          depNote.textContent='Р С›РЎРѓРЎвЂљР В°Р В»Р С•РЎРѓРЎРЉ Р Р…Р В° Р С—РЎР‚Р С•РЎвЂ Р ВµР Т‘РЎС“РЎР‚РЎвЂ№: ' + rub(baselineRemaining);
+          depNote.textContent='╨Ю╤Б╤В╨░╨╗╨╛╤Б╤М ╨╜╨░ ╨┐╤А╨╛╤Ж╨╡╨┤╤Г╤А╤Л: ' + rub(baselineRemaining);
           totalEl.textContent=rub(baseDep0);
           return;
         }
@@ -463,7 +464,7 @@
         var gift=Math.max(slots-1,0);
         var endFact=addHoursToHM(startHM,durPaid+gift); if(endFact==='24:00') endFact='00:00';
         hoursBadge.textContent=String(durPaid+gift);
-        noteLine.textContent='Р вЂ™РЎвЂ№ Р Р†РЎвЂ№Р В±РЎР‚Р В°Р В»Р С‘: '+startHM+' РІР‚вЂќ '+endFact+(gift?('; +'+gift+' РЎвЂЎ Р Р† Р С—Р С•Р Т‘Р В°РЎР‚Р С•Р С”'):'');
+        noteLine.textContent='╨Т╤Л ╨▓╤Л╨▒╤А╨░╨╗╨╕: '+startHM+' тАФ '+endFact+(gift?('; +'+gift+' ╤З ╨▓ ╨┐╨╛╨┤╨░╤А╨╛╨║'):'');
       }
 
       function recalcMoney(){
@@ -476,7 +477,7 @@
           var baselineRemaining = Math.max(baseDeposit - (effGuestsInit*priceInit*1), 0);
           depRange.max=String(baseDeposit); depRange.value=String(baselineRemaining); fill(depRange);
           depBadge.textContent=rub(baselineRemaining);
-          depNote.textContent='Р С›РЎРѓРЎвЂљР В°Р В»Р С•РЎРѓРЎРЉ Р Р…Р В° Р С—РЎР‚Р С•РЎвЂ Р ВµР Т‘РЎС“РЎР‚РЎвЂ№: ' + rub(baselineRemaining);
+          depNote.textContent='╨Ю╤Б╤В╨░╨╗╨╛╤Б╤М ╨╜╨░ ╨┐╤А╨╛╤Ж╨╡╨┤╤Г╤А╤Л: ' + rub(baselineRemaining);
           totalEl.textContent=rub(baseDeposit);
           return;
         }
@@ -491,11 +492,11 @@
         var total=Math.max(ticketsReal, deposit);
         depRange.max=String(deposit); depRange.value=String(Math.round(topup)); fill(depRange);
         depBadge.innerHTML=rub(topup);
-        depNote.innerHTML=topup>0?('Р С›РЎРѓРЎвЂљР В°Р В»Р С•РЎРѓРЎРЉ Р Р…Р В° Р С—РЎР‚Р С•РЎвЂ Р ВµР Т‘РЎС“РЎР‚РЎвЂ№: '+rub(topup)):'Р вЂР С‘Р В»Р ВµРЎвЂљРЎвЂ№ Р С—Р ВµРЎР‚Р ВµР С”РЎР‚РЎвЂ№Р Р†Р В°РЎР‹РЎвЂљ Р Т‘Р ВµР С—Р С•Р В·Р С‘РЎвЂљ';
+        depNote.innerHTML=topup>0?('╨Ю╤Б╤В╨░╨╗╨╛╤Б╤М ╨╜╨░ ╨┐╤А╨╛╤Ж╨╡╨┤╤Г╤А╤Л: '+rub(topup)):'╨С╨╕╨╗╨╡╤В╤Л ╨┐╨╡╤А╨╡╨║╤А╤Л╨▓╨░╤О╤В ╨┤╨╡╨┐╨╛╨╖╨╕╤В';
         totalEl.innerHTML=rub(total);
       }
 
-      // Р Р€Р В»РЎС“РЎвЂЎРЎв‚¬Р ВµР Р…Р Р…РЎвЂ№Р в„– Р С•Р В±РЎР‚Р В°Р В±Р С•РЎвЂљРЎвЂЎР С‘Р С” Р С”Р В»Р С‘Р С”Р С•Р Р† Р Т‘Р В»РЎРЏ РЎРѓР В»Р С•РЎвЂљР С•Р Р†
+      // ╨г╨╗╤Г╤З╤И╨╡╨╜╨╜╤Л╨╣ ╨╛╨▒╤А╨░╨▒╨╛╤В╤З╨╕╨║ ╨║╨╗╨╕╨║╨╛╨▓ ╨┤╨╗╤П ╤Б╨╗╨╛╤В╨╛╨▓
       function handleSlotClick(e){
         var btn = e.target.closest('button');
         if(!btn) return;
@@ -506,10 +507,10 @@
         selectedStart = parseInt(index);
         recompute(); 
         recalcMoney();
-        showToast('Р вЂ™РЎвЂ№Р В±РЎР‚Р В°Р Р… РЎРѓР В»Р С•РЎвЂљ ' + CFG.WINDOWS[selectedStart].start);
+        showToast('╨Т╤Л╨▒╤А╨░╨╜ ╤Б╨╗╨╛╤В ' + CFG.WINDOWS[selectedStart].start);
       }
 
-      // Р ВРЎРѓР С—РЎР‚Р В°Р Р†Р В»Р ВµР Р…Р Р…РЎвЂ№Р в„– Р С•Р В±РЎР‚Р В°Р В±Р С•РЎвЂљРЎвЂЎР С‘Р С” РЎРѓР С•Р В±РЎвЂ№РЎвЂљР С‘Р в„– Р Т‘Р В»РЎРЏ РЎРѓР В»Р С•РЎвЂљР С•Р Р†
+      // ╨Ш╤Б╨┐╤А╨░╨▓╨╗╨╡╨╜╨╜╤Л╨╣ ╨╛╨▒╤А╨░╨▒╨╛╤В╤З╨╕╨║ ╤Б╨╛╨▒╤Л╤В╨╕╨╣ ╨┤╨╗╤П ╤Б╨╗╨╛╤В╨╛╨▓
       winSeg.addEventListener('click', handleSlotClick);
 
       hoursEl.addEventListener('input',function(){
@@ -524,7 +525,7 @@
 
       dateEl.addEventListener('change',function(){
         if (!dateEl.value) {
-          showToast('Р СџР С•Р В¶Р В°Р В»РЎС“Р в„–РЎРѓРЎвЂљР В°, Р Р†РЎвЂ№Р В±Р ВµРЎР‚Р С‘РЎвЂљР Вµ Р Т‘Р В°РЎвЂљРЎС“', 3000);
+          showToast('╨Я╨╛╨╢╨░╨╗╤Г╨╣╤Б╤В╨░, ╨▓╤Л╨▒╨╡╤А╨╕╤В╨╡ ╨┤╨░╤В╤Г', 3000);
           dateEl.classList.add('kb-input-error');
           return;
         }
@@ -537,37 +538,37 @@
       bookBtn.addEventListener('click', function(e){
         e.preventDefault();
         
-        // Р вЂ™Р В°Р В»Р С‘Р Т‘Р В°РЎвЂ Р С‘РЎРЏ РЎвЂћР С•РЎР‚Р СРЎвЂ№
+        // ╨Т╨░╨╗╨╕╨┤╨░╤Ж╨╕╤П ╤Д╨╛╤А╨╝╤Л
         if(!dateEl.value) {
-          showToast('Р СџР С•Р В¶Р В°Р В»РЎС“Р в„–РЎРѓРЎвЂљР В°, Р Р†РЎвЂ№Р В±Р ВµРЎР‚Р С‘РЎвЂљР Вµ Р Т‘Р В°РЎвЂљРЎС“', 3000);
+          showToast('╨Я╨╛╨╢╨░╨╗╤Г╨╣╤Б╤В╨░, ╨▓╤Л╨▒╨╡╤А╨╕╤В╨╡ ╨┤╨░╤В╤Г', 3000);
           dateEl.classList.add('kb-input-error');
           return;
         }
         
         if(selectedStart===null){ 
-          showToast('Р вЂ™РЎвЂ№Р В±Р ВµРЎР‚Р С‘РЎвЂљР Вµ РЎвЂ¦Р С•РЎвЂљРЎРЏ Р В±РЎвЂ№ Р С•Р Т‘Р С‘Р Р… РЎРѓР В»Р С•РЎвЂљ', 3000);
+          showToast('╨Т╤Л╨▒╨╡╤А╨╕╤В╨╡ ╤Е╨╛╤В╤П ╨▒╤Л ╨╛╨┤╨╕╨╜ ╤Б╨╗╨╛╤В', 3000);
           winSeg.classList.add('kb-input-error');
           setTimeout(() => winSeg.classList.remove('kb-input-error'), 1000);
           return; 
         }
         
         if(!nameEl.value.trim()) {
-          showToast('Р вЂ™Р Р†Р ВµР Т‘Р С‘РЎвЂљР Вµ Р Р†Р В°РЎв‚¬Р Вµ Р С‘Р СРЎРЏ', 3000);
+          showToast('╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨▓╨░╤И╨╡ ╨╕╨╝╤П', 3000);
           nameEl.classList.add('kb-input-error');
           nameEl.focus();
           return;
         }
         
-        // Р Р€Р В±РЎР‚Р В°Р Р…Р В° Р С—РЎР‚Р С•Р Р†Р ВµРЎР‚Р С”Р В° РЎвЂћР С•РЎР‚Р СР В°РЎвЂљР В° РЎвЂљР ВµР В»Р ВµРЎвЂћР С•Р Р…Р В°, Р С•РЎРѓРЎвЂљР В°Р Р†Р В»Р ВµР Р…Р В° РЎвЂљР С•Р В»РЎРЉР С”Р С• Р С—РЎР‚Р С•Р Р†Р ВµРЎР‚Р С”Р В° Р Р…Р В° Р Р…Р В°Р В»Р С‘РЎвЂЎР С‘Р Вµ Р В·Р Р…Р В°РЎвЂЎР ВµР Р…Р С‘РЎРЏ
+        // ╨г╨▒╤А╨░╨╜╨░ ╨┐╤А╨╛╨▓╨╡╤А╨║╨░ ╤Д╨╛╤А╨╝╨░╤В╨░ ╤В╨╡╨╗╨╡╤Д╨╛╨╜╨░, ╨╛╤Б╤В╨░╨▓╨╗╨╡╨╜╨░ ╤В╨╛╨╗╤М╨║╨╛ ╨┐╤А╨╛╨▓╨╡╤А╨║╨░ ╨╜╨░ ╨╜╨░╨╗╨╕╤З╨╕╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╤П
         if(!phoneEl.value.trim()) {
-          showToast('Р вЂ™Р Р†Р ВµР Т‘Р С‘РЎвЂљР Вµ Р Р…Р С•Р СР ВµРЎР‚ РЎвЂљР ВµР В»Р ВµРЎвЂћР С•Р Р…Р В°', 3000);
+          showToast('╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨╜╨╛╨╝╨╡╤А ╤В╨╡╨╗╨╡╤Д╨╛╨╜╨░', 3000);
           phoneEl.classList.add('kb-input-error');
           phoneEl.focus();
           return;
         }
         
-        // Р вЂ™РЎРѓР Вµ Р С—РЎР‚Р С•Р Р†Р ВµРЎР‚Р С”Р С‘ Р С—РЎР‚Р С•Р в„–Р Т‘Р ВµР Р…РЎвЂ№
-        var date = dateEl.value ? dateEl.value.split('-').reverse().join('.') : 'Р Р…Р Вµ Р Р†РЎвЂ№Р В±РЎР‚Р В°Р Р…Р В°';
+        // ╨Т╤Б╨╡ ╨┐╤А╨╛╨▓╨╡╤А╨║╨╕ ╨┐╤А╨╛╨╣╨┤╨╡╨╜╤Л
+        var date = dateEl.value ? dateEl.value.split('-').reverse().join('.') : '╨╜╨╡ ╨▓╤Л╨▒╤А╨░╨╜╨░';
         var durPaid = +hoursEl.value || CFG.SLOT_HOURS;
         var slots = Math.max(1, Math.round(durPaid/CFG.SLOT_HOURS));
         var gift = Math.max(slots-1, 0);
@@ -575,13 +576,13 @@
         var endHM = addHoursToHM(startHM, durPaid + gift);
         if(endHM==='24:00') endHM='00:00';
         var lines = [
-          'Р вЂ”Р В°РЎРЏР Р†Р С”Р В° Р Р…Р В° Р В±РЎР‚Р С•Р Р…Р С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘Р Вµ РІР‚вЂќ Р С™Р В°Р В»Р С‘Р Р…Р С•Р Р†Р В°РЎРЏ Р вЂР В°Р Р…РЎРЏ',
-          'Р вЂќР В°РЎвЂљР В°: ' + date,
-          'Р ВР Р…РЎвЂљР ВµРЎР‚Р Р†Р В°Р В»: ' + startHM + 'РІР‚вЂњ' + endHM,
-          'Р вЂњР С•РЎРѓРЎвЂљР ВµР в„–: ' + (guestsEl.value || 'РІР‚вЂќ'),
-          'Р СћР ВµР В»Р ВµРЎвЂћР С•Р Р…: ' + (phoneEl && phoneEl.value ? phoneEl.value.trim() : 'РІР‚вЂќ'),
-          'Р ВР СРЎРЏ: ' + (nameEl && nameEl.value ? nameEl.value.trim() : 'РІР‚вЂќ'),
-          'Р ВРЎвЂљР С•Р С–Р С• Р С” Р С•Р С—Р В»Р В°РЎвЂљР Вµ: ' + totalEl.textContent
+          '╨Ч╨░╤П╨▓╨║╨░ ╨╜╨░ ╨▒╤А╨╛╨╜╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ тАФ ╨Ъ╨░╨╗╨╕╨╜╨╛╨▓╨░╤П ╨С╨░╨╜╤П',
+          '╨Ф╨░╤В╨░: ' + date,
+          '╨Ш╨╜╤В╨╡╤А╨▓╨░╨╗: ' + startHM + 'тАУ' + endHM,
+          '╨У╨╛╤Б╤В╨╡╨╣: ' + (guestsEl.value || 'тАФ'),
+          '╨в╨╡╨╗╨╡╤Д╨╛╨╜: ' + (phoneEl && phoneEl.value ? phoneEl.value.trim() : 'тАФ'),
+          '╨Ш╨╝╤П: ' + (nameEl && nameEl.value ? nameEl.value.trim() : 'тАФ'),
+          '╨Ш╤В╨╛╨│╨╛ ╨║ ╨╛╨┐╨╗╨░╤В╨╡: ' + totalEl.textContent
         ];
         var text = encodeURIComponent(lines.join('\n'));
         window.open('https://wa.me/79347771777?text=' + text, '_blank');
@@ -591,7 +592,7 @@
       document.querySelectorAll('#kb-window button').forEach(function(btn){
         var top=btn.querySelector('.kb-slot-start'); var bot=btn.querySelector('.kb-slot-end');
         var st=top.textContent.trim(); var end=addHoursToHM(st,CFG.SLOT_HOURS);
-        if(bot){ bot.textContent='Р Т‘Р С• '+(end==='24:00'?'00:00':end); }
+        if(bot){ bot.textContent='╨┤╨╛ '+(end==='24:00'?'00:00':end); }
       });
 
       // Weather (best effort)
@@ -599,7 +600,7 @@
         fetch('https://api.open-meteo.com/v1/forecast?latitude=43.6833&longitude=40.2000&current=temperature_2m,weather_code&timezone=auto',{cache:'no-store'})
           .then(r=>r.json()).then(d=>{
             var t = (d && d.current && typeof d.current.temperature_2m==='number') ? Math.round(d.current.temperature_2m) : null;
-            var tNode=document.getElementById('kb-temp'); if(tNode) tNode.textContent = (t==null?'РІР‚вЂќ':t)+'Р’В°';
+            var tNode=document.getElementById('kb-temp'); if(tNode) tNode.textContent = (t==null?'тАФ':t)+'┬░';
           }).catch(()=>{});
       }catch(_){}}
     );
@@ -614,13 +615,13 @@
       function setBody(){ 
         document.body.classList.toggle('kb-open', isOpen());
         
-        // Р вЂР В»Р С•Р С”Р С‘РЎР‚Р С•Р Р†Р С”Р В° РЎРѓР С”РЎР‚Р С•Р В»Р В»Р В° Р Р…Р В° Р СР С•Р В±Р С‘Р В»РЎРЉР Р…РЎвЂ№РЎвЂ¦ РЎС“РЎРѓРЎвЂљРЎР‚Р С•Р в„–РЎРѓРЎвЂљР Р†Р В°РЎвЂ¦
+        // ╨С╨╗╨╛╨║╨╕╤А╨╛╨▓╨║╨░ ╤Б╨║╤А╨╛╨╗╨╗╨░ ╨╜╨░ ╨╝╨╛╨▒╨╕╨╗╤М╨╜╤Л╤Е ╤Г╤Б╤В╤А╨╛╨╣╤Б╤В╨▓╨░╤Е
         if (window.innerWidth <= 600) {
           if (isOpen()) {
-            // Р РЋР С•РЎвЂ¦РЎР‚Р В°Р Р…РЎРЏР ВµР С РЎвЂљР ВµР С”РЎС“РЎвЂ°РЎС“РЎР‹ Р С—Р С•Р В·Р С‘РЎвЂ Р С‘РЎР‹ РЎРѓР С”РЎР‚Р С•Р В»Р В»Р В°
+            // ╨б╨╛╤Е╤А╨░╨╜╤П╨╡╨╝ ╤В╨╡╨║╤Г╤Й╤Г╤О ╨┐╨╛╨╖╨╕╤Ж╨╕╤О ╤Б╨║╤А╨╛╨╗╨╗╨░
             document.body.style.top = `-${window.scrollY}px`;
           } else {
-            // Р вЂ™Р С•РЎРѓРЎРѓРЎвЂљР В°Р Р…Р В°Р Р†Р В»Р С‘Р Р†Р В°Р ВµР С Р С—Р С•Р В·Р С‘РЎвЂ Р С‘РЎР‹ РЎРѓР С”РЎР‚Р С•Р В»Р В»Р В°
+            // ╨Т╨╛╤Б╤Б╤В╨░╨╜╨░╨▓╨╗╨╕╨▓╨░╨╡╨╝ ╨┐╨╛╨╖╨╕╤Ж╨╕╤О ╤Б╨║╤А╨╛╨╗╨╗╨░
             const scrollY = document.body.style.top;
             document.body.style.top = '';
             window.scrollTo(0, parseInt(scrollY || '0') * -1);
@@ -662,7 +663,7 @@
         }, true);
       }
       
-      // Р С›Р В±РЎР‚Р В°Р В±Р С•РЎвЂљРЎвЂЎР С‘Р С” Р С‘Р В·Р СР ВµР Р…Р ВµР Р…Р С‘РЎРЏ РЎР‚Р В°Р В·Р СР ВµРЎР‚Р В° Р С•Р С”Р Р…Р В°
+      // ╨Ю╨▒╤А╨░╨▒╨╛╤В╤З╨╕╨║ ╨╕╨╖╨╝╨╡╨╜╨╡╨╜╨╕╤П ╤А╨░╨╖╨╝╨╡╤А╨░ ╨╛╨║╨╜╨░
       window.addEventListener('resize', function() {
         if (window.innerWidth > 600 && document.body.classList.contains('kb-open')) {
           document.body.classList.remove('kb-open');
