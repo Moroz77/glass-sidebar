@@ -14,11 +14,12 @@
       html, body { min-height: 100%; }
       /* Фоновое изображение главной страницы (можно заменить путь на свой) */
       body{
-        background-image: url('../images/hero-bg.jpg');
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
+        background-image: url('../images/hero-bg.jpg') !important;
+        background-position: center !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+        background-color: #000 !important; /* fallback */
       }
 
       /* Мини‑виджет: внутренняя FAB из booking/ */
@@ -75,6 +76,10 @@
 
       /* Кнопка всегда видима; при открытом оверлее поднимаем поверх и оставляем кликабельной */
       .kb-overlay-open #kb-open-btn{ pointer-events:auto; z-index:2147483602; }
+      /* На мобильных скрываем кнопку, когда открыт оверлей */
+      @media (hover:none), (pointer:coarse){
+        .kb-overlay-open #kb-open-btn{ display:none !important; }
+      }
     </style>
   </head>
   <body>
