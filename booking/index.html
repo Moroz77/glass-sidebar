@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="./">
+  <title>Калиновая баня — Улучшенный виджет бронирования</title>
+  <style>
+    :root{
+      --z-max:2147483647; --z-card:2147483600; --z-weather:2147483000; --z-home:2147483500;
+      --glass-from:rgba(255,255,255,.58);
+      --glass-to:rgba(255,255,255,.20);
+      --glass-shadow:0 12px 40px rgba(0,0,0,.22); --glass-backdrop:blur(16px) saturate(120%);
+      --text:rgba(18,18,18,.86); --text-weak:rgba(18,18,18,.65);
+      --radius-card:24px; --radius-field:28px; --radius-field-m:30px;
+      --ctrl-height:54px; --ctrl-height-m:50px;
+      --font-base:15px; --font-label:13px; --font-note:13px;
+      --seg-font-size:16px; --seg-font-weight:700;
+      --gap-col:10px; --gap-field:14px; --gap-field-m:12px; --pad-card:16px;
+      --fab-size:90px;
+      --home-size:110px;
+      --color-primary: #c62828;
+      --color-primary-light: #ff5f52;
+    }
+    html,body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:var(--text);background:transparent}
+    #kb-widget, #kb-widget *{box-sizing:border-box}
+    .kb-glass{background:linear-gradient(135deg,var(--glass-from),var(--glass-to));border-radius:var(--radius-card);
+      box-shadow:var(--glass-shadow);backdrop-filter:var(--glass-backdrop)}
+
+    /* FAB - Статичный с элевантной анимацией появления */
+    .kb-fab{
+      position:fixed;right:18px;bottom:18px;z-index:var(--z-max);width:var(--fab-size);height:var(--fab-size);
+      background:url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png") center/contain no-repeat;
+      cursor:pointer;transition:transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+      opacity:0.7;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.4));
+      animation: kb-subtle-pulse 8s ease-in-out infinite;
+    }
+    .kb-fab:hover{
+      transform:scale(1.05);
+      opacity:0.9;
+      filter: drop-shadow(0 10px 25px rgba(0,0,0,0.5));
+      animation: none; /* Отключаем анимацию при наведении */
+    }
+    .kb-fab:active{transform:scale(.97)}
+    
+    /* Сдержанная анимация пульсации */
+    @keyframes kb-subtle-pulse{
+      0%, 90%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 8px 20px rgba(0,0,0,0.4));
+      }
+      95% {
+        transform: scale(1.03);
+        filter: drop-shadow(0 10px 25px rgba(0,0,0,0.5));
+      }
+    }
+
+    /* Home button - возвращаем первую анимацию с улучшенной тенью */
+    .kb-home{
+      display:none;
+      position:fixed;
+      left:18px;
+      top:calc(18px + env(safe-area-inset-top));
+      z-index:var(--z-home);
+      width:var(--home-size);
+      height:var(--home-size);
+      cursor:pointer;
+      opacity:0.7;
+      /* ПРАВИЛЬНЫЙ ЛОГОТИП СЛЕВА */
+      background:url("https://static.tildacdn.com/tild6434-3966-4334-b664-396466336537/ChatGPT_Image_13__20.png") center/contain no-repeat;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+      animation: kb-float 4s ease-in-out infinite;
+    }
+    .kb-home:hover{
+      opacity:0.8;
+      animation: kb-pulse 1.5s ease-in-out infinite;
+      filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6));
+    }
+    
+    /* Новое изображение с названием - прозрачное */
+    .kb-home-name {
+      display:none;
+      position:fixed;
+      left:calc(18px + var(--home-size) + 10px);
+      top:calc(18px + env(safe-area-inset-top) + 25px);
+      z-index:var(--z-home);
+      height:60px;
+      width:auto;
+      /* ПРОЗРАЧНОЕ ИЗОБРАЖЕНИЕ С НАЗВАНИЕМ */
+      background:url("https://static.tildacdn.com/tild3664-3430-4234-a264-306136616264/ChatGPT_Image_13__20.png") center/contain no-repeat;
+    }
+    
+    @keyframes kb-float{
+      0%,100%{transform:translateY(0) scale(1);}
+      50%{transform:translateY(-10px) scale(1.03);}
+    }
+    @keyframes kb-pulse{
+      0%,100%{transform:scale(1); opacity:0.7;}
+      50%{transform:scale(1.06); opacity:0.8;}
+    }
+
+    /* Остальные стили без изменений */
+    .kb-card{position:fixed;left:8px;right:8px;top:calc(8px + env(safe-area-inset-top));margin:0 auto;max-width:520px;
+      z-index:var(--z-card);visibility:hidden;opacity:0;transform:translateY(8px) scale(.98);
+      transition:visibility .25s,opacity .25s,transform .25s;display:flex;flex-direction:column;padding:var(--pad-card);color:var(--text)}
+    .kb-card:target{visibility:visible;opacity:1;transform:translateY(0) scale(1)}
+    .kb-card-header{position:relative;padding:0 0 12px 0}
+    .kb-title{font-weight:var(--seg-font-weight);font-size:var(--seg-font-size);line-height:1.2}
+    .kb-close{position:absolute;top:0;right:0;display:grid;place-items:center;width:34px;height:34px;border-radius:12px;
+      background:rgba(255,255,255,.35)!important;color:var(--text)!important;border:none;cursor:pointer}
+    #kb-booking .kb-close:hover{background:rgba(255,255,255,.5)!important}
+
+    .kb-card-body{overflow:visible}
+    .kb-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap-col);align-items:center}
+    .kb-field{margin:10px 0 var(--gap-field)}
+    .kb-label{display:block;margin:0 0 6px 0;font:700 var(--font-label)/1.25 system-ui;color:var(--text-weak)}
+
+    .kb-input{width:100%;border:none;outline:none;border-radius:var(--radius-field);min-height:var(--ctrl-height);
+      padding:0 16px;background:rgba(255,255,255,.38);backdrop-filter:blur(10px);font:var(--font-base)/1.25 system-ui;color:var(--text);
+      transition: background 0.2s ease, box-shadow 0.2s ease;}
+    .kb-input:focus{background:rgba(255,255,255,.48);box-shadow:0 0 0 2px var(--color-primary-light);}
+    .kb-input-error{box-shadow:0 0 0 2px #ff3b30;}
+    .kb-static{display:flex;align-items:center;line-height:1;height:var(--ctrl-height)}
+
+    .kb-seg{display:grid;grid-template-columns:repeat(4,minmax(66px,1fr));gap:10px}
+    .kb-seg button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      aspect-ratio:1/1;padding:10px;border:none;cursor:pointer;border-radius:50%;
+      background:rgba(255,255,255,.28);border:1px solid rgba(0,0,0,.10);backdrop-filter:blur(10px);
+      font-weight:var(--seg-font-weight);font-size:var(--seg-font-size);color:var(--text);
+      transition:background .16s ease, box-shadow .16s ease, transform .12s ease}
+    .kb-slot-start{font:800 16px/1 system-ui}
+    .kb-slot-end{font:700 11px/1.1 system-ui;opacity:.85;margin-top:6px}
+    .kb-seg button.kb-active{background:rgba(255,255,255,.98);border-color:var(--color-primary);
+      box-shadow:0 0 0 2px var(--color-primary-light), 0 8px 22px rgba(0,0,0,.18);transform:translateZ(0) scale(1.01);
+      color: var(--color-primary);}
+    .kb-seg button.kb-linked{background:rgba(255,255,255,.92);border-color:var(--color-primary-light);box-shadow:0 0 0 1.5px var(--color-primary-light);}
+
+    .kb-range-row{display:flex;align-items:center;gap:12px;width:100%}
+    .kb-range{flex:1;height:12px;border-radius:6px;outline:none;-webkit-appearance:none;appearance:none;
+      background:linear-gradient(to right,var(--color-primary) 0% var(--kb-fill,0%),rgba(255,255,255,.55) var(--kb-fill,0%) 100%)}
+    .kb-range::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;border:none;cursor:pointer;margin-top:-5px;
+      background:var(--color-primary);box-shadow:0 0 0 2px rgba(255,255,255,.65) inset}
+    .kb-range::-moz-range-track{height:12px;background:rgba(255,255,255,.55);border-radius:6px}
+    .kb-range::-moz-range-progress{height:12px;background:var(--color-primary);border-radius:6px}
+    .kb-range::-moz-range-thumb{width:22px;height:22px;border:none;border-radius:50%;background:var(--color-primary)}
+
+    #kb-deposit.kb-range{pointer-events:none}
+    #kb-deposit.kb-range::-webkit-slider-thumb{opacity:0}
+    #kb-deposit.kb-range::-moz-range-thumb{opacity:0}
+
+    .kb-badge{font:800 20px/1.1 system-ui;color:var(--text)}
+    #kb-hours-badge,#kb-guests-badge,#kb-deposit-badge{transition:text-shadow .25s ease, transform .25s ease}
+    .kb-flash{transform:translateZ(0) scale(1.04); color: var(--color-primary);}
+
+    .kb-note{font:600 var(--font-note)/1.25 system-ui;color:var(--text-weak)}
+
+    .kb-bottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end;margin-top:10px}
+    .kb-total{font:900 32px/1.05 system-ui;color:var(--text);white-space:nowrap;font-variant-numeric:tabular-nums}
+    .kb-like-input{display:flex;align-items:center;justify-content:center;width:100%;min-height:var(--ctrl-height);padding:0 16px;
+      border:none;border-radius:var(--radius-field);background:var(--color-primary);backdrop-filter:blur(10px);
+      box-shadow:var(--glass-shadow);text-decoration:none;text-align:center;color:white!important;font:700 16px/1.25 system-ui;
+      transition: background 0.2s ease, transform 0.1s ease;}
+    .kb-like-input:hover{background:var(--color-primary-light);transform: translateY(-1px);}
+    .kb-like-input:active{transform: translateY(1px);}
+
+    .kb-min-bottom{margin-top:8px;font:600 12px/1.25 system-ui;color:var(--text-weak);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+    .kb-weather{position:fixed;top:172px;right:-10px;z-index:var(--z-weather);display:inline-flex;align-items:center;gap:8px;
+      padding:8px 20px 8px 12px;border-radius:16px 0 0 16px;color:var(--text);font:700 16px/1 system-ui;}
+
+    .kb-toast {
+      display: none;
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      z-index: var(--z-max);
+      padding: 12px 20px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      font: 600 14px/1.4 system-ui;
+      transition: transform 0.3s ease;
+      white-space: nowrap;
+    }
+    .kb-toast-visible {
+      display: block;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (min-width:601px){
+      .kb-card{top:auto;bottom:calc(18px + var(--fab-size) + 16px);right:18px;left:auto;transform:none;max-width:420px;width:420px}
+      .kb-card:target{transform:none}
+    }
+    @media (max-width:600px){
+      .kb-card{height:calc(100svh - 16px - env(safe-area-inset-top));max-height:none;bottom:auto}
+      .kb-input,.kb-like-input{min-height:var(--ctrl-height-m);border-radius:var(--radius-field-m)}
+      .kb-field{margin:10px 0 var(--gap-field-m)}
+      body.kb-open .kb-fab,body.kb-open .kb-weather,body.kb-open .kb-home,body.kb-open .kb-home-name{display:none!important}
+      .kb-row + .kb-field{margin-top:4px!important;}
+      .kb-home{display:block;}
+      .kb-home-name{display:block;}
+      .kb-weather{top:120px;right:-10px;}
+      
+      /* Блокировка скролла при открытом виджете */
+      body.kb-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    #kb-contacts + #kb-deposit-field{ margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div id="kb-widget">
+    <a href="#kb-booking" class="kb-fab" aria-label="Открыть/закрыть бронирование"></a>
+    <a href="/" class="kb-home" aria-label="Вернуться на главную"></a>
+    <div class="kb-home-name" aria-label="Калиновая Баня"></div>
+
+    <aside id="kb-booking" class="kb-card kb-glass" aria-label="Форма бронирования">
+      <div class="kb-card-header">
+        <div class="kb-title">Бронирование</div>
+        <button type="button" class="kb-close" aria-label="Закрыть">✕</button>
+      </div>
+
+      <div class="kb-card-body">
+        <div class="kb-row">
+          <div class="kb-field">
+            <label class="kb-label" for="kb-date">Дата</label>
+            <input class="kb-input" type="date" id="kb-date" />
+          </div>
+          <div class="kb-field">
+            <label class="kb-label">Начало</label>
+            <div class="kb-input kb-static" id="kb-start-label">—</div>
+          </div>
+        </div>
+
+        <div class="kb-field">
+          <label class="kb-label">Слоты</label>
+          <div class="kb-seg" id="kb-window" role="tablist">
+            <button type="button" data-index="0" aria-selected="false"><div class="kb-slot-start">09:00</div><div class="kb-slot-end">до 12:00</div></button>
+            <button type="button" data-index="1" aria-selected="false"><div class="kb-slot-start">13:00</div><div class="kb-slot-end">до 16:00</div></button>
+            <button type="button" data-index="2" aria-selected="false"><div class="kb-slot-start">17:00</div><div class="kb-slot-end">до 20:00</div></button>
+            <button type="button" data-index="3" aria-selected="false"><div class="kb-slot-start">21:00</div><div class="kb-slot-end">до 00:00</div></button>
+          </div>
+        </div>
+
+        <div class="kb-field">
+          <label class="kb-label" for="kb-hours">Длительность</label>
+          <div class="kb-range-row">
+            <input class="kb-range" id="kb-hours" type="range" min="3" max="12" step="3" value="3" />
+            <div class="kb-badge" id="kb-hours-badge">3</div>
+          </div>
+          <div class="kb-note" id="kb-note-line">Выберите слоты</div>
+        </div>
+
+        <div class="kb-field">
+          <label class="kb-label" for="kb-guests">Гости</label>
+          <div class="kb-range-row">
+            <input class="kb-range" id="kb-guests" type="range" min="1" max="15" step="1" value="1" />
+            <div class="kb-badge" id="kb-guests-badge">1</div>
+          </div>
+          <div class="kb-note">Детям до 12 лет —50%</div>
+        </div>
+
+        <div class="kb-row" id="kb-contacts">
+          <div class="kb-field">
+            <label class="kb-label" for="kb-name">Имя</label>
+            <input class="kb-input" type="text" id="kb-name" placeholder="Ваше имя" />
+          </div>
+          <div class="kb-field">
+            <label class="kb-label" for="kb-phone">Телефон</label>
+            <input class="kb-input" type="tel" id="kb-phone" placeholder="+7 ..." />
+          </div>
+        </div>
+
+        <div class="kb-field" id="kb-deposit-field">
+          <label class="kb-label" for="kb-deposit">Депозит</label>
+          <div class="kb-range-row">
+            <input class="kb-range" id="kb-deposit" type="range" min="0" max="25000" step="100" value="11000" disabled />
+            <div class="kb-badge" id="kb-deposit-badge">11 000 ₽</div>
+          </div>
+          <div class="kb-note" id="kb-deposit-note">Осталось на процедуры: 11 000 ₽</div>
+        </div>
+
+        <div class="kb-bottom">
+          <div class="kb-total-wrap">
+            <div class="kb-label">Итого</div>
+            <div class="kb-total" id="kb-total">25 000 ₽</div>
+          </div>
+          <a id="kb-book-btn" class="kb-like-input" href="#" role="button" aria-label="Забронировать">Забронировать</a>
+        </div>
+
+        <div class="kb-min-bottom" id="kb-minline">Мин. депозит: 25 000 ₽ (будни) / 30 000 ₽ (выходные) за 1 слот (3 ч)</div>
+      </div>
+    </aside>
+
+    <div class="kb-weather kb-glass" aria-label="Погода сейчас">
+      <span id="kb-temp">—°</span>
+    </div>
+
+    <div class="kb-toast" id="kb-toast"></div>
+  </div>
+
+  <script>
+    function pad2(n){return String(n).padStart(2,'0')}
+    function addHoursToHM(hm, add){var p=(hm||'00:00').split(':'),h=parseInt(p[0],10)||0,m=parseInt(p[1],10)||0;
+      var d=new Date(2000,0,1,h,m,0,0);d.setHours(d.getHours()+add);
+      return pad2(d.getHours())+':'+pad2(d.getMinutes())}
+    function rub(n){ return (Math.max(0,Math.round(n))||0).toLocaleString('ru-RU') + ' ₽'; }
+    
+    // Функция для показа уведомлений
+    function showToast(message, duration = 3000) {
+      const toast = document.getElementById('kb-toast');
+      toast.textContent = message;
+      toast.classList.add('kb-toast-visible');
+      
+      setTimeout(() => {
+        toast.classList.remove('kb-toast-visible');
+      }, duration);
+    }
+    
+    // Убрана функция валидации телефона
+    
+    // Форматирование телефона (оставляем для удобства пользователей)
+    function formatPhone(input) {
+      const value = input.value.replace(/\D/g, '');
+      let formattedValue = '+7 ';
+      
+      if (value.length > 1) {
+        const rest = value.substring(1);
+        if (rest.length > 0) {
+          formattedValue += rest.substring(0, 3);
+        }
+        if (rest.length > 3) {
+          formattedValue += ' ' + rest.substring(3, 6);
+        }
+        if (rest.length > 6) {
+          formattedValue += ' ' + rest.substring(6, 8);
+        }
+        if (rest.length > 8) {
+          formattedValue += ' ' + rest.substring(8, 10);
+        }
+      }
+      
+      input.value = formattedValue;
+    }
+  </script>
+
+  <script>
+    var CFG={
+      HOLIDAYS: [],
+      WINDOWS:[{start:'09:00'},{start:'13:00'},{start:'17:00'},{start:'21:00'}],
+      SLOT_HOURS:3,
+      PRICE_WEEKDAY:7000, PRICE_WEEKEND:8000,
+      DEPOSIT_WEEKDAY:25000, DEPOSIT_WEEKEND:30000,
+      BASE_GUESTS:1
+    };
+    
+    function isWeekend(dateStr){if(!dateStr) return false;var d=new Date(dateStr);var day=d.getDay();return day===0||day===6}
+    function isHoliday(dateStr){if(!dateStr) return false;return CFG.HOLIDAYS.indexOf(dateStr)>=0}
+    function isWeekendOrHoliday(dateStr){return isWeekend(dateStr)||isHoliday(dateStr)}
+
+    document.addEventListener('DOMContentLoaded',function(){
+      var dateEl=document.getElementById('kb-date'),
+          hoursEl=document.getElementById('kb-hours'),
+          guestsEl=document.getElementById('kb-guests'),
+          hoursBadge=document.getElementById('kb-hours-badge'),
+          guestsBadge=document.getElementById('kb-guests-badge'),
+          winSeg=document.getElementById('kb-window'),
+          startLabel=document.getElementById('kb-start-label'),
+          totalEl=document.getElementById('kb-total'),
+          depRange=document.getElementById('kb-deposit'),
+          depBadge=document.getElementById('kb-deposit-badge'),
+          depNote=document.getElementById('kb-deposit-note'),
+          noteLine=document.getElementById('kb-note-line'),
+          bookBtn=document.getElementById('kb-book-btn'),
+          nameEl=document.getElementById('kb-name'),
+          phoneEl=document.getElementById('kb-phone'),
+          toastEl = document.getElementById('kb-toast');
+
+      // Установка минимальной дата (сегодня)
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      dateEl.min = `${yyyy}-${mm}-${dd}`;
+      
+      // Обработчик для форматирования телефона
+      if(phoneEl){
+        phoneEl.value = '+7 ';
+        phoneEl.addEventListener('input', function() {
+          formatPhone(phoneEl);
+        });
+        
+        phoneEl.addEventListener('blur', function() {
+          if (phoneEl.value === '+7 ') {
+            phoneEl.value = '';
+          }
+        });
+        
+        phoneEl.addEventListener('focus', function() {
+          if (!phoneEl.value || !phoneEl.value.startsWith('+7')) {
+            phoneEl.value = '+7 ';
+          }
+        });
+      }
+
+      var selectedStart=null;
+
+      function fill(range){var min=+range.min||0,max=+range.max||100,val=+range.value||0;var pct=((val-min)*100)/(max-min);
+        range.style.setProperty('--kb-fill',pct+'%')}
+
+      function hoursMaxForStart(){ if(selectedStart===null) return 12; var maxSlots=4-selectedStart; return Math.min(12,maxSlots*CFG.SLOT_HOURS); }
+      function clampHours(){
+        var max=hoursMaxForStart();
+        hoursEl.max=String(max);
+        var v=+hoursEl.value||CFG.SLOT_HOURS;
+        v=Math.max(CFG.SLOT_HOURS,Math.min(max,v));
+        v=Math.round(v/CFG.SLOT_HOURS)*CFG.SLOT_HOURS;
+        hoursEl.value=String(v);
+      }
+
+      function applySlotHighlight(slots){
+        winSeg.querySelectorAll('button').forEach(function(b){b.classList.remove('kb-active','kb-linked');b.setAttribute('aria-selected','false')});
+        if(selectedStart===null || slots<=0) return;
+        for(var i=0;i<slots;i++){
+          var btn=winSeg.querySelector('button[data-index="'+(selectedStart+i)+'"]'); if(!btn) break;
+          (i===0?btn.classList.add('kb-active'):btn.classList.add('kb-linked'));
+          btn.setAttribute('aria-selected','true');
+        }
+      }
+
+      function recompute(){
+        clampHours(); fill(hoursEl); fill(guestsEl);
+        var durPaid=+hoursEl.value||CFG.SLOT_HOURS;
+        var slots=Math.max(1,Math.round(durPaid/CFG.SLOT_HOURS));
+        var weekend0 = isWeekendOrHoliday(dateEl.value);
+        var baseDep0 = weekend0?CFG.DEPOSIT_WEEKEND:CFG.DEPOSIT_WEEKDAY;
+        var price0   = weekend0?CFG.PRICE_WEEKEND:CFG.PRICE_WEEKDAY;
+
+        if(selectedStart===null){
+          applySlotHighlight(0);
+          startLabel.textContent='—';
+          hoursBadge.textContent=String(durPaid);
+          noteLine.textContent='Выберите слоты';
+          var guests0  = +guestsEl.value || CFG.BASE_GUESTS;
+          var effGuests0 = Math.max(guests0, 2);
+          var baselineRemaining = Math.max(baseDep0 - (effGuests0*price0*1), 0);
+          depRange.max=String(baseDep0); depRange.value=String(baselineRemaining); fill(depRange);
+          depBadge.textContent=rub(baselineRemaining);
+          depNote.textContent='Осталось на процедуры: ' + rub(baselineRemaining);
+          totalEl.textContent=rub(baseDep0);
+          return;
+        }
+
+        applySlotHighlight(slots);
+        var startHM=CFG.WINDOWS[selectedStart].start;
+        startLabel.textContent=startHM;
+        var gift=Math.max(slots-1,0);
+        var endFact=addHoursToHM(startHM,durPaid+gift); if(endFact==='24:00') endFact='00:00';
+        hoursBadge.textContent=String(durPaid+gift);
+        noteLine.textContent='Вы выбрали: '+startHM+' — '+endFact+(gift?('; +'+gift+' ч в подарок'):'');
+      }
+
+      function recalcMoney(){
+        var weekend=isWeekendOrHoliday(dateEl.value);
+        var baseDeposit=weekend?CFG.DEPOSIT_WEEKEND:CFG.DEPOSIT_WEEKDAY;
+        if(selectedStart===null){
+          var guestsInit = +guestsEl.value || CFG.BASE_GUESTS;
+          var effGuestsInit = Math.max(guestsInit,2);
+          var priceInit = weekend?CFG.PRICE_WEEKEND:CFG.PRICE_WEEKDAY;
+          var baselineRemaining = Math.max(baseDeposit - (effGuestsInit*priceInit*1), 0);
+          depRange.max=String(baseDeposit); depRange.value=String(baselineRemaining); fill(depRange);
+          depBadge.textContent=rub(baselineRemaining);
+          depNote.textContent='Осталось на процедуры: ' + rub(baselineRemaining);
+          totalEl.textContent=rub(baseDeposit);
+          return;
+        }
+        var durPaid=+hoursEl.value||CFG.SLOT_HOURS;
+        var slots=Math.max(1,Math.round(durPaid/CFG.SLOT_HOURS));
+        var guests=+guestsEl.value||CFG.BASE_GUESTS;
+        var price=weekend?CFG.PRICE_WEEKEND:CFG.PRICE_WEEKDAY;
+        var deposit=baseDeposit*slots;
+        var ticketsReal = guests*price*slots;
+        var ticketsEffective = Math.max(guests,2)*price*slots;
+        var topup=Math.max(deposit - ticketsEffective, 0);
+        var total=Math.max(ticketsReal, deposit);
+        depRange.max=String(deposit); depRange.value=String(Math.round(topup)); fill(depRange);
+        depBadge.innerHTML=rub(topup);
+        depNote.innerHTML=topup>0?('Осталось на процедуры: '+rub(topup)):'Билеты перекрывают депозит';
+        totalEl.innerHTML=rub(total);
+      }
+
+      // Улучшенный обработчик кликов для слотов
+      function handleSlotClick(e){
+        var btn = e.target.closest('button');
+        if(!btn) return;
+        
+        var index = btn.getAttribute('data-index');
+        if(index === null) return;
+        
+        selectedStart = parseInt(index);
+        recompute(); 
+        recalcMoney();
+        showToast('Выбран слот ' + CFG.WINDOWS[selectedStart].start);
+      }
+
+      // Исправленный обработчик событий для слотов
+      winSeg.addEventListener('click', handleSlotClick);
+
+      hoursEl.addEventListener('input',function(){
+        recompute(); recalcMoney();
+        hoursBadge.classList.add('kb-flash'); setTimeout(function(){hoursBadge.classList.remove('kb-flash')},220);
+      });
+
+      guestsEl.addEventListener('input',function(){
+        guestsBadge.textContent=guestsEl.value; fill(guestsEl); recalcMoney();
+        guestsBadge.classList.add('kb-flash'); setTimeout(function(){guestsBadge.classList.remove('kb-flash')},220);
+      });
+
+      dateEl.addEventListener('change',function(){
+        if (!dateEl.value) {
+          showToast('Пожалуйста, выберите дату', 3000);
+          dateEl.classList.add('kb-input-error');
+          return;
+        }
+        dateEl.classList.remove('kb-input-error');
+        recompute();
+        recalcMoney();
+      });
+
+      // WhatsApp message
+      bookBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        
+        // Валидация формы
+        if(!dateEl.value) {
+          showToast('Пожалуйста, выберите дату', 3000);
+          dateEl.classList.add('kb-input-error');
+          return;
+        }
+        
+        if(selectedStart===null){ 
+          showToast('Выберите хотя бы один слот', 3000);
+          winSeg.classList.add('kb-input-error');
+          setTimeout(() => winSeg.classList.remove('kb-input-error'), 1000);
+          return; 
+        }
+        
+        if(!nameEl.value.trim()) {
+          showToast('Введите ваше имя', 3000);
+          nameEl.classList.add('kb-input-error');
+          nameEl.focus();
+          return;
+        }
+        
+        // Убрана проверка формата телефона, оставлена только проверка на наличие значения
+        if(!phoneEl.value.trim()) {
+          showToast('Введите номер телефона', 3000);
+          phoneEl.classList.add('kb-input-error');
+          phoneEl.focus();
+          return;
+        }
+        
+        // Все проверки пройдены
+        var date = dateEl.value ? dateEl.value.split('-').reverse().join('.') : 'не выбрана';
+        var durPaid = +hoursEl.value || CFG.SLOT_HOURS;
+        var slots = Math.max(1, Math.round(durPaid/CFG.SLOT_HOURS));
+        var gift = Math.max(slots-1, 0);
+        var startHM = CFG.WINDOWS[selectedStart].start;
+        var endHM = addHoursToHM(startHM, durPaid + gift);
+        if(endHM==='24:00') endHM='00:00';
+        var lines = [
+          'Заявка на бронирование — Калиновая Баня',
+          'Дата: ' + date,
+          'Интервал: ' + startHM + '–' + endHM,
+          'Гостей: ' + (guestsEl.value || '—'),
+          'Телефон: ' + (phoneEl && phoneEl.value ? phoneEl.value.trim() : '—'),
+          'Имя: ' + (nameEl && nameEl.value ? nameEl.value.trim() : '—'),
+          'Итого к оплате: ' + totalEl.textContent
+        ];
+        var text = encodeURIComponent(lines.join('\n'));
+        window.open('https://wa.me/79347771777?text=' + text, '_blank');
+      });
+
+      // Slot end labels
+      document.querySelectorAll('#kb-window button').forEach(function(btn){
+        var top=btn.querySelector('.kb-slot-start'); var bot=btn.querySelector('.kb-slot-end');
+        var st=top.textContent.trim(); var end=addHoursToHM(st,CFG.SLOT_HOURS);
+        if(bot){ bot.textContent='до '+(end==='24:00'?'00:00':end); }
+      });
+
+      // Weather (best effort)
+      try{
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=43.6833&longitude=40.2000&current=temperature_2m,weather_code&timezone=auto',{cache:'no-store'})
+          .then(r=>r.json()).then(d=>{
+            var t = (d && d.current && typeof d.current.temperature_2m==='number') ? Math.round(d.current.temperature_2m) : null;
+            var tNode=document.getElementById('kb-temp'); if(tNode) tNode.textContent = (t==null?'—':t)+'°';
+          }).catch(()=>{});
+      }catch(_){}}
+    );
+  </script>
+
+  <!-- Close & toggle: robust :target-based -->
+  <script>
+    (function(){
+      var CARD_ID = 'kb-booking';
+      var card = document.getElementById(CARD_ID);
+      function isOpen(){ return !!card && card.matches(':target'); }
+      function setBody(){ 
+        document.body.classList.toggle('kb-open', isOpen());
+        
+        // Блокировка скролла на мобильных устройствах
+        if (window.innerWidth <= 600) {
+          if (isOpen()) {
+            // Сохраняем текущую позицию скролла
+            document.body.style.top = `-${window.scrollY}px`;
+          } else {
+            // Восстанавливаем позицию скролла
+            const scrollY = document.body.style.top;
+            document.body.style.top = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+          }
+        }
+      }
+
+      function openCard(){
+        try{ location.hash = '#' + CARD_ID; }catch(_){ window.location.href = '#' + CARD_ID; }
+        setTimeout(setBody, 0);
+      }
+      function closeCard(){
+        try{ location.hash = ''; }catch(_){}
+        if (location.hash) {
+          try{ history.replaceState(null, document.title, window.location.pathname + window.location.search); }catch(_){}
+        }
+        if (location.hash) {
+          try{ window.location.href = window.location.pathname + window.location.search; }catch(_){}
+        }
+        setTimeout(setBody, 0);
+      }
+
+      window.addEventListener('hashchange', setBody);
+      setBody();
+
+      var fab = document.querySelector('#kb-widget .kb-fab');
+      if(fab){
+        fab.addEventListener('click', function(e){
+          e.preventDefault();
+          if(isOpen()) closeCard(); else openCard();
+        }, true);
+      }
+
+      var closeBtn = document.querySelector('#kb-booking .kb-close');
+      if(closeBtn){
+        closeBtn.addEventListener('click', function(e){
+          e.preventDefault();
+          closeCard();
+        }, true);
+      }
+      
+      // Обработчик изменения размера окна
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 600 && document.body.classList.contains('kb-open')) {
+          document.body.classList.remove('kb-open');
+          document.body.style.top = '';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
+
