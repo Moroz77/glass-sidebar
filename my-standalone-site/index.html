@@ -64,8 +64,8 @@
       #kb-open-btn:active{ transform: scale(.98); }
       @media (max-width:600px){ #kb-open-btn{ width: 92px; height: 92px; } }
 
-      /* На мобильных скрываем кнопку во время открытого оверлея */
-      @media (hover:none), (pointer:coarse){ .kb-overlay-open #kb-open-btn{ display:none !important; } }
+      /* Кнопка всегда видима; при открытом оверлее поднимаем поверх и оставляем кликабельной */
+      .kb-overlay-open #kb-open-btn{ pointer-events:auto; z-index:2147483602; }
     </style>
   </head>
   <body>
@@ -166,7 +166,10 @@
         // На старте сбросим класс (кнопка всегда видима как нативная)
         document.documentElement.classList.remove('kb-overlay-open');
         // Клик по нативной кнопке
-        if (openBtn) openBtn.addEventListener('click', function(e){ e.preventDefault(); openOverlay(); });
+        if (openBtn) openBtn.addEventListener('click', function(e){
+          e.preventDefault();
+          if (overlay.classList.contains('is-open')) closeOverlay(); else openOverlay();
+        });
       })();
     </script>
   </body>
