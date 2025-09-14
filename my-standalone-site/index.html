@@ -104,7 +104,8 @@
     <iframe
       id="kb-mini-frame"
       title="Калиновая баня — кнопка бронирования"
-      src="../booking/?mini=1"
+      src="../booking/?mini=1&staticfab=1"
+      style="display:block"
       referrerpolicy="no-referrer">
     </iframe>
 
@@ -131,8 +132,9 @@
           catch(_) { return window.innerWidth <= 1024; }
         }
         function lockScroll(on){ if (isMobile()) { document.documentElement.classList.toggle('kb-noscroll', on); document.body.classList.toggle('kb-noscroll', on); } }
+        function ensureMiniVisible(){ try{ if (!mini) return; mini.removeAttribute('hidden'); mini.style.display='block'; mini.style.opacity='1'; mini.style.visibility='visible'; mini.style.zIndex = mini.style.zIndex || '2147483500'; mini.style.pointerEvents = mini.style.pointerEvents || 'auto'; }catch(_){} }
         function openOverlay(){ if (full.src !== FULL_SRC) full.src = FULL_SRC; overlay.classList.add('is-open'); document.documentElement.classList.add('kb-overlay-open'); lockScroll(true); }
-        function closeOverlay(){ overlay.classList.remove('is-open'); document.documentElement.classList.remove('kb-overlay-open'); lockScroll(false); }
+        function closeOverlay(){ overlay.classList.remove('is-open'); document.documentElement.classList.remove('kb-overlay-open'); lockScroll(false); ensureMiniVisible(); setTimeout(ensureMiniVisible,50); setTimeout(ensureMiniVisible,300); }
 
         // Слушаем события из booking/ (postMessage)
         window.addEventListener('message', function(e){
@@ -148,8 +150,9 @@
         overlay.addEventListener('click', function(e){ if (e.target === overlay) closeOverlay(); });
         window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeOverlay(); });
         window.addEventListener('resize', function(){ if (!overlay.classList.contains('is-open')) return; if (isMobile()) lockScroll(true); else lockScroll(false); });
-        // На старте сбросим класс, чтобы мини‑кнопка точно была видна
+        // На старте сбросим класс и гарантируем видимость FAB
         document.documentElement.classList.remove('kb-overlay-open');
+        ensureMiniVisible();
       })();
     </script>
   </body>
