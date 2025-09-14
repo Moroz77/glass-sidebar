@@ -94,7 +94,8 @@
       #kb-open-btn{
         width: 130px !important; height: 130px !important;
         background: transparent !important; border: 0 !important; border-radius: 0 !important;
-        box-shadow: none !important; overflow: visible !important;
+        -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+        background-clip: initial !important; box-shadow: none !important; overflow: visible !important;
       }
       #kb-open-btn::before{
         content: ""; position: absolute; inset: 0;
@@ -107,6 +108,7 @@
         -webkit-mask-repeat: no-repeat; -webkit-mask-position: center; -webkit-mask-size: contain;
         mask-image: url("https://static.tildacdn.com/tild6338-3661-4465-b332-643665333939/ChatGPT_Image_12__20.png");
         mask-repeat: no-repeat; mask-position: center; mask-size: contain;
+        pointer-events: none;
       }
       @supports not ((-webkit-mask-image: url("") ) or (mask-image: url("") )){
         #kb-open-btn::before{ background: transparent; border: 0; box-shadow: none; }
@@ -115,7 +117,7 @@
 
       /* Weather chip (glass) — always on desktop; hides on mobile only when overlay open */
       .kb-weather{
-        position: fixed; top: 120px; right: 14px; z-index: 2147483400;
+        position: fixed; top: 120px; right: 0; z-index: 2147483400;
         padding: 8px 20px 8px 12px; border-radius: 16px 0 0 16px;
         color: #121212; font: 700 16px/1 system-ui;
         background: rgba(255,255,255,.16);
