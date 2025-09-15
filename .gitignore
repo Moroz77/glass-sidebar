@@ -1,0 +1,13 @@
+# OS / misc
+.DS_Store
+Thumbs.db
+*.log
+__backup*.zip
+
+# Node / tooling (на будущее)
+node_modules/
+dist/
+.parcel-cache/
+.cache/
+build/
+
