@@ -19,9 +19,7 @@
 html,body{ height:100%; }
 body{
   margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--text); background: url('assets/hero-bg.png') center/cover no-repeat fixed, #0f1214;
-  background-position: 50% 50%, 50% 50%;
-  animation: bg-pan 48s ease-in-out infinite alternate;
+  color: var(--text); background: #0f1214;
   -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
@@ -50,7 +48,8 @@ h1,h2,h3{ margin: 0 0 10px; line-height: 1.2; }
 /* Hero */
 .hero{ position: relative; min-height: 74vh; display:grid; align-items:center; }
 .hero-media{ position: absolute; inset: 0; background: url('assets/hero-bg.png') center/cover no-repeat fixed; filter: saturate(1) contrast(1.05) brightness(.98); }
-.hero::after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(11,15,18,.45) 0%, rgba(11,15,18,.78) 62%, rgba(11,15,18,.94) 100%); }
+/* Removed heavy dark overlay over hero for clearer photos */
+/* .hero::after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(11,15,18,.45) 0%, rgba(11,15,18,.78) 62%, rgba(11,15,18,.94) 100%); } */
 .hero-content{ position: relative; z-index: 1; padding: 64px 0; }
 .hero h1{ font-size: clamp(28px, 4vw + 8px, 52px); }
 .cta{ display: flex; gap: 12px; margin-top: 16px; }
@@ -105,18 +104,22 @@ h1,h2,h3{ margin: 0 0 10px; line-height: 1.2; }
   .hero{ min-height: 66vh; }
 }
 
-/* Subtle animated overlay */
-body::before{
-  content:""; position: fixed; inset: -12%; pointer-events:none;
-  background:
-    radial-gradient(600px 600px at 20% 20%, color-mix(in oklab, var(--primary) 30%, transparent) 0%, transparent 60%),
-    radial-gradient(500px 500px at 80% 30%, color-mix(in oklab, var(--accent) 28%, transparent) 0%, transparent 60%),
-    radial-gradient(700px 700px at 50% 85%, rgba(255,255,255,.08) 0%, transparent 60%);
-  filter: blur(40px);
-  opacity: .18;
-  animation: bg-float 28s ease-in-out infinite alternate;
-  z-index: 0;
-}
+/* Remove page dimming overlay to not hinder viewing photos */
+body::before{ content:none !important; }
+
+/* Background rotator (full-bleed, smooth crossfade) */
+#bg-rotator{ position: fixed; inset:0; z-index: 0; overflow:hidden; }
+#bg-rotator .layer{ position:absolute; inset:0; width:100%; height:100%; object-fit: cover; opacity:0; transition: opacity 1.4s ease-in-out; filter: saturate(1) contrast(1.02); }
+#bg-rotator .layer.show{ opacity:1; }
+#bg-rotator{ transition: opacity .8s ease; }
+#bg-rotator.hide{ opacity: 0; }
+
+#bg-video{ position: fixed; inset:0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity .8s ease; }
+#bg-video.show{ opacity: 1; }
+#bg-video video{ width:100%; height:100%; object-fit: cover; filter: saturate(1) contrast(1.02); }
+
+/* Ensure site content layers above the rotator */
+main, .site-header, .site-footer{ position: relative; z-index: 1; }
 
 @keyframes bg-pan{
   0%{ background-position: 48% 52%, 50% 50%; }
@@ -126,3 +129,4 @@ body::before{
   0%{ transform: translate3d(-1.5%, -1.5%, 0) scale(1.02); }
   100%{ transform: translate3d(1.5%, 1.5%, 0) scale(1.02); }
 }
+
