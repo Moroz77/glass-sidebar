@@ -41,7 +41,7 @@ h1,h2,h3{ margin: 0 0 10px; line-height: 1.2; }
 /* Header (kept if ever used) */
 .site-header{ position: sticky; top:0; z-index: 100; backdrop-filter: blur(12px) saturate(140%); background: color-mix(in oklab, var(--bg) 65%, transparent); border-bottom: 1px solid var(--stroke); }
 .header-row{ display: flex; align-items: center; gap: 16px; padding: 12px 0; }
-.logo{ font-weight: 700; letter-spacing: .3px; padding: 8px 12px; border-radius: 10px; background: var(--panel); border: 1px solid var(--stroke); }
+.site-header .logo{ font-weight: 700; letter-spacing: .3px; padding: 8px 12px; border-radius: 10px; background: var(--panel); border: 1px solid var(--stroke); }
 .nav{ margin-left: auto; display: flex; gap: 18px; align-items: center; }
 .nav a{ opacity: .9; }
 .nav a:hover{ color: var(--primary); }
@@ -126,4 +126,3 @@ body::before{
   0%{ transform: translate3d(-1.5%, -1.5%, 0) scale(1.02); }
   100%{ transform: translate3d(1.5%, 1.5%, 0) scale(1.02); }
 }
-
