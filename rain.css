@@ -1,4 +1,5 @@
-#rain-canvas{
+#rain-canvas,
+#snow-canvas{
   position: fixed;
   inset: 0;
   z-index: 5; /* ниже всех оверлеев виджета, выше бэкграунда */
@@ -8,6 +9,5 @@
 }
 
 @media (prefers-reduced-motion: reduce){
-  #rain-canvas{ display: none; }
+  #rain-canvas, #snow-canvas{ display: none; }
 }
-

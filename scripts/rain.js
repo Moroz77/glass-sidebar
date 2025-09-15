@@ -82,10 +82,22 @@
     raf = requestAnimationFrame(frame);
   }
 
-  let raf = requestAnimationFrame(frame);
+  let raf = 0;
+  function start(){
+    if (raf) return; // already running
+    canvas.style.display = 'block';
+    last = performance.now();
+    raf = requestAnimationFrame(frame);
+  }
+  function stop(){
+    if (raf){ cancelAnimationFrame(raf); raf = 0; }
+    ctx.clearRect(0,0,w,h);
+    canvas.style.display = 'none';
+  }
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden){ cancelAnimationFrame(raf); }
-    else { last = performance.now(); raf = requestAnimationFrame(frame); }
+    if (document.hidden){ if (raf){ cancelAnimationFrame(raf); raf = 0; } }
   });
-})();
 
+  window.Rain = { start, stop };
+  // Do not autostart; weather controller will manage it
+})();

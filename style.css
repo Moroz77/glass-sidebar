@@ -23,6 +23,11 @@ body{
   position: relative;
 }
 
+/* Weather‑based backgrounds (override when present) */
+body.weather-sunny{ background: url('assets/hero-sunny.jpg') center/cover no-repeat fixed, #0f1214; }
+body.weather-rain{  background: url('assets/hero-rain.jpg')  center/cover no-repeat fixed, #0f1214; }
+body.weather-snow{  background: url('assets/hero-snow.jpg')  center/cover no-repeat fixed, #0f1214; }
+
 a{ color: inherit; text-decoration: none; }
 p{ line-height: 1.65; color: var(--text); margin: 0 0 12px; }
 h1,h2,h3{ margin: 0 0 10px; line-height: 1.2; }
