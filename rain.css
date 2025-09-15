@@ -1,0 +1,13 @@
+#rain-canvas{
+  position: fixed;
+  inset: 0;
+  z-index: 5; /* ниже всех оверлеев виджета, выше бэкграунда */
+  pointer-events: none;
+  opacity: .32;
+  mix-blend-mode: screen;
+}
+
+@media (prefers-reduced-motion: reduce){
+  #rain-canvas{ display: none; }
+}
+
