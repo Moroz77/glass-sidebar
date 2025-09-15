@@ -14,7 +14,7 @@
 .sidebar .links{ list-style:none; margin-top:20px; overflow-y:auto; scrollbar-width:none; height:calc(100% - 140px); width:100%; }
 .sidebar .links::-webkit-scrollbar{ display:none; }
 .links li{ display:flex; border-radius:6px; align-items:center; width:100%; }
-.links li span.material-symbols-outlined{ display:grid; place-items:center; width:100%; text-align:center; line-height:1; font-size:28px; }
+.links li span.material-symbols-outlined{ display:grid; place-items:center; width:100%; text-align:center; line-height:1; font-size:28px; color:#000; }
 .links li:hover{ cursor:pointer; background:rgba(255,255,255,.86); }
 .links h4{ color:#222; font-weight:600; display:none; margin:10px 12px; }
 .sidebar:hover .links h4{ display:block; }
@@ -33,17 +33,17 @@
 
 @media (max-width: 700px){
   /* Narrower collapsed width on mobile */
-  .sidebar{ width: 50px; }
+  .sidebar{ width: 30px; }
   .sidebar:hover{ width: 220px; }
   .sidebar ~ main,
-  .sidebar ~ footer.site-footer{ margin-left:50px; }
+  .sidebar ~ footer.site-footer{ margin-left:30px; }
   .sidebar:hover ~ main,
   .sidebar:hover ~ footer.site-footer{ margin-left:220px; }
   /* Ensure perfect centering for icons and logo when collapsed */
-  .sidebar:not(:hover) .logo{ justify-content:center; padding:16px 2px 12px; }
-  .sidebar:not(:hover) .logo img{ margin-inline:auto; width:46px; height:46px; }
+  .sidebar:not(:hover) .logo{ justify-content:center; padding:10px 1px 8px; }
+  .sidebar:not(:hover) .logo img{ margin-inline:auto; width:26px; height:26px; }
   .sidebar:not(:hover) .links li{ justify-content:center; }
-  .sidebar:not(:hover) .links li span{ padding:12px 0; }
+  .sidebar:not(:hover) .links li span{ padding:8px 0; font-size:22px; }
 }
 
 /* Center icons when sidebar is collapsed */
