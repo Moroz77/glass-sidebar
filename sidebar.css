@@ -13,7 +13,7 @@ body{ background: url('assets/hero-bg.jpg') center/cover no-repeat fixed, #0f121
 
 .sidebar .links{ list-style:none; margin-top:20px; overflow-y:auto; scrollbar-width:none; height:calc(100% - 140px); width:100%; }
 .sidebar .links::-webkit-scrollbar{ display:none; }
-.links li{ display:flex; border-radius:6px; align-items:center; }
+.links li{ display:flex; border-radius:6px; align-items:center; width:100%; }
 .links li:hover{ cursor:pointer; background:#fff; }
 .links h4{ color:#222; font-weight:600; display:none; margin:10px 12px; }
 .sidebar:hover .links h4{ display:block; }
@@ -42,4 +42,5 @@ body{ background: url('assets/hero-bg.jpg') center/cover no-repeat fixed, #0f121
 /* Center icons when sidebar is collapsed */
 .sidebar:not(:hover) .logo{ justify-content:center; }
 .sidebar:not(:hover) .links li{ justify-content:center; }
-.sidebar:not(:hover) .links li span{ width:100%; text-align:center; padding:12px 0; }
+.sidebar:not(:hover) .links li span{ display:grid; place-items:center; width:100%; text-align:center; padding:12px 0; margin:0 auto; }
+.sidebar:not(:hover) .logo img{ margin-inline:auto; }
