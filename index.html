@@ -10,26 +10,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;700" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="sidebar.css" />
     <link rel="stylesheet" href="kb-widget.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="container header-row">
         <a class="logo" href="#top">Калиновая Баня</a>
-        <nav class="nav" id="nav">
-          <a href="#about">О нас</a>
-          <a href="#services">Услуги</a>
-          <a href="#gallery">Галерея</a>
-          <a href="#prices">Цены</a>
-          <a href="#booking" class="btn btn-primary">Записаться</a>
-        </nav>
-        <button class="nav-toggle" id="navToggle" aria-label="Меню">
-          <span class="material-symbols-outlined">menu</span>
-        </button>
       </div>
     </header>
 
     <main>
+      <aside class="sidebar">
+        <div class="logo">
+          <img src="assets/logo.jpg" alt="Калиновая Баня">
+          <h2>Калиновая Баня</h2>
+        </div>
+        <ul class="links">
+          <h4>Навигация</h4>
+          <li>
+            <span class="material-symbols-outlined">home</span>
+            <a href="#top">Главная</a>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">spa</span>
+            <a href="#about">О нас</a>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">sauna</span>
+            <a href="#services">Парения</a>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">relax</span>
+            <a href="#services">SPA</a>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">photo_camera</span>
+            <a href="#gallery">Галерея</a>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">payments</span>
+            <a href="#prices">Цены</a>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">event_available</span>
+            <a href="#booking">Онлайн‑запись</a>
+          </li>
+          <hr>
+          <h4>Контакты</h4>
+          <li>
+            <span class="material-symbols-outlined">call</span>
+            <a href="#contacts">Позвонить</a>
+          </li>
+          <li class="logout-link">
+            <span class="material-symbols-outlined">map</span>
+            <a href="#contacts">Как добраться</a>
+          </li>
+        </ul>
+      </aside>
       <section class="hero" id="top">
         <div class="hero-media" role="img" aria-label="Фон: баня и пар"></div>
         <div class="container hero-content">
