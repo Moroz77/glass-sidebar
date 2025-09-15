@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;700" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="kb-widget.css" />
   </head>
   <body>
     <header class="site-header">
@@ -152,6 +153,97 @@
     </footer>
 
     <script src="scripts/app.js"></script>
+    <!-- Booking widget -->
+    <div id="kb-widget">
+      <a href="#kb-booking" class="kb-fab" aria-label="Открыть/закрыть бронирование"></a>
+      <a href="#top" class="kb-home" aria-label="Вернуться на главную"></a>
+      <div class="kb-home-name" aria-label="Калиновая Баня"></div>
+
+      <aside id="kb-booking" class="kb-card kb-glass" aria-label="Форма бронирования">
+        <div class="kb-card-header">
+          <div class="kb-title">Бронирование</div>
+          <button type="button" class="kb-close" aria-label="Закрыть">✕</button>
+        </div>
+
+        <div class="kb-card-body">
+          <div class="kb-row">
+            <div class="kb-field">
+              <label class="kb-label" for="kb-date">Дата</label>
+              <input class="kb-input" type="date" id="kb-date" />
+            </div>
+            <div class="kb-field">
+              <label class="kb-label">Начало</label>
+              <div class="kb-input kb-static" id="kb-start-label">—</div>
+            </div>
+          </div>
+
+          <div class="kb-field">
+            <label class="kb-label">Слоты</label>
+            <div class="kb-seg" id="kb-window" role="tablist">
+              <button type="button" data-index="0" aria-selected="false"><div class="kb-slot-start">09:00</div><div class="kb-slot-end">до 12:00</div></button>
+              <button type="button" data-index="1" aria-selected="false"><div class="kb-slot-start">13:00</div><div class="kb-slot-end">до 16:00</div></button>
+              <button type="button" data-index="2" aria-selected="false"><div class="kb-slot-start">17:00</div><div class="kb-slot-end">до 20:00</div></button>
+              <button type="button" data-index="3" aria-selected="false"><div class="kb-slot-start">21:00</div><div class="kb-slot-end">до 00:00</div></button>
+            </div>
+          </div>
+
+          <div class="kb-field">
+            <label class="kb-label" for="kb-hours">Длительность</label>
+            <div class="kb-range-row">
+              <input class="kb-range" id="kb-hours" type="range" min="3" max="12" step="3" value="3" />
+              <div class="kb-badge" id="kb-hours-badge">3</div>
+            </div>
+            <div class="kb-note" id="kb-note-line">Выберите слоты</div>
+          </div>
+
+          <div class="kb-field">
+            <label class="kb-label" for="kb-guests">Гости</label>
+            <div class="kb-range-row">
+              <input class="kb-range" id="kb-guests" type="range" min="1" max="15" step="1" value="1" />
+              <div class="kb-badge" id="kb-guests-badge">1</div>
+            </div>
+            <div class="kb-note">Детям до 12 лет —50%</div>
+          </div>
+
+          <div class="kb-row" id="kb-contacts">
+            <div class="kb-field">
+              <label class="kb-label" for="kb-name">Имя</label>
+              <input class="kb-input" type="text" id="kb-name" placeholder="Ваше имя" />
+            </div>
+            <div class="kb-field">
+              <label class="kb-label" for="kb-phone">Телефон</label>
+              <input class="kb-input" type="tel" id="kb-phone" placeholder="+7 ..." />
+            </div>
+          </div>
+
+          <div class="kb-field" id="kb-deposit-field">
+            <label class="kb-label" for="kb-deposit">Депозит</label>
+            <div class="kb-range-row">
+              <input class="kb-range" id="kb-deposit" type="range" min="0" max="25000" step="100" value="11000" disabled />
+              <div class="kb-badge" id="kb-deposit-badge">11 000 ₽</div>
+            </div>
+            <div class="kb-note" id="kb-deposit-note">Осталось на процедуры: 11 000 ₽</div>
+          </div>
+
+          <div class="kb-bottom">
+            <div class="kb-total-wrap">
+              <div class="kb-label">Итого</div>
+              <div class="kb-total" id="kb-total">25 000 ₽</div>
+            </div>
+            <a id="kb-book-btn" class="kb-like-input" href="#" role="button" aria-label="Забронировать">Забронировать</a>
+          </div>
+
+          <div class="kb-min-bottom" id="kb-minline">Мин. депозит: 25 000 ₽ (будни) / 30 000 ₽ (выходные) за 1 слот (3 ч)</div>
+        </div>
+      </aside>
+
+      <div class="kb-weather kb-glass" aria-label="Погода сейчас">
+        <span id="kb-temp">—°</span>
+      </div>
+
+      <div class="kb-toast" id="kb-toast"></div>
+    </div>
+
+    <script src="scripts/kb-widget.js"></script>
   </body>
   </html>
-
