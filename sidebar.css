@@ -25,21 +25,21 @@ body{ background: url('assets/hero-bg.jpg') center/cover no-repeat fixed, #0f121
 .links .logout-link{ margin-top:20px; }
 
 /* Shift site content to make room for sidebar */
-.sidebar ~ header.site-header,
 .sidebar ~ main,
 .sidebar ~ footer.site-footer{ margin-left:110px; transition: margin-left .3s ease; }
-.sidebar:hover ~ header.site-header,
 .sidebar:hover ~ main,
 .sidebar:hover ~ footer.site-footer{ margin-left:260px; }
 
 @media (max-width: 700px){
   .sidebar{ width: 82px; }
   .sidebar:hover{ width: 220px; }
-  .sidebar ~ header.site-header,
   .sidebar ~ main,
   .sidebar ~ footer.site-footer{ margin-left:82px; }
-  .sidebar:hover ~ header.site-header,
   .sidebar:hover ~ main,
   .sidebar:hover ~ footer.site-footer{ margin-left:220px; }
 }
 
+/* Center icons when sidebar is collapsed */
+.sidebar:not(:hover) .logo{ justify-content:center; }
+.sidebar:not(:hover) .links li{ justify-content:center; }
+.sidebar:not(:hover) .links li span{ width:100%; text-align:center; padding:12px 0; }
