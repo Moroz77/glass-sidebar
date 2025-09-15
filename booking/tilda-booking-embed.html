@@ -2,7 +2,7 @@
 <style>
   :root{ --kb-sidebar-width: 260px; }
 
-  /* Мини‑виджет: внутренняя FAB из booking/ */
+  /* РњРёРЅРёвЂ‘РІРёРґР¶РµС‚: РІРЅСѓС‚СЂРµРЅРЅСЏСЏ FAB РёР· booking/ */
   #kb-mini-frame{
     position: fixed;
     right: 18px;
@@ -11,22 +11,22 @@
     height: 120px;
     border: 0;
     background: transparent;
-    z-index: 2147483500; /* выше сайдбара, ниже фулскрина */
+    z-index: 2147483500; /* РІС‹С€Рµ СЃР°Р№РґР±Р°СЂР°, РЅРёР¶Рµ С„СѓР»СЃРєСЂРёРЅР° */
   }
   @media (max-width:600px){ #kb-mini-frame{ width:100px; height:100px; } }
 
-  /* Полноэкранный оверлей + iframe */
+  /* РџРѕР»РЅРѕСЌРєСЂР°РЅРЅС‹Р№ РѕРІРµСЂР»РµР№ + iframe */
   #kb-full-overlay{
     position: fixed; inset: 0;
     display: none; align-items: stretch;
     background: transparent; z-index: 2147483600;
   }
   #kb-full-overlay.is-open{ display: flex; }
-  /* На десктопе не закрываем левый сайдбар */
+  /* РќР° РґРµСЃРєС‚РѕРїРµ РЅРµ Р·Р°РєСЂС‹РІР°РµРј Р»РµРІС‹Р№ СЃР°Р№РґР±Р°СЂ */
   @media (min-width:1025px){ #kb-full-overlay{ left: var(--kb-sidebar-width); } }
-  /* На мобильных прячем мини‑кнопку, когда открыт оверлей */
+  /* РќР° РјРѕР±РёР»СЊРЅС‹С… РїСЂСЏС‡РµРј РјРёРЅРёвЂ‘РєРЅРѕРїРєСѓ, РєРѕРіРґР° РѕС‚РєСЂС‹С‚ РѕРІРµСЂР»РµР№ */
   @media (hover:none), (pointer:coarse){ .kb-overlay-open #kb-mini-frame{ display:none !important; } }
-  /* На десктопе во время оверлея отключаем клики по мини‑кнопке и поднимаем z-index */
+  /* РќР° РґРµСЃРєС‚РѕРїРµ РІРѕ РІСЂРµРјСЏ РѕРІРµСЂР»РµСЏ РѕС‚РєР»СЋС‡Р°РµРј РєР»РёРєРё РїРѕ РјРёРЅРёвЂ‘РєРЅРѕРїРєРµ Рё РїРѕРґРЅРёРјР°РµРј z-index */
   .kb-overlay-open #kb-mini-frame{ pointer-events:none; z-index:2147483602; }
 
   #kb-full-frame{ flex:1; border:0; background:transparent; width:100%; height:100%; }
@@ -38,30 +38,30 @@
   html.kb-noscroll, body.kb-noscroll{ overflow: hidden !important; }
 </style>
 
-<!-- Мини‑фрейм с внутренней FAB -->
+<!-- РњРёРЅРёвЂ‘С„СЂРµР№Рј СЃ РІРЅСѓС‚СЂРµРЅРЅРµР№ FAB -->
 <iframe
   id="kb-mini-frame"
-  title="Калиновая баня — кнопка бронирования"
-  src="https://moroz77.github.io/glass-sidebar/booking/?mini=1&staticfab=1"
+  title="РљР°Р»РёРЅРѕРІР°СЏ Р±Р°РЅСЏ вЂ” РєРЅРѕРїРєР° Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ"
+  src="https://moroz77.github.io/glass-sidebar/booking/app.html?mini=1&staticfab=1"
   style="display:block"
   referrerpolicy="no-referrer">
 </iframe>
 
-<!-- Фулскрин с открытой карточкой -->
+<!-- Р¤СѓР»СЃРєСЂРёРЅ СЃ РѕС‚РєСЂС‹С‚РѕР№ РєР°СЂС‚РѕС‡РєРѕР№ -->
 <div id="kb-full-overlay" aria-hidden="true">
   <iframe
     id="kb-full-frame"
-    title="Калиновая баня — бронирование"
+    title="РљР°Р»РёРЅРѕРІР°СЏ Р±Р°РЅСЏ вЂ” Р±СЂРѕРЅРёСЂРѕРІР°РЅРёРµ"
     src="about:blank"
     referrerpolicy="no-referrer">
   </iframe>
-  <button class="kb-overlay-close" aria-label="Закрыть">×</button>
+  <button class="kb-overlay-close" aria-label="Р—Р°РєСЂС‹С‚СЊ">Г—</button>
 </div>
 
 <script>
   (function(){
-    var MINI_SRC = 'https://moroz77.github.io/glass-sidebar/booking/';
-    var FULL_SRC = 'https://moroz77.github.io/glass-sidebar/booking/?hidefab=1#kb-booking';
+    var MINI_SRC = 'https://moroz77.github.io/glass-sidebar/booking/app.html';
+    var FULL_SRC = 'https://moroz77.github.io/glass-sidebar/booking/app.html?hidefab=1#kb-booking';
     var mini = document.getElementById('kb-mini-frame');
     var overlay = document.getElementById('kb-full-overlay');
     var full = document.getElementById('kb-full-frame');
@@ -92,13 +92,13 @@
       overlay.classList.remove('is-open');
       document.documentElement.classList.remove('kb-overlay-open');
       lockScroll(false);
-      // Дважды подтверждаем видимость FAB на случай внешних стилей
+      // Р”РІР°Р¶РґС‹ РїРѕРґС‚РІРµСЂР¶РґР°РµРј РІРёРґРёРјРѕСЃС‚СЊ FAB РЅР° СЃР»СѓС‡Р°Р№ РІРЅРµС€РЅРёС… СЃС‚РёР»РµР№
       ensureMiniVisible();
       setTimeout(ensureMiniVisible, 50);
       setTimeout(ensureMiniVisible, 300);
     }
 
-    // Слушаем события из booking/ (postMessage)
+    // РЎР»СѓС€Р°РµРј СЃРѕР±С‹С‚РёСЏ РёР· booking/ (postMessage)
     window.addEventListener('message', function(e){
       if (!/^https:\/\/moroz77\.github\.io$/.test(e.origin)) return;
       var d = e.data || {};
@@ -112,7 +112,7 @@
     overlay.addEventListener('click', function(e){ if (e.target === overlay) closeOverlay(); });
     window.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeOverlay(); });
     window.addEventListener('resize', function(){ if (!overlay.classList.contains('is-open')) return; if (isMobile()) lockScroll(true); else lockScroll(false); });
-    // Сброс класса на старте и гарантированная видимость FAB
+    // РЎР±СЂРѕСЃ РєР»Р°СЃСЃР° РЅР° СЃС‚Р°СЂС‚Рµ Рё РіР°СЂР°РЅС‚РёСЂРѕРІР°РЅРЅР°СЏ РІРёРґРёРјРѕСЃС‚СЊ FAB
     document.documentElement.classList.remove('kb-overlay-open');
     ensureMiniVisible();
   })();
